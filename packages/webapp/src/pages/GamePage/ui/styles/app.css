@@ -3,21 +3,29 @@
 *::before {
   box-sizing: border-box;
 }
-#game-root {
-  width: 100%;
-}
+
 html {
   font-size: 2.2vw;
   line-height: 1.4;
   color: var(--text);
   cursor: url(../images/cursors/default.png), auto;
   min-height: 100%;
-  background: url("../images/scenes/dalle1.jpg");
+  background: url("../images/scenes/bg1.jpeg");
   background-attachment: fixed;
-  /* background-position: center bottom; */
-  background-position: 50%;
+  background-position: center bottom;
+  /* background-position: 50%; */
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.player {
+  margin: 0 auto;
+  width: 35%;
+}
+
+.enemy {
+  margin: 0 auto;
+  width: 50%;
 }
 
 /* Minimum font size */
@@ -149,9 +157,9 @@ h2 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url("../images/scenes/moonlit-landscape-1904.jpg");
+  background-image: url("../images/scenes/map1.jpeg");
 }
-.App-background[data-room-index="1"] {
+/* .App-background[data-room-index="1"] {
   background-image: url("../images/scenes/arietty.jpg");
 }
 .App-background[data-room-index="2"] {
@@ -183,7 +191,7 @@ h2 {
 }
 .App-background[data-room-index="11"] {
   background-image: url("../images/scenes/ponyo.jpg");
-}
+} */
 
 /* Darkens the top of the screen to highlight the player+monsters on the background. */
 .App-background::before,

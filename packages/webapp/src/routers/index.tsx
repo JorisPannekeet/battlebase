@@ -42,6 +42,15 @@ const ContentWrap = ({
   children,
   state,
 }: React.PropsWithChildren<any> & { state: keyof typeof SagaStatus }) => {
+  const page = window.location.href.split("/").pop();
+  if (page === "game") {
+    return (
+      <>
+        {/* <Header isHideOnScroll={false} /> */}
+        {children}
+      </>
+    );
+  }
   return (
     <>
       <Header isHideOnScroll={false} />

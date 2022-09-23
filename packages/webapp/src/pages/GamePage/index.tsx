@@ -1,9 +1,4 @@
-import { useRouteMatch } from "react-router-dom";
-import {
-  html,
-  render,
-  Component,
-} from "./web_modules/htm/preact/standalone.module.js";
+import { html, render } from "./web_modules/htm/preact/standalone.module.js";
 import { Box } from "@mui/material";
 import { Toast, useSettings } from "@loopring-web/component-lib";
 import { subMenuNFT, TOAST_TIME } from "@loopring-web/common-resources";
@@ -18,21 +13,17 @@ import { SlayTheWeb } from "./ui/index";
 import "./ui/index.css";
 
 export const Game = () => {
-  //   const renderGame = useMemo(() => {
-  //     render(html` <${SlayTheWeb} /> `, document.querySelector("#SlayTheWeb"));
-  //   }, []);
-  const renderGame = () => {
+  const renderGame = useMemo(() => {
+    setTimeout(() => {
+      renderObject();
+    }, 1000);
+  }, []);
+  const renderObject = () => {
     render(html` <${SlayTheWeb} /> `, document.querySelector("#SlayTheWeb"));
   };
   return (
     <div id="game-root">
-      <div id="SlayTheWeb">
-        {useMemo(() => {
-          setTimeout(() => {
-            renderGame();
-          }, []);
-        }, 1000)}
-      </div>
+      <div id="SlayTheWeb">{renderGame}</div>
     </div>
   );
 };

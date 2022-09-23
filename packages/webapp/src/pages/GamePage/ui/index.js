@@ -29,10 +29,11 @@ export class SlayTheWeb extends Component {
     this.handleNewGame = this.handleNewGame.bind(this);
     this.handleLoose = this.handleLoose.bind(this);
   }
+
   handleNewGame() {
     this.setState({ gameMode: GameModes.gameplay });
     // Clear any previous saved game.
-    window.history.pushState("", document.title, window.location.pathname);
+    //window.history.pushState("", document.title, window.location.pathname);
   }
   handleWin() {
     this.setState({ gameMode: GameModes.win });

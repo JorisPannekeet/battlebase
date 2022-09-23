@@ -49,29 +49,11 @@ const App = () => {
   return (
     <>
       <GlobalStyles
-        styles={css`
-      ${globalCss({ theme })};
-
-      body {
-        ${
-          theme.mode === "dark"
-            ? `
-            color: ${theme.colorBase.textPrimary};
-          `
-            : ``
-        }
-      }
-
-      body:before {
-        ${
-          theme.mode === "dark"
-            ? `
-            background: var(--color-global-bg);
-       `
-            : ""
-        }
-      }
-    }`}
+        styles="
+        header{position:relative;}
+      iframe{display:none;}
+      body{background:none;}
+      "
       />
 
       <Router>

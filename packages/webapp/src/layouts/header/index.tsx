@@ -78,7 +78,6 @@ const Header = withTranslation("common")(
               }
             />
           )}
-          <Toolbar id="back-to-top-anchor" />
           {/* <BottomRule isShow={!confirmation?.confirmed} */}
           <BottomRule
             isShow={false}
