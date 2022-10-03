@@ -679,7 +679,7 @@ export default {
   labelPropertyAdd: "Add property",
   labelMintNFT: "Create NFT",
   labelL1toL2NFT: "Receive NFT",
-  labelMyAssetsNFT: "My NFTs",
+  labelMyAssetsNFT: "My Cards",
   labelTransactionNFT: "Transactions",
   labelMintPropertyKey: "Key",
   labelMintPropertyValue: "Value",

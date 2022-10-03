@@ -137,17 +137,10 @@ export const ammDisableList = ["Liquidity"];
 export const headerMenuLandingData: Array<HeaderMenuItemInterface> = [
   {
     label: {
-      id: "Landing-page",
-      i18nKey: "labelZkRollupLayer2",
+      id: "game",
+      i18nKey: "game",
     },
-    router: { path: "/" },
-  },
-  {
-    label: {
-      id: "wallet",
-      i18nKey: "labelWallet",
-    },
-    router: { path: "/wallet" },
+    router: { path: "/game" },
   },
 ];
 export const subMenuLayer2 = {
@@ -236,27 +229,8 @@ export const subMenuNFT = {
       icon: AssetsIcon,
       router: { path: "/nft/assetsNFT" },
       label: {
-        id: "assetsNFT",
-        i18nKey: "labelMyAssetsNFT",
-        description: "labelMyAssetsNFTDes",
-      },
-    },
-    {
-      icon: MintIcon,
-      router: { path: "/nft/mintNFTLanding" },
-      label: {
-        id: "mintNFT",
-        i18nKey: "labelMintNFT",
-        description: "labelMintNFTDes",
-      },
-    },
-    {
-      icon: ImageIcon,
-      router: { path: "/nft/myCollection" },
-      label: {
-        id: "collection",
-        i18nKey: "labelMyCollection",
-        description: "labelMyCollectionDes",
+        id: "My cards",
+        i18nKey: "My cards",
       },
     },
   ],
@@ -388,45 +362,19 @@ export const MEDIA_LIST = [
 export const headerMenuData: Array<HeaderMenuItemInterface> = [
   {
     label: {
-      id: "L2Assets",
-      i18nKey: "labelAssets",
-    },
-    router: { path: "/l2assets" },
-    status: HeaderMenuTabStatus.default,
-  },
-  {
-    label: {
-      id: "Markets",
-      i18nKey: "labelMarkets",
-    },
-    router: { path: "/markets" },
-    status: HeaderMenuTabStatus.default,
-  },
-  {
-    label: {
-      id: "Trade",
-      i18nKey: "labelTrade",
-    },
-    status: HeaderMenuTabStatus.default,
-    child: layer2ItemData,
-  },
-  {
-    label: {
-      id: "Invest",
-      i18nKey: "labelInvest",
-    },
-    router: { path: "/invest/overview" },
-    status: HeaderMenuTabStatus.default,
-    child: subMenuInvest,
-  },
-  {
-    label: {
-      id: "NFT",
-      i18nKey: "labelNFT",
+      id: "Cards",
+      i18nKey: "Cards",
     },
     router: { path: "/nft" },
     status: HeaderMenuTabStatus.default,
     child: subMenuNFT,
+  },
+  {
+    label: {
+      id: "game",
+      i18nKey: "game",
+    },
+    router: { path: "/game" },
   },
 ];
 

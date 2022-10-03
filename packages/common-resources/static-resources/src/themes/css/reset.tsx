@@ -181,11 +181,7 @@ export default css`
     text-decoration: none;
     cursor: pointer;
   }
-  button {
-    padding: 0;
-    border: none;
-    background: none;
-  }
+
   html {
     overscroll-behavior-x: none;
     overscroll-behavior-y: none;
