@@ -29,11 +29,7 @@ export default class SplashScreen extends Component {
           html`
             <div class="Splash-details Article">
               <p><strong>What's going on?</strong></p>
-              <p>
-                Slay the Web is a single player card game where you fight
-                monsters to reach the end of the web. It's a game of planning
-                and knowing when to play which card.
-              </p>
+              <p>Some text about the story...</p>
               <p>
                 Every turn you draw 5 cards from your draw pile. Cards cost
                 energy to play, and you get 3 energy every turn.
@@ -48,15 +44,6 @@ export default class SplashScreen extends Component {
                 Should you manage to kill the monsters in a room before they end
                 you, you'll proceed to the next room. Maybe there will be
                 rewards. Can you reach the end?
-              </p>
-              <p>
-                The game is
-                <a
-                  href="https://github.com/oskarrough/slaytheweb"
-                  rel="noreferrer"
-                  target="_blank"
-                  >open source</a
-                >.
               </p>
             </div>
           `
