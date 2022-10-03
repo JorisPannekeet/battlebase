@@ -26,11 +26,5 @@ export const Footer = () => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  return (
-    <FooterUI
-      isLandingPage={isLandingPage}
-      linkListMap={linkListMap}
-      mediaList={mediaList}
-    />
-  );
+  return <></>;
 };

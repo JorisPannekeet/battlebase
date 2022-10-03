@@ -99,7 +99,7 @@ export const LandPage = withTranslation(["landPage", "common"])(
                     textTransform: "uppercase",
                   }}
                 >
-                  {t("labelProtocol")}
+                  Lvl5Mage presents
                 </Typography>
                 <Typography
                   component={"h1"}
@@ -109,7 +109,7 @@ export const LandPage = withTranslation(["landPage", "common"])(
                   whiteSpace={"pre-line"}
                   lineHeight={"100px"}
                 >
-                  {t("labelH1Title")}
+                  Game Name
                 </Typography>
                 <Typography
                   component={"h2"}
@@ -117,23 +117,22 @@ export const LandPage = withTranslation(["landPage", "common"])(
                   lineHeight={"46px"}
                   marginTop={1}
                 >
-                  {t("labelH1TitleDetail")}
+                  Subtitle
                 </Typography>
                 <Typography marginTop={8.5} width={260}>
-                  <ButtonStyled
-                    // disabled={isMaintaining}
-                    variant={"contained"}
+                  <Button
+                    variant={"outlined"}
                     fullWidth={true}
-                    size={"large"}
-                    onClick={() => history.push("/trade/lite/LRC-ETH")}
+                    size={"medium"}
+                    onClick={() => history.push("/game")}
                   >
-                    {t("labelLaunchApp")}
+                    Play!
                     <i>
                       <DropDownIcon
                         style={{ transform: "rotate(-90deg) scale(1.5)" }}
                       />
                     </i>
-                  </ButtonStyled>
+                  </Button>
                 </Typography>
               </Box>
             </Grid>

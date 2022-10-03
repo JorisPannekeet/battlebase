@@ -18,11 +18,11 @@ export default class Cards extends Component {
 
 export function Card(card, gameState) {
   const isDisabled = !canPlay(card, gameState);
-  //   const image = card.image
-  //     ? require(`./images/cards/${card.image}`).default
-  //     : require("./images/cards/fallback.jpg").default;
+  const image = card.image
+    ? require(`./images/cards/${card.image}`).default
+    : require("./images/cards/placeholder.png").default;
 
-  const image = require("./images/cards/placeholder.png").default;
+  //const image = require("./images/cards/placeholder.png").default;
   return html`
     <article
       class="Card"
@@ -36,11 +36,11 @@ export function Card(card, gameState) {
         <p class="Card-energy EnergyBadge">
           <span>${card.energy}</span>
         </p>
+        <h3 class="Card-name">${card.name}</h3>
         <figure class="Card-media">
           <img src=${image} alt=${card.name} />
         </figure>
         <p class="Card-type">${card.type}</p>
-        <h3 class="Card-name">${card.name}</h3>
         <p class="Card-description">${card.description}</p>
       </div>
     </article>

@@ -1,5 +1,5 @@
-import {uuid} from './utils.js'
-import cards from '../content/cards.js'
+import { uuid } from "./utils.js";
+import cards from "../content/cards.js";
 
 // This file contains the logic to create cards.
 // While cards are described in plain object form, they are always converted to a class equivalent.
@@ -7,19 +7,19 @@ import cards from '../content/cards.js'
 
 /** @enum {string} */
 export const CardTypes = {
-	attack: 'attack',
-	skill: 'skill',
-	power: 'power',
-	status: 'status',
-	curse: 'curse',
-}
+  attack: "attack",
+  skill: "skill",
+  power: "power",
+  status: "status",
+  curse: "curse",
+};
 
 /** @enum {string} - must be either "player", "enemyx" (where x is the index) or "allEnemies" */
 export const CardTargets = {
-	player: 'player',
-	enemy: 'enemy',
-	allEnemies: 'allEnemies',
-}
+  player: "player",
+  enemy: "enemy",
+  allEnemies: "allEnemies",
+};
 
 /**
  * @typedef {object} CARDPOWERS
@@ -58,27 +58,27 @@ export const CardTargets = {
  */
 
 export class Card {
-	/** @param {CARD} props */
-	constructor(props) {
-		this.id = uuid()
-		this.name = props.name
-		this.type = CardTypes[props.type]
-		this.energy = props.energy
-		this.target = CardTargets[props.target]
-		this.damage = props.damage
-		this.block = props.block
-		this.powers = props.powers
-		this.description = props.description
-		this.conditions = props.conditions
-		this.actions = props.actions
-		this.image = props.image
-		this.upgraded = false
-		if (props.upgrade) this.upgrade = props.upgrade
-	}
-	upgrade() {
-		if (this.upgraded) return
-		// Here you can upgrade the card. Like this.damage = this.damage * 2
-	}
+  /** @param {CARD} props */
+  constructor(props) {
+    this.id = uuid();
+    this.name = props.name;
+    this.type = CardTypes[props.type];
+    this.energy = props.energy;
+    this.target = CardTargets[props.target];
+    this.damage = props.damage;
+    this.block = props.block;
+    this.powers = props.powers;
+    this.description = props.description;
+    this.conditions = props.conditions;
+    this.actions = props.actions;
+    this.image = props.image;
+    this.upgraded = false;
+    if (props.upgrade) this.upgrade = props.upgrade;
+  }
+  upgrade() {
+    if (this.upgraded) return;
+    // Here you can upgrade the card. Like this.damage = this.damage * 2
+  }
 }
 
 /**
@@ -87,7 +87,7 @@ export class Card {
  * @returns {CARD}
  */
 function findCard(name) {
-	return cards.find((card) => card.name === name)
+  return cards.find((card) => card.name === name);
 }
 
 /**
@@ -98,9 +98,9 @@ function findCard(name) {
  */
 
 export function createCard(name) {
-	const baseCard = findCard(name)
-	if (!baseCard) throw new Error(`Card not found: ${name}`)
-	return new Card(baseCard)
+  const baseCard = findCard(name);
+  if (!baseCard) throw new Error(`Card not found: ${name}`);
+  return new Card(baseCard);
 }
 
 /**
@@ -110,15 +110,15 @@ export function createCard(name) {
  * @returns {array} results
  */
 export function getRandomCards(list, amount) {
-	const cardNames = list.map((card) => card.name)
-	let results = []
-	for (let i = 0; i < amount; i++) {
-		const randomIndex = Math.floor(Math.random() * cardNames.length)
-		const name = cardNames[randomIndex]
-		const card = createCard(name)
-		results.push(card)
-	}
-	return results
+  const cardNames = list.map((card) => card.name);
+  let results = [];
+  for (let i = 0; i < amount; i++) {
+    const randomIndex = Math.floor(Math.random() * cardNames.length);
+    const name = cardNames[randomIndex];
+    const card = createCard(name);
+    results.push(card);
+  }
+  return results;
 }
 
 /**
@@ -127,19 +127,20 @@ export function getRandomCards(list, amount) {
  * @returns {Array.<CARD>}
  */
 export function getCardRewards(amount = 3) {
-	// Remove boring cards from rewards.
-	const niceCards = cards
-		.filter((card) => card.name !== 'Strike')
-		.filter((card) => card.name !== 'Defend')
-	// List of random card rewards.
-	const rewards = []
-	while (rewards.length < amount) {
-		const card = getRandomCards(niceCards, 1)[0]
-		// Avoid duplicates
-		const isDuplicate = Boolean(rewards.find((c) => c.name === card.name))
-		if (!isDuplicate) {
-			rewards.push(card)
-		}
-	}
-	return rewards
+  // Remove boring cards from rewards.
+  // TODO: Only NFT cards
+  const niceCards = cards
+    .filter((card) => card.name !== "Strike")
+    .filter((card) => card.name !== "Defend");
+  // List of random card rewards.
+  const rewards = [];
+  while (rewards.length < amount) {
+    const card = getRandomCards(niceCards, 1)[0];
+    // Avoid duplicates
+    const isDuplicate = Boolean(rewards.find((c) => c.name === card.name));
+    if (!isDuplicate) {
+      rewards.push(card);
+    }
+  }
+  return rewards;
 }

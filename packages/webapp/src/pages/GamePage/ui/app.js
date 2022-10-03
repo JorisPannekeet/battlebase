@@ -275,7 +275,7 @@ stw.dealCards()`);
           didWin &&
           room.type === "monster" &&
           html`<${Overlay}>
-            <h1 center medium>Victory. Onwards!</h1>
+            <h1 center medium>Victory!</h1>
             ${!state.didPickCard
               ? html`
                   <p center>
