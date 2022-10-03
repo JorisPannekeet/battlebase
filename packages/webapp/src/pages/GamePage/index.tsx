@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { html, render } from "./web_modules/htm/preact/standalone.module.js";
 import { Box } from "@mui/material";
 import { Toast, useSettings } from "@loopring-web/component-lib";
@@ -21,6 +22,7 @@ export const Game = () => {
   const renderObject = () => {
     render(html` <${SlayTheWeb} /> `, document.querySelector("#SlayTheWeb"));
   };
+
   return (
     <div id="game-root">
       <div id="SlayTheWeb">{renderGame}</div>
