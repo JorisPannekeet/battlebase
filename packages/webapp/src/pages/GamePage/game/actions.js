@@ -375,14 +375,10 @@ function endTurn(state) {
       draft.player.currentHealth = newHealth;
     });
   }
-  setTimeout(() => {
-    newState = playMonsterActions(newState);
-
-    newState = decreasePlayerPowerStacks(newState);
-    newState = decreaseMonsterPowerStacks(newState);
-    newState = newTurn(newState);
-  }, 1000);
-
+  newState = playMonsterActions(newState);
+  newState = decreasePlayerPowerStacks(newState);
+  newState = decreaseMonsterPowerStacks(newState);
+  newState = newTurn(newState);
   return newState;
 }
 
