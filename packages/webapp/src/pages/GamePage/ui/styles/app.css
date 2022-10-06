@@ -16,7 +16,7 @@ html {
   color: var(--text);
   cursor: url(../images/cursors/default.png), auto;
   min-height: 100%;
-  background: url("../images/scenes/bg1.jpeg");
+  background: url("../images/scenes/bg2.png");
   background-attachment: fixed;
   background-position: center bottom;
   /* background-position: 50%; */
@@ -87,11 +87,11 @@ a {
 button {
   font-size: 1.25rem;
   padding: 0.4em 1em 0.4em;
-  border: 3px solid var(--text-inverse);
+  border: none;
   border-radius: 0.3em;
-  background: var(--lightblue);
-  color: var(--text-inverse);
-  box-shadow: 0 0.2em var(--text-inverse);
+  background: hsl(43deg 100% 18%);
+  color: hsl(0deg 0% 100% / 95%);
+  box-shadow: 0 0.2em hsl(43deg 100% 11%);
   text-decoration: none;
 }
 .Button + .Button,
@@ -102,7 +102,7 @@ button + button {
 .Button:focus,
 button:hover,
 button:focus {
-  background: hsl(194.7, 53.3%, 83%);
+  background: hsl(43deg 96% 27%);
   box-shadow: 0 0.1em var(--text-inverse);
 }
 .Button:active,
@@ -113,16 +113,17 @@ button:active {
 }
 
 h1 {
+  font-family: "Hades", serif;
   margin-top: 2rem;
-  font-size: 5rem;
+  font-size: 8rem;
   margin-bottom: -1rem;
   /* background-image: linear-gradient(63deg, var(--yellow), hsl(17, 80%, 60%), hsl(0, 97.2%, 42.7%)); */
   background-image: linear-gradient(180deg, #ff5f5f, hsl(0, 90.1%, 0.5%));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 2px 3px hsla(240, 89%, 4%, 0.1);
-  letter-spacing: -2px;
+  letter-spacing: 10px;
+  /* text-shadow: 2px 3px hsla(240, 89%, 4%, 0.1); */
   line-height: 1;
 }
 h1[medium] {
@@ -340,10 +341,7 @@ h2 {
   text-align: center;
   padding: 0 1rem;
 }
-.Splash h1 {
-  font-family: "Hades", serif;
-  font-size: 10rem;
-}
+
 .Splash-details {
   width: 100%;
   max-width: 35rem;
@@ -371,6 +369,7 @@ h2 {
 .Options {
   list-style: none;
   padding: 0;
+  width: 250px;
   max-width: 30em;
   margin-left: auto;
   margin-right: auto;

@@ -19,7 +19,7 @@ export default class Decks extends Component {
   }
   render(props, state) {
     const deckNames = Object.keys(D);
-    //console.log({ state: this.state.selectedDeck });
+
     return html`
       <article class="Splash Splash--fadein">
         <h1 style="margin-top:8vh">Decks</h1>
@@ -33,6 +33,8 @@ export default class Decks extends Component {
                 </button>`
             )}
           </div>
+          <h2>${this.state.selectedDeck}</h2>
+
           <h2>${D[this.state.selectedDeck].length} Card Collection</h2>
 
           <div class="Cards Cards--grid">

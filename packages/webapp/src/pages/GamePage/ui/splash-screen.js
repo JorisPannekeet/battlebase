@@ -9,6 +9,11 @@ export default class SplashScreen extends Component {
 			<article class="Splash Splash--fadein">
 				<h1 style="margin-top:8vh">Lucifer</h1>
 				<h2>The NFT Dungeon Crawler Card Game</h2>
+        <div>${
+          props.connected
+            ? html`<p>Wallet connected !</p>`
+            : html`<p>Wallet not connected</p>`
+        }</div>
 				<ul class="Options">
 					${
             localStorage.getItem("saveGame")

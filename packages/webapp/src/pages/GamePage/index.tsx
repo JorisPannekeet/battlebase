@@ -8,19 +8,28 @@ import {
   useMyCollection,
   useNFTMintAdvance,
   ViewAccountTemplate,
+  useAccount,
 } from "@loopring-web/core";
+import { SagaStatus } from "@loopring-web/common-resources";
 import { useTranslation } from "react-i18next";
 import { SlayTheWeb } from "./ui/index";
 import "./ui/index.css";
 
 export const Game = () => {
+  const accountTotal = useAccount();
+  const { status: accountStatus } = accountTotal;
+  const isConnected = !accountStatus === SagaStatus.UNSET;
+
   const renderGame = useMemo(() => {
     setTimeout(() => {
       renderObject();
     }, 1000);
   }, []);
   const renderObject = () => {
-    render(html` <${SlayTheWeb} /> `, document.querySelector("#SlayTheWeb"));
+    render(
+      html` <${SlayTheWeb} connected=${isConnected} /> `,
+      document.querySelector("#SlayTheWeb")
+    );
   };
 
   return (
