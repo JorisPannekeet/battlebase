@@ -76,7 +76,7 @@ export default class App extends Component {
   }
   enableConsole() {
     // Enable a "console" in the browser.
-    console.log(`Welcome to the Slay The Web Console. Some examples:
+    console.log(`Welcome to the Console. Some examples:
 stw.game.state.player.maxHealth = 999; stw.update()
 stw.game.enqueue({type: 'drawCards', amount: 2})
 stw.update()

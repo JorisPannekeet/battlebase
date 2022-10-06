@@ -3,6 +3,12 @@
 *::before {
   box-sizing: border-box;
 }
+@font-face {
+  font-family: "Hades";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Hades"), url("HADES.otf") format("truetype");
+}
 
 html {
   font-size: 2.2vw;
@@ -111,12 +117,7 @@ h1 {
   font-size: 5rem;
   margin-bottom: -1rem;
   /* background-image: linear-gradient(63deg, var(--yellow), hsl(17, 80%, 60%), hsl(0, 97.2%, 42.7%)); */
-  background-image: linear-gradient(
-    68deg,
-    #ff5f5f,
-    rgb(255, 55, 55),
-    hsl(0, 28.1%, 17.5%)
-  );
+  background-image: linear-gradient(180deg, #ff5f5f, hsl(0, 90.1%, 0.5%));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -339,6 +340,10 @@ h2 {
   text-align: center;
   padding: 0 1rem;
 }
+.Splash h1 {
+  font-family: "Hades", serif;
+  font-size: 10rem;
+}
 .Splash-details {
   width: 100%;
   max-width: 35rem;
@@ -412,4 +417,12 @@ h2 {
 
 table {
   width: 100%;
+}
+.decks {
+  position: relative;
+  display: inline-block;
+  margin: 50px;
+}
+.decks span {
+  margin: 10px 25px;
 }

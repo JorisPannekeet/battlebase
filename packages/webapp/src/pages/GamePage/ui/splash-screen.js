@@ -7,8 +7,8 @@ export default class SplashScreen extends Component {
   render(props, state) {
     return html`
 			<article class="Splash Splash--fadein">
-				<h1 style="margin-top:8vh">Game name here</h1>
-				<h2>Subtitle here</h2>
+				<h1 style="margin-top:8vh">Lucifer</h1>
+				<h2>The NFT Dungeon Crawler Card Game</h2>
 				<ul class="Options">
 					${
             localStorage.getItem("saveGame")
@@ -18,7 +18,7 @@ export default class SplashScreen extends Component {
 				`
               : html`<li><button autofocus onClick=${props.onNewGame}>Play</a></li>`
           }
-					<li><a class="Button">Decks</a></li>
+					<li><a class="Button" onClick=${props.openDecks}>Decks</a></li>
 					<li><button onClick=${() =>
             this.setState({
               showTutorial: !state.showTutorial,
