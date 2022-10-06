@@ -17,17 +17,15 @@ import "./ui/index.css";
 
 export const Game = () => {
   const accountTotal = useAccount();
-  const { status: accountStatus } = accountTotal;
-  const isConnected = !accountStatus === SagaStatus.UNSET;
-
+  console.log({ accountTotal });
   const renderGame = useMemo(() => {
     setTimeout(() => {
       renderObject();
     }, 1000);
-  }, []);
+  }, [accountTotal]);
   const renderObject = () => {
     render(
-      html` <${SlayTheWeb} connected=${isConnected} /> `,
+      html` <${SlayTheWeb} connectedAccount=${accountTotal} /> `,
       document.querySelector("#SlayTheWeb")
     );
   };

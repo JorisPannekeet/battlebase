@@ -111,12 +111,40 @@ button:active {
   top: 0.1em;
   box-shadow: none;
 }
+.cloud {
+  width: 50%;
+  position: absolute;
+  z-index: -1;
+}
+.c1 {
+  top: -20%;
 
+  animation: fly 25s infinite;
+}
+.c2 {
+  top: 30%;
+
+  animation: fly 40s infinite;
+}
+@keyframes fly {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+.title-container {
+  /* background-image: url("../images/paint.png");
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat; */
+}
 h1 {
   font-family: "Hades", serif;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   font-size: 8rem;
-  margin-bottom: -1rem;
+  /* margin-bottom: -1rem; */
   /* background-image: linear-gradient(63deg, var(--yellow), hsl(17, 80%, 60%), hsl(0, 97.2%, 42.7%)); */
   background-image: linear-gradient(180deg, #ff5f5f, hsl(0, 90.1%, 0.5%));
   -webkit-background-clip: text;

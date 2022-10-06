@@ -53,7 +53,7 @@ export class SlayTheWeb extends Component {
         onNewGame=${this.handleNewGame}
         onContinue=${this.handleNewGame}
         openDecks=${this.handleDecks}
-        connected=${props.connected}
+        account=${props.connectedAccount}
       />`;
     if (gameMode === GameModes.decks)
       return html`<${Decks} back=${this.handleLoose} />`;

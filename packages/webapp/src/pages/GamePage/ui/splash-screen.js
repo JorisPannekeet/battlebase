@@ -5,13 +5,17 @@ import {
 
 export default class SplashScreen extends Component {
   render(props, state) {
+    const c1 = require("./images/cloud1.png").default;
+    const c2 = require("./images/cloud2.png").default;
     return html`
 			<article class="Splash Splash--fadein">
-				<h1 style="margin-top:8vh">Lucifer</h1>
+        <div class="title-container">
+          <h1 style="margin-top:8vh">Lucifer</h1>
+        </div>
 				<h2>The NFT Dungeon Crawler Card Game</h2>
         <div>${
-          props.connected
-            ? html`<p>Wallet connected !</p>`
+          props.account.addressShort
+            ? html`<p>Wallet ${props.account.addressShort} connected !</p>`
             : html`<p>Wallet not connected</p>`
         }</div>
 				<ul class="Options">
@@ -54,6 +58,9 @@ export default class SplashScreen extends Component {
           `
         }
 			</article>
+      <img class="cloud c1" src="${c1}" />
+      <img class="cloud c2" src="${c2}" />
+
 		`;
   }
 }
