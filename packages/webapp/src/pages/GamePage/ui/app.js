@@ -61,7 +61,7 @@ export default class App extends Component {
     // Set up a new game
     const game = createNewGame();
     this.game = game;
-    this.setState(game.state, this.dealCards);
+    this.setState(game.state);
 
     sfx.startGame();
 
@@ -72,7 +72,7 @@ export default class App extends Component {
     //   this.setState(savedGameState, this.dealCards);
     // }
 
-    this.enableConsole();
+    //this.enableConsole();
   }
   enableConsole() {
     // Enable a "console" in the browser.
@@ -240,14 +240,14 @@ stw.dealCards()`);
     const didWinEntireGame = isDungeonCompleted(state);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
-
+    console.log({ room });
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>
 				<figure class="App-background" data-room-index=${state.dungeon.y}></div>
 
 				${
-          room.type === "start DISABLED" &&
+          room.type === "start" &&
           html`<${Overlay}><${StartRoom} onContinue=${this.goToNextRoom} /><//>`
         }
 
@@ -349,20 +349,17 @@ stw.dealCards()`);
 					</div>
 				<//>
 
-				<${OverlayWithButton} id="Map" open topright key=${1}>
+				
 					${
             room.type !== "start" &&
-            html`<button
-              align-right
-              onClick=${() => this.toggleOverlay("#Map")}
-            >
-              <u>M</u>ap
-            </button>`
+            html` <${OverlayWithButton} id="Map" open topright key=${1}>
+              <button align-right onClick=${() => this.toggleOverlay("#Map")}>
+                <u>M</u>ap
+              </button>
+            <//>`
           }
-					<div class="Overlay-content">
-						<${Map} dungeon=${state.dungeon} onMove=${this.handleMapMove} />
-					</div>
-				<//>
+				
+				
 
 				<${OverlayWithButton} id="Deck" topright topright2>
 					<button onClick=${() => this.toggleOverlay("#Deck")}><u>D</u>eck ${

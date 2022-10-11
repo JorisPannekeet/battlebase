@@ -10,7 +10,7 @@ export default class SplashScreen extends Component {
     return html`
 			<article class="Splash Splash--fadein">
         <div class="title-container">
-          <h1 style="margin-top:8vh">Lucifer</h1>
+          <h1 style="margin-top:8vh">The Descent</h1>
         </div>
 				<h2>The NFT Dungeon Crawler Card Game</h2>
         <div>${

@@ -10,14 +10,11 @@ import {
   ViewAccountTemplate,
   useAccount,
 } from "@loopring-web/core";
-import { SagaStatus } from "@loopring-web/common-resources";
-import { useTranslation } from "react-i18next";
 import { SlayTheWeb } from "./ui/index";
 import "./ui/index.css";
 
 export const Game = () => {
   const accountTotal = useAccount();
-  console.log({ accountTotal });
   const renderGame = useMemo(() => {
     setTimeout(() => {
       renderObject();

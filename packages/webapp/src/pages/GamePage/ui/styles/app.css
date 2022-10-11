@@ -115,16 +115,15 @@ button:active {
   width: 50%;
   position: absolute;
   z-index: -1;
+  border-radius: 30% !important;
 }
 .c1 {
   top: -20%;
-
-  animation: fly 25s infinite;
+  animation: fly 33s infinite;
 }
 .c2 {
   top: 30%;
-
-  animation: fly 40s infinite;
+  animation: fly 50s infinite;
 }
 @keyframes fly {
   0% {
@@ -142,8 +141,9 @@ button:active {
 }
 h1 {
   font-family: "Hades", serif;
+  margin: 0px;
   /* margin-top: 2rem; */
-  font-size: 8rem;
+  font-size: 5rem;
   /* margin-bottom: -1rem; */
   /* background-image: linear-gradient(63deg, var(--yellow), hsl(17, 80%, 60%), hsl(0, 97.2%, 42.7%)); */
   background-image: linear-gradient(180deg, #ff5f5f, hsl(0, 90.1%, 0.5%));
@@ -452,4 +452,172 @@ table {
 }
 .decks span {
   margin: 10px 25px;
+}
+
+/* Hero cards */
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-wrap: wrap; */
+}
+.hero-card {
+  position: relative;
+  min-width: 270px;
+  margin: 2em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 180px 1fr auto;
+}
+
+.hero-card-body,
+.hero-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-card-image {
+  position: relative;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/heroes/4.png");
+  background-size: cover;
+}
+
+.hero-card-image img {
+  max-width: 95%;
+  max-height: 95%;
+  transition: max-width 0.4s, max-height 0.4s;
+}
+
+.hero-card:hover .hero-card-image img {
+  max-width: 120%;
+  max-height: 120%;
+}
+
+.hero-card {
+  box-shadow: 0 15px 30px -10px #000;
+  cursor: pointer;
+}
+
+.hero-card:hover {
+  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hero-card:nth-child(2) .hero-card-image {
+  background: url("../images/heroes/1.png");
+  background-size: cover;
+}
+
+.hero-card:nth-child(3) .hero-card-image {
+  background: url("../images/heroes/2.png");
+  background-size: cover;
+}
+
+.hero-card:nth-child(4) .hero-card-image {
+  background: url("../images/heroes/3.png");
+  background-size: cover;
+}
+
+.hero-card-body {
+  background: #fff;
+  padding: 20px 28px;
+}
+
+.hero-card-body .power {
+  font-weight: bolder;
+}
+
+.hero-card-body h2 {
+  font-size: 1.8em;
+  margin: 4px auto 12px;
+  color: #000;
+}
+
+.hero-card-body p {
+  color: gray;
+  font-size: 1.1em;
+  line-height: 20px;
+  text-align: center;
+}
+
+.hero-card-footer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.hero-card-footer .info {
+  font-size: 0.9em;
+  padding: 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.hero-card-footer .info:last-child {
+  border: none;
+}
+
+.hero-card-footer .info .type {
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-size: 0.8em;
+}
+
+.hero-card:nth-child(1) .hero-card-footer {
+  background: #4891ba;
+}
+.hero-card:nth-child(2) .hero-card-footer {
+  background: #f6b10f;
+}
+.hero-card:nth-child(3) .hero-card-footer {
+  background: #959595;
+}
+.hero-card:nth-child(4) .hero-card-footer {
+  background: #9e5161;
+}
+
+.hero-card:nth-child(1) .power {
+  color: #4891ba;
+}
+.hero-card:nth-child(2) .power {
+  color: #f6b10f;
+}
+.hero-card:nth-child(3) .power {
+  color: #959595;
+}
+.hero-card:nth-child(4) .power {
+  color: #9e5161;
+}
+
+.selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.hero-card:hover .selector {
+  opacity: 1;
 }
