@@ -12,12 +12,9 @@ export default class StartRoom extends Component {
           <div class="hero-card-image"></div>
 
           <div class="hero-card-body">
-            <span class="power">Brilliant Power</span>
+            <span class="power">No type</span>
             <h2>Default</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-              laudantium sequi facere mollitia saepe.
-            </p>
+            <p>Start with the default deck, no NFT's needed.</p>
           </div>
 
           <div class="hero-card-footer">
@@ -48,10 +45,7 @@ export default class StartRoom extends Component {
           <div class="hero-card-body">
             <span class="power">Street Power</span>
             <h2>P2A</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-              laudantium sequi facere mollitia saepe.
-            </p>
+            <p>Use the Power to the Apes deck and ....</p>
           </div>
 
           <div class="hero-card-footer">
@@ -79,10 +73,7 @@ export default class StartRoom extends Component {
           <div class="hero-card-body">
             <span class="power">Knight Power</span>
             <h2>Ice Cream</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-              laudantium sequi facere mollitia saepe.
-            </p>
+            <p>Not working yet.</p>
           </div>
 
           <div class="hero-card-footer">
@@ -110,10 +101,7 @@ export default class StartRoom extends Component {
           <div class="hero-card-body">
             <span class="power">Brilliant Power</span>
             <h2>Hollow</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-              laudantium sequi facere mollitia saepe.
-            </p>
+            <p>Not working yet</p>
           </div>
 
           <div class="hero-card-footer">
@@ -136,11 +124,6 @@ export default class StartRoom extends Component {
         </div>
       </div>
 
-      <ul class="Options">
-        <li>
-          <button onclick=${() => this.props.onContinue()}>Start...</button>
-        </li>
-      </ul>
       <p center>
         <button onclick=${() => (window.location = window.location.origin)}>
           Leave
