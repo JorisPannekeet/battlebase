@@ -37,7 +37,7 @@ export const defaultDeck = [
     energy: 2,
     damage: 8,
     target: "enemy",
-    image: "placeholder.png",
+    image: "bash.png",
     powers: {
       vulnerable: 2,
     },

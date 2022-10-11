@@ -1,5 +1,6 @@
 import { uuid } from "./utils.js";
 import cards from "../content/cards.js";
+import { decks } from "../content/decks";
 
 // This file contains the logic to create cards.
 // While cards are described in plain object form, they are always converted to a class equivalent.
@@ -126,12 +127,21 @@ export function getRandomCards(list, amount) {
  * @param {number} [amount]
  * @returns {Array.<CARD>}
  */
-export function getCardRewards(amount = 3) {
+export function getCardRewards(amount = 3, hero) {
   // Remove boring cards from rewards.
   // TODO: Only NFT cards
-  const niceCards = cards
+  let deckCards;
+  switch (hero) {
+    case "P2A":
+      deckCards = decks.testDeck;
+      break;
+    default:
+      deckCards = decks.defaultDeck;
+  }
+  const niceCards = deckCards
     .filter((card) => card.name !== "Strike")
     .filter((card) => card.name !== "Defend");
+  console.log({ niceCards, deckCards });
   // List of random card rewards.
   const rewards = [];
   while (rewards.length < amount) {

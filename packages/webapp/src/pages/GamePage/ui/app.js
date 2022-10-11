@@ -54,6 +54,7 @@ export default class App extends Component {
     this.handlePlayerReward = this.handlePlayerReward.bind(this);
     this.handleCampfireChoice = this.handleCampfireChoice.bind(this);
     this.goToNextRoom = this.goToNextRoom.bind(this);
+    this.selectHero = this.selectHero.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleMapMove = this.handleMapMove.bind(this);
   }
@@ -226,6 +227,12 @@ stw.dealCards()`);
     console.log("Go to next room, toggling map");
     this.toggleOverlay("#Map");
   }
+  selectHero(name) {
+    console.log(name);
+    this.game.enqueue({ type: "selectHero", hero: name });
+    this.goToNextRoom();
+    this.update();
+  }
   handleMapMove(move) {
     console.log("Made a move");
     this.toggleOverlay("#Map");
@@ -240,7 +247,7 @@ stw.dealCards()`);
     const didWinEntireGame = isDungeonCompleted(state);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
-    console.log({ room });
+    console.log({ hero: this.game.state?.hero });
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>
@@ -248,7 +255,11 @@ stw.dealCards()`);
 
 				${
           room.type === "start" &&
-          html`<${Overlay}><${StartRoom} onContinue=${this.goToNextRoom} /><//>`
+          html`<${Overlay}
+            ><${StartRoom}
+              onContinue=${this.goToNextRoom}
+              onSelect=${this.selectHero}
+          /><//>`
         }
 
 				${
@@ -283,7 +294,7 @@ stw.dealCards()`);
                   </p>
 
                   <${CardChooser}
-                    cards=${getCardRewards(3)}
+                    cards=${getCardRewards(3, this.game.state.hero)}
                     didSelectCard=${(card) =>
                       this.handlePlayerReward("addCard", card)}
                   />
@@ -350,15 +361,15 @@ stw.dealCards()`);
 				<//>
 
 				
-					${
-            room.type !== "start" &&
-            html` <${OverlayWithButton} id="Map" open topright key=${1}>
+
+             <${OverlayWithButton} id="Map" topright key=${1}>
               <button align-right onClick=${() => this.toggleOverlay("#Map")}>
                 <u>M</u>ap
               </button>
-            <//>`
-          }
-				
+              <div class="Overlay-content">
+						<${Map} dungeon=${state.dungeon} onMove=${this.handleMapMove} />
+					</div>
+            <//>
 				
 
 				<${OverlayWithButton} id="Deck" topright topright2>

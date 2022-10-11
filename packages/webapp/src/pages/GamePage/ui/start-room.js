@@ -36,7 +36,9 @@ export default class StartRoom extends Component {
           </div>
 
           <div class="selector">
-            <button>select</button>
+            <button onClick=${() => this.props.onSelect("Default")}>
+              select
+            </button>
           </div>
         </div>
 
@@ -67,7 +69,7 @@ export default class StartRoom extends Component {
             </div>
           </div>
           <div class="selector">
-            <button>select</button>
+            <button onClick=${() => this.props.onSelect("P2A")}>select</button>
           </div>
         </div>
 

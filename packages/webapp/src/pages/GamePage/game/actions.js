@@ -55,6 +55,7 @@ function createNewGame() {
       block: 0,
       powers: {},
     },
+    hero: "",
     dungeon: {},
   };
 }
@@ -150,6 +151,11 @@ function removeCard(state, { card }) {
 function upgradeCard(state, { card }) {
   return produce(state, (draft) => {
     draft.deck.find((c) => c.id === card.id).upgrade();
+  });
+}
+function selectHero(state, { hero }) {
+  return produce(state, (draft) => {
+    draft.hero = hero;
   });
 }
 
@@ -615,6 +621,7 @@ const allActions = {
   setPower,
   takeMonsterTurn,
   upgradeCard,
+  selectHero,
 };
 
 export default allActions;
