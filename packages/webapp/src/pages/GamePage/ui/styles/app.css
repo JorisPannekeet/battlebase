@@ -463,6 +463,12 @@ table {
   align-items: center;
   /* flex-wrap: wrap; */
 }
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .container {
+    flex-wrap: wrap;
+  }
+}
 .hero-card {
   position: relative;
   min-width: 270px;
