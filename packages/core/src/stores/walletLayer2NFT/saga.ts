@@ -18,7 +18,7 @@ const getWalletLayer2NFTBalance = async <_R extends { [key: string]: any }>({
   // if (!collection) {
   //   _collection = store.getState().walletLayer2NFT.collection;
   // }
-  const offset = (page - 1) * NFTLimit;
+  const offset = (page - 1) * 99999;
   const { accountId, apiKey } = store.getState().account;
   if (apiKey && accountId && LoopringAPI.userAPI) {
     let { userNFTBalances, totalNum } = await LoopringAPI.userAPI

@@ -47,6 +47,15 @@
   object-fit: cover;
   object-position: center top;
 }
+.relic-card:hover {
+  box-shadow: 0px 0px 15px 10px var(--yellow);
+  cursor: url(../images/cursors/point.png) 10 0, auto;
+}
+.relic img {
+  height: 120px !important;
+  object-position: center !important;
+}
+
 @media (max-height: 500px) {
   .Card-media img {
     height: 70px;

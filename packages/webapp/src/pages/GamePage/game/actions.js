@@ -56,6 +56,7 @@ function createNewGame() {
       powers: {},
     },
     hero: "",
+    relics: [],
     selectedDeck: 0,
     dungeon: {},
     stage: 1,
@@ -160,6 +161,12 @@ function upgradeCard(state, { card }) {
 function selectHero(state, { hero }) {
   return produce(state, (draft) => {
     draft.hero = hero;
+  });
+}
+
+function selectRelic(state, { relic }) {
+  return produce(state, (draft) => {
+    draft.relics.push(relic);
   });
 }
 
@@ -641,6 +648,7 @@ const allActions = {
   upgradeCard,
   selectHero,
   goToNextStage,
+  selectRelic,
 };
 
 export default allActions;

@@ -10,7 +10,7 @@ export default class StartRoom extends Component {
       heroSelected: false,
     };
   }
-  HandleSelect() {}
+
   render() {
     return html`
       <article>
@@ -149,8 +149,31 @@ export default class StartRoom extends Component {
           </p>`}
         ${this.state.heroSelected &&
         html`
-          <h1>Select Relic</h1>
-          <p>TODO add relics</p>
+          <h1 center medium>Select Relic</h1>
+          ${this.props.nfts.length
+            ? html`
+                <div class="Cards Cards--grid">
+                  ${this.props.nfts.map((nft) => {
+                    return html` <article class="Card relic-card">
+                      <div
+                        class="Card-inner"
+                        onClick=${() => this.props.selectRelic(nft)}
+                      >
+                        <h3 class="Card-name">${nft.metadata.base.name}</h3>
+                        <figure class="Card-media relic">
+                          <img
+                            src=${nft.metadata.imageSize.original}
+                            alt=${nft.metadata.base.name}
+                          />
+                        </figure>
+                        <p class="Card-type">Relic</p>
+                        <p class="Card-description">Relic description</p>
+                      </div>
+                    </article>`;
+                  })}
+                </div>
+              `
+            : html`<p center>No Relics in wallet</p>`}
         `}
 
         <p center>

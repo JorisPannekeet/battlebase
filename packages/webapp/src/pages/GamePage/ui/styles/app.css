@@ -499,7 +499,7 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("../images/heroes/4.png");
+  background: url("../images/heroes/3.png");
   background-size: cover;
 }
 
@@ -529,12 +529,12 @@ table {
 }
 
 .hero-card:nth-child(3) .hero-card-image {
-  background: url("../images/heroes/2.png");
+  background: url("../images/heroes/239.png");
   background-size: cover;
 }
 
 .hero-card:nth-child(4) .hero-card-image {
-  background: url("../images/heroes/3.png");
+  background: url("../images/heroes/503.png");
   background-size: cover;
 }
 
@@ -630,4 +630,13 @@ table {
 
 .hero-card:hover .selector {
   opacity: 1;
+}
+.relics {
+  position: absolute;
+  left: 85px;
+  top: 5px;
+}
+.relics img {
+  width: 40px;
+  border-radius: 30%;
 }

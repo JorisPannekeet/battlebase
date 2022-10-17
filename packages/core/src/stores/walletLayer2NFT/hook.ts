@@ -24,7 +24,6 @@ export function useWalletLayer2NFT(): WalletLayer2NFTStates & {
     (state: any) => state.walletLayer2NFT
   );
   const dispatch = useDispatch();
-
   return {
     ...walletLayer2NFT,
     resetLayer2NFT: React.useCallback(() => {

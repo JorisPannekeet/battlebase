@@ -58,6 +58,7 @@ export default class App extends Component {
     this.handleCampfireChoice = this.handleCampfireChoice.bind(this);
     this.goToNextRoom = this.goToNextRoom.bind(this);
     this.selectHero = this.selectHero.bind(this);
+    this.selectRelic = this.selectRelic.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleMapMove = this.handleMapMove.bind(this);
     this.handleNextStage = this.handleNextStage.bind(this);
@@ -238,10 +239,15 @@ stw.dealCards()`);
     this.toggleOverlay("#Map");
   }
   selectHero(name) {
-    console.log(name);
     this.game.enqueue({ type: "selectHero", hero: name });
     //this.goToNextRoom();
     this.update();
+  }
+  selectRelic(nft) {
+    console.log(nft);
+    this.game.enqueue({ type: "selectRelic", relic: nft });
+    this.update();
+    this.goToNextRoom();
   }
   handleMapMove(move) {
     console.log("Made a move");
@@ -258,7 +264,8 @@ stw.dealCards()`);
     const didWinStage = isStageCompleted(state);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
-
+    const nfts = props.nfts;
+    console.log({ relics: state.relics });
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>
@@ -270,6 +277,8 @@ stw.dealCards()`);
             ><${StartRoom}
               onContinue=${this.goToNextRoom}
               onSelect=${this.selectHero}
+              nfts=${nfts}
+              selectRelic=${this.selectRelic}
           /><//>`
         }
 
@@ -392,6 +401,14 @@ stw.dealCards()`);
 							<${Menu} gameState=${state} game=${this.game} onUndo=${() => this.undo()} />
 					</div>
 				<//>
+
+        <div id="relics" class="relics" topleft>
+        ${state.relics.map((relic) => {
+          return html`
+            <img src=${relic.metadata.imageSize.original} with="20" />
+          `;
+        })}
+        </div>
 
 				
 

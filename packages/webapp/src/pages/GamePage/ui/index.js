@@ -59,7 +59,11 @@ export class SlayTheWeb extends Component {
       return html`<${Decks} back=${this.handleLoose} />`;
     if (gameMode === GameModes.gameplay)
       return html`
-        <${App} onWin=${this.handleWin} onLoose=${this.handleLoose} />
+        <${App}
+          onWin=${this.handleWin}
+          onLoose=${this.handleLoose}
+          nfts=${props.nfts}
+        />
       `;
     if (gameMode === GameModes.win)
       return html` <${WinScreen} onNewGame=${this.handleNewGame} /> `;
