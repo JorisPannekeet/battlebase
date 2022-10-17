@@ -20,12 +20,12 @@ import {
  */
 
 const defaultOptions = {
-  width: 10,
-  height: 6,
-  minRooms: 2,
-  maxRooms: 5,
+  width: 6,
+  height: 10,
+  minRooms: 3,
+  maxRooms: 4,
   roomTypes: "MMMQCE",
-  // customPaths: '123'
+  customPaths: "0235",
 };
 
 /**

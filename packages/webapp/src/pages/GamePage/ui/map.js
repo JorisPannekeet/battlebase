@@ -49,7 +49,7 @@ export class SlayMap extends Component {
 
     // Add references to our DOM elements on the graph. Why?
     // no set state because we don't want to rerender
-    if (!this.didDrawPaths) {
+    if (!this.didDrawPaths || prevProps.dungeon !== this.props.dungeon) {
       this.didDrawPaths = true;
       this.scatter();
       const resizeObserver = new ResizeObserver(() => {
