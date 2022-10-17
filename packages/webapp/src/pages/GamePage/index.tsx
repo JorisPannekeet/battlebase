@@ -10,6 +10,7 @@ import {
   ViewAccountTemplate,
   useAccount,
 } from "@loopring-web/core";
+// import { WalletConnectL2Btn } from "./index";
 import { SlayTheWeb } from "./ui/index";
 import "./ui/index.css";
 
@@ -19,7 +20,7 @@ export const Game = () => {
     setTimeout(() => {
       renderObject();
     }, 1000);
-  }, [accountTotal]);
+  }, []);
   const renderObject = () => {
     render(
       html` <${SlayTheWeb} connectedAccount=${accountTotal} /> `,

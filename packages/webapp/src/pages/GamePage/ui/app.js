@@ -10,11 +10,13 @@ import { Flip } from "../web_modules/gsap/Flip.js";
 
 // Game logic
 import createNewGame from "../game/new-game.js";
+import actions from "../game/actions.js";
 import { createCard, getCardRewards } from "../game/cards.js";
 import {
   getCurrRoom,
   isCurrRoomCompleted,
   isDungeonCompleted,
+  isStageCompleted,
 } from "../game/utils-state.js";
 import * as backend from "../game/backend.js";
 
@@ -25,6 +27,7 @@ import { Overlay, OverlayWithButton } from "./overlays.js";
 import { Player, Monster } from "./player.js";
 import CardChooser from "./card-chooser.js";
 import CampfireRoom from "./campfire.js";
+import QuestRoom from "./quest.js";
 import Menu from "./menu.js";
 import StartRoom from "./start-room.js";
 import DungeonStats from "./dungeon-stats.js";
@@ -57,6 +60,7 @@ export default class App extends Component {
     this.selectHero = this.selectHero.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleMapMove = this.handleMapMove.bind(this);
+    this.handleNextStage = this.handleNextStage.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -73,7 +77,7 @@ export default class App extends Component {
     //   this.setState(savedGameState, this.dealCards);
     // }
 
-    //this.enableConsole();
+    this.enableConsole();
   }
   enableConsole() {
     // Enable a "console" in the browser.
@@ -88,6 +92,7 @@ stw.dealCards()`);
       update: this.update.bind(this),
       createCard,
       dealCards: this.dealCards.bind(this),
+      clearStage: this.handleNextStage.bind(this),
       iddqd() {
         // console.log(this.game.state)
         this.game.enqueue({ type: "iddqd" });
@@ -201,6 +206,11 @@ stw.dealCards()`);
     this.setState({ didPickCard: card });
     this.update();
   }
+  handleNextStage() {
+    this.game.enqueue({ type: "goToNextStage" });
+    this.update();
+    this.goToNextRoom();
+  }
   handleCampfireChoice(choice, reward) {
     // Depending on the choice, run an action.
     if (choice === "rest") {
@@ -230,7 +240,7 @@ stw.dealCards()`);
   selectHero(name) {
     console.log(name);
     this.game.enqueue({ type: "selectHero", hero: name });
-    this.goToNextRoom();
+    //this.goToNextRoom();
     this.update();
   }
   handleMapMove(move) {
@@ -245,9 +255,10 @@ stw.dealCards()`);
     const isDead = state.player.currentHealth < 1;
     const didWin = isCurrRoomCompleted(state);
     const didWinEntireGame = isDungeonCompleted(state);
+    const didWinStage = isStageCompleted(state);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
-    console.log({ hero: this.game.state?.hero });
+
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>
@@ -280,9 +291,21 @@ stw.dealCards()`);
             <${DungeonStats} state=${state}><//>
           <//> `
         }
+        ${
+          didWinStage &&
+          html`<${Overlay}>
+            <h2 center>Stage ${state.stage} Completed!</h2>
+            <p center>
+              <button onClick=${() => this.handleNextStage()}>
+                Start stage ${state.stage + 1}
+              </button>
+            </p>
+          <//> `
+        }
 
 				${
           !didWinEntireGame &&
+          !didWinStage &&
           didWin &&
           room.type === "monster" &&
           html`<${Overlay}>
@@ -314,6 +337,16 @@ stw.dealCards()`);
           room.type === "campfire" &&
           html`<${Overlay}>
             <${CampfireRoom}
+              gameState=${state}
+              onChoose=${this.handleCampfireChoice}
+              onContinue=${this.goToNextRoom}
+            />
+          <//>`
+        }
+        ${
+          room.type === "quest" &&
+          html`<${Overlay}>
+            <${QuestRoom}
               gameState=${state}
               onChoose=${this.handleCampfireChoice}
               onContinue=${this.goToNextRoom}
@@ -367,7 +400,9 @@ stw.dealCards()`);
                 <u>M</u>ap
               </button>
               <div class="Overlay-content">
-						<${Map} dungeon=${state.dungeon} onMove=${this.handleMapMove} />
+						<${Map} dungeon=${state.dungeon} stage=${state.stage} onMove=${
+      this.handleMapMove
+    } />
 					</div>
             <//>
 				

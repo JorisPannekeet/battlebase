@@ -1,5 +1,5 @@
 import { uuid, shuffle, random as randomBetween } from "./utils.js";
-import { StartRoom, CampfireRoom } from "./dungeon-rooms.js";
+import { StartRoom, CampfireRoom, QuestRoom } from "./dungeon-rooms.js";
 import {
   easyMonsters,
   monsters,
@@ -24,7 +24,7 @@ const defaultOptions = {
   height: 6,
   minRooms: 2,
   maxRooms: 5,
-  roomTypes: "MMMCE",
+  roomTypes: "MMMQCE",
   // customPaths: '123'
 };
 
@@ -102,6 +102,7 @@ function decideRoomType(nodeType, floor /*, graph*/) {
   const pickRandomFromObj = (obj) => obj[shuffle(Object.keys(obj))[0]];
   if (floor === 0) return StartRoom();
   if (nodeType === "C") return CampfireRoom();
+  if (nodeType === "Q") return QuestRoom();
   if (nodeType === "M" && floor < 2) return pickRandomFromObj(easyMonsters);
   if (nodeType === "M") return pickRandomFromObj(monsters);
   if (nodeType === "E") return pickRandomFromObj(elites);

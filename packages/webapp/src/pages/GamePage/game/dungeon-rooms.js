@@ -1,4 +1,4 @@
-import {shuffle, range} from './utils.js'
+import { shuffle, range } from "./utils.js";
 
 /**
  * @typedef {object} ROOM
@@ -10,9 +10,9 @@ import {shuffle, range} from './utils.js'
  * @returns {ROOM}
  */
 export function StartRoom() {
-	return {
-		type: 'start',
-	}
+  return {
+    type: "start",
+  };
 }
 
 /**
@@ -20,10 +20,19 @@ export function StartRoom() {
  * @returns {ROOM}
  */
 export function CampfireRoom() {
-	return {
-		type: 'campfire',
-		// choices: ['rest', 'remove', 'upgrade'],
-	}
+  return {
+    type: "campfire",
+    // choices: ['rest', 'remove', 'upgrade'],
+  };
+}
+/**
+ * A quest gives our hero the opportunity to gain a relic.
+ * @returns {ROOM}
+ */
+export function QuestRoom() {
+  return {
+    type: "quest",
+  };
 }
 
 /**
@@ -32,10 +41,10 @@ export function CampfireRoom() {
  * @returns {ROOM}
  */
 export function MonsterRoom(...monsters) {
-	return {
-		type: 'monster',
-		monsters,
-	}
+  return {
+    type: "monster",
+    monsters,
+  };
 }
 
 /**
@@ -61,34 +70,34 @@ export function MonsterRoom(...monsters) {
  * @returns {MONSTER}
  */
 export function Monster(
-	props = {
-		currentHealth: 42,
-		maxHealth: 42,
-		intents: [],
-	}
+  props = {
+    currentHealth: 42,
+    maxHealth: 42,
+    intents: [],
+  }
 ) {
-	// By setting props.random to a number, all damage intents will be randomized with this range.
-	let randomIntents
-	if (typeof props.random === 'number') {
-		randomIntents = props.intents.map((intent) => {
-			if (intent.damage) {
-				let newDamage = shuffle(range(5, intent.damage - props.random))[0]
-				intent.damage = newDamage
-			}
-			return intent
-		})
-	}
+  // By setting props.random to a number, all damage intents will be randomized with this range.
+  let randomIntents;
+  if (typeof props.random === "number") {
+    randomIntents = props.intents.map((intent) => {
+      if (intent.damage) {
+        let newDamage = shuffle(range(5, intent.damage - props.random))[0];
+        intent.damage = newDamage;
+      }
+      return intent;
+    });
+  }
 
-	return {
-		currentHealth: props.hp || props.currentHealth,
-		maxHealth: props.hp || props.maxHealth,
-		block: props.block || 0,
-		powers: props.powers || {},
-		// A list of "actions" the monster will take each turn.
-		// Example: [{damage: 6}, {block: 2}, {}, {weak: 2}]
-		// ... meaning turn 1, deal 6 damage, turn 2 gain 2 block, turn 3 do nothing, turn 4 apply 2 weak
-		intents: randomIntents || props.intents,
-		// A counter to keep track of which intent to run next.
-		nextIntent: 0,
-	}
+  return {
+    currentHealth: props.hp || props.currentHealth,
+    maxHealth: props.hp || props.maxHealth,
+    block: props.block || 0,
+    powers: props.powers || {},
+    // A list of "actions" the monster will take each turn.
+    // Example: [{damage: 6}, {block: 2}, {}, {weak: 2}]
+    // ... meaning turn 1, deal 6 damage, turn 2 gain 2 block, turn 3 do nothing, turn 4 apply 2 weak
+    intents: randomIntents || props.intents,
+    // A counter to keep track of which intent to run next.
+    nextIntent: 0,
+  };
 }

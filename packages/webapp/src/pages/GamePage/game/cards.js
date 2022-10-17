@@ -141,7 +141,7 @@ export function getCardRewards(amount = 3, hero) {
   const niceCards = deckCards
     .filter((card) => card.name !== "Strike")
     .filter((card) => card.name !== "Defend");
-  console.log({ niceCards, deckCards });
+
   // List of random card rewards.
   const rewards = [];
   while (rewards.length < amount) {

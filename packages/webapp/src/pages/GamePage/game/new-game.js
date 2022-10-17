@@ -1,5 +1,5 @@
-import actions from './actions.js'
-import ActionManager from './action-manager.js'
+import actions from "./actions.js";
+import ActionManager from "./action-manager.js";
 
 // This function returns a "game" object with everything you need to play and control the game.
 // Note: it IS possible to modify all aspects of the game using actions directly.
@@ -19,35 +19,35 @@ import ActionManager from './action-manager.js'
 // ```
 
 export default function createNewGame() {
-	const actionManager = ActionManager({debug: false})
+  const actionManager = ActionManager({ debug: false });
 
-	// Adds a dungeon, starter deck and draws cards.
-	function createNewState() {
-		let state = actions.createNewGame()
-		state = actions.setDungeon(state)
-		state = actions.addStarterDeck(state)
-		state = actions.drawCards(state)
-		return state
-	}
+  // Adds a dungeon, starter deck and draws cards.
+  function createNewState() {
+    let state = actions.createNewGame();
+    state = actions.setDungeon(state);
+    state = actions.addStarterDeck(state);
+    //state = actions.drawCards(state)
+    return state;
+  }
 
-	return {
-		state: createNewState(),
-		actions,
-		enqueue: actionManager.enqueue,
-		dequeue() {
-			try {
-				const nextState = actionManager.dequeue(this.state)
-				if (nextState) this.state = nextState
-			} catch (err) {
-				console.warn(err)
-			}
-		},
-		undo() {
-			const prevGame = actionManager.undo()
-			if (prevGame) this.state = prevGame.state
-			return prevGame
-		},
-		future: actionManager.future,
-		past: actionManager.past,
-	}
+  return {
+    state: createNewState(),
+    actions,
+    enqueue: actionManager.enqueue,
+    dequeue() {
+      try {
+        const nextState = actionManager.dequeue(this.state);
+        if (nextState) this.state = nextState;
+      } catch (err) {
+        console.warn(err);
+      }
+    },
+    undo() {
+      const prevGame = actionManager.undo();
+      if (prevGame) this.state = prevGame.state;
+      return prevGame;
+    },
+    future: actionManager.future,
+    past: actionManager.past,
+  };
 }

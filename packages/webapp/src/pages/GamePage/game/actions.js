@@ -56,7 +56,9 @@ function createNewGame() {
       powers: {},
     },
     hero: "",
+    selectedDeck: 0,
     dungeon: {},
+    stage: 1,
   };
 }
 
@@ -153,9 +155,21 @@ function upgradeCard(state, { card }) {
     draft.deck.find((c) => c.id === card.id).upgrade();
   });
 }
+
+/*Select a hero*/
 function selectHero(state, { hero }) {
   return produce(state, (draft) => {
     draft.hero = hero;
+  });
+}
+
+/* Clear dungeon and go to next stage */
+function goToNextStage(state) {
+  return produce(state, (draft) => {
+    if (state.stage <= 9) {
+      draft.dungeon = dungeonWithMap();
+      draft.stage = state.stage + 1;
+    }
   });
 }
 
@@ -181,6 +195,10 @@ function playCard(state, { card, target }) {
   let newState = discardCard(state, { card });
   newState = produce(newState, (draft) => {
     // Use energy
+    //TODO: not if target health = 0;
+    if (target.health <= 0) {
+      console.log("NEEEEE");
+    }
     draft.player.currentEnergy = newState.player.currentEnergy - card.energy;
     // Block is expected to always target the player.
     if (card.block) {
@@ -622,6 +640,7 @@ const allActions = {
   takeMonsterTurn,
   upgradeCard,
   selectHero,
+  goToNextStage,
 };
 
 export default allActions;

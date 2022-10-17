@@ -10,6 +10,8 @@ export default function map(props) {
 
   return html`
     <div class="MapContainer">
+      <h2>Stage ${props.stage}</h2>
+
       <${SlayMap}
         dungeon=${props.dungeon}
         x=${x}
