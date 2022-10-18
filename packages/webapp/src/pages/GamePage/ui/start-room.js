@@ -151,6 +151,10 @@ export default class StartRoom extends Component {
         ${this.state.heroSelected &&
         html`
           <h1 center medium>Select Relic</h1>
+          <p center>
+            Relics will give you a little boost on your descent so collect as
+            mamny as you can!
+          </p>
           ${this.props.nfts.length
             ? html`
                 <div class="Cards Cards--grid">

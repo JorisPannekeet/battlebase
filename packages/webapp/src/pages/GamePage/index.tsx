@@ -1,32 +1,21 @@
 // @ts-nocheck
 import { html, render } from "./web_modules/htm/preact/standalone.module.js";
-import { Box } from "@mui/material";
-import { useWalletLayer2NFT } from "@loopring-web/core";
-import { useMyNFT } from "../NFTPage/MyNFT/useMyNFT";
+import { useWalletLayer2NFT, store } from "@loopring-web/core";
 import React, { useEffect, useMemo } from "react";
-import {
-  useMyCollection,
-  useNFTMintAdvance,
-  ViewAccountTemplate,
-  useAccount,
-} from "@loopring-web/core";
-// import { WalletConnectL2Btn } from "./index";
+import { useAccount, unlockAccount } from "@loopring-web/core";
 import { SlayTheWeb } from "./ui/index";
+import { useHeader } from "../../layouts/header/hook";
 import "./ui/index.css";
 
 export const Game = () => {
+  const account = store.getState().account;
+  const { headerToolBarData } = useHeader();
   const allowedCollections = [
     "0xfe86f18373f116a1a4db56a0bde6ac638f36251b",
     "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a",
   ];
   const accountTotal = useAccount();
-  const {
-    status: walletLayer2NFTStatus,
-    walletLayer2NFT,
-    total: totalOrg,
-    page: page_reudex,
-    updateWalletLayer2NFT,
-  } = useWalletLayer2NFT();
+  const { walletLayer2NFT } = useWalletLayer2NFT();
 
   const allowedNFTs = [];
   allowedCollections.forEach((filterValue) => {
@@ -34,6 +23,16 @@ export const Game = () => {
       ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
     );
   });
+  const connectAccount = async () => {
+    headerToolBarData[4].handleClick();
+  };
+
+  useEffect(() => {
+    console.log("rendering game");
+    setTimeout(() => {
+      renderObject();
+    }, 1000);
+  }, [account.readyState, walletLayer2NFT]);
 
   const renderGame = useMemo(() => {
     setTimeout(() => {
@@ -43,7 +42,13 @@ export const Game = () => {
   const renderObject = () => {
     render(
       html`
-        <${SlayTheWeb} connectedAccount=${accountTotal} nfts=${allowedNFTs} />
+        <${SlayTheWeb}
+          connectedAccount=${accountTotal}
+          accountState=${account.readyState}
+          nfts=${allowedNFTs}
+          connectEvent=${connectAccount}
+          unlockEvent=${unlockAccount}
+        />
       `,
       document.querySelector("#SlayTheWeb")
     );

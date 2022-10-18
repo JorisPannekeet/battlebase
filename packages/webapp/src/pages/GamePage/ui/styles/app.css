@@ -140,17 +140,16 @@ button:active {
   background-repeat: no-repeat; */
 }
 h1 {
-  font-family: "Hades", serif;
   margin: 0px;
   /* margin-top: 2rem; */
   font-size: 5rem;
   /* margin-bottom: -1rem; */
   /* background-image: linear-gradient(63deg, var(--yellow), hsl(17, 80%, 60%), hsl(0, 97.2%, 42.7%)); */
-  background-image: linear-gradient(180deg, #ff5f5f, hsl(0, 90.1%, 0.5%));
+  background-image: linear-gradient(180deg, #ff0000, hsl(46deg 100% 50%));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  letter-spacing: 10px;
+
   /* text-shadow: 2px 3px hsla(240, 89%, 4%, 0.1); */
   line-height: 1;
 }
@@ -397,7 +396,7 @@ h2 {
 .Options {
   list-style: none;
   padding: 0;
-  width: 250px;
+  width: 300px;
   max-width: 30em;
   margin-left: auto;
   margin-right: auto;
