@@ -173,7 +173,12 @@ export default class StartRoom extends Component {
                   })}
                 </div>
               `
-            : html`<p center>No Relics in wallet</p>`}
+            : html` <p center>No Relics in wallet or no wallet connected</p>
+                <div center>
+                  <button onClick=${() => this.props.onContinue()}>
+                    Start descent
+                  </button>
+                </div>`}
         `}
       </article>
     `;
