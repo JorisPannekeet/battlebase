@@ -5,6 +5,7 @@ import { getTargets, getCurrRoom } from "./utils-state.js";
 import powers from "./powers.js";
 import { dungeonWithMap } from "../content/dungeon-encounters.js";
 import { conditionsAreValid } from "./conditions.js";
+import relics from "../content/relics";
 
 // Without this, immer.js will throw an error if our `state` is modified outside of an action.
 // While in theory a good idea, we're not there yet. It is a useful way to spot modifications
@@ -75,6 +76,7 @@ function setDungeon(state, dungeon) {
 }
 
 // Draws a "starter" deck to your discard pile. Normally you'd run this as you start the game.
+// TODO: this will change depending on the selected hero
 function addStarterDeck(state) {
   const deck = [
     createCard("Defend"),
@@ -165,8 +167,14 @@ function selectHero(state, { hero }) {
 }
 
 function selectRelic(state, { relic }) {
+  const nft = relic;
+  const stats = relics.find((item) => item.address === nft.tokenAddress);
+  const newRelic = {
+    ...stats,
+    ...nft,
+  };
   return produce(state, (draft) => {
-    draft.relics.push(relic);
+    draft.relics.push(newRelic);
   });
 }
 
@@ -178,6 +186,22 @@ function goToNextStage(state) {
       draft.stage = state.stage + 1;
     }
   });
+}
+
+function useRelic(state, { relic }) {
+  console.log({ relic });
+  switch (relic.action) {
+    case "addBlock":
+      return produce(state, (draft) => {
+        draft.player.block = state.player.block + relic.value;
+      });
+      break;
+    case "addAttack":
+      return produce(state);
+      break;
+    default:
+      return;
+  }
 }
 
 // The funky part of this action is the `target` argument. It needs to be a special type of string:
@@ -203,9 +227,7 @@ function playCard(state, { card, target }) {
   newState = produce(newState, (draft) => {
     // Use energy
     //TODO: not if target health = 0;
-    if (target.health <= 0) {
-      console.log("NEEEEE");
-    }
+
     draft.player.currentEnergy = newState.player.currentEnergy - card.energy;
     // Block is expected to always target the player.
     if (card.block) {
@@ -416,7 +438,6 @@ function endTurn(state) {
 // Draws new cards, reset energy, remove player block, check powers
 function newTurn(state) {
   let newState = drawCards(state);
-
   return produce(newState, (draft) => {
     draft.turn++;
     draft.player.currentEnergy = 3;
@@ -649,6 +670,7 @@ const allActions = {
   selectHero,
   goToNextStage,
   selectRelic,
+  useRelic,
 };
 
 export default allActions;

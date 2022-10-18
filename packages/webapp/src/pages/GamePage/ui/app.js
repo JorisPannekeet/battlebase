@@ -240,11 +240,9 @@ stw.dealCards()`);
   }
   selectHero(name) {
     this.game.enqueue({ type: "selectHero", hero: name });
-    //this.goToNextRoom();
     this.update();
   }
   selectRelic(nft) {
-    console.log(nft);
     this.game.enqueue({ type: "selectRelic", relic: nft });
     this.update();
     this.goToNextRoom();
@@ -254,7 +252,20 @@ stw.dealCards()`);
     this.toggleOverlay("#Map");
     this.setState({ didPickCard: false });
     this.game.enqueue({ type: "move", move });
+
     this.update(this.dealCards);
+    const room = this.state.dungeon.graph[move.y][move.x].room;
+
+    if (room.type === "monster") {
+      const battleStartRelic = this.state.relics.find(
+        (item) => item.type === "battleStart"
+      );
+      if (battleStartRelic) {
+        console.log("Triggering battleStart relic");
+        this.game.enqueue({ type: "useRelic", relic: battleStartRelic });
+        this.update();
+      }
+    }
   }
   render(props, state) {
     if (!state.player) return;
@@ -265,7 +276,6 @@ stw.dealCards()`);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
     const nfts = props.nfts;
-    console.log({ relics: state.relics });
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>

@@ -2,6 +2,7 @@ import {
   html,
   Component,
 } from "../web_modules/htm/preact/standalone.module.js";
+import relics from "../content/relics";
 
 export default class StartRoom extends Component {
   constructor() {
@@ -167,7 +168,11 @@ export default class StartRoom extends Component {
                           />
                         </figure>
                         <p class="Card-type">Relic</p>
-                        <p class="Card-description">Relic description</p>
+                        <p class="Card-description">
+                          ${relics.find(
+                            (item) => item.address === nft.tokenAddress
+                          ).description}
+                        </p>
                       </div>
                     </article>`;
                   })}

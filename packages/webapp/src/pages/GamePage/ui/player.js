@@ -66,6 +66,7 @@ class Target extends Component {
   render({ model, type, name, children }, state) {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
+    // TODO: replace image with player and monster specific assets
     const image = require(`./images/${type}.png`).default;
     return html`
       <div
