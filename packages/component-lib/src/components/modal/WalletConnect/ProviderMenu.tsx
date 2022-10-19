@@ -70,6 +70,7 @@ export const ProviderMenu = ({
       key: string,
       handleSelect?: (event: React.MouseEvent, key: string) => void
     ) => {
+      // @ts-ignore
       handleSelect(event, key);
     },
     [checkboxValue, isShake]
