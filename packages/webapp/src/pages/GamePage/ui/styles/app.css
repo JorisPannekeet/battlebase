@@ -639,3 +639,22 @@ table {
   width: 40px;
   border-radius: 30%;
 }
+.react-swipeable-view-container {
+  border: 2px solid black;
+  max-width: 800px;
+  background: #8e8480 !important;
+}
+.walletConnectBtns {
+  width: 100%;
+  position: relative;
+}
+.walletConnectBtns img {
+  position: absolute;
+  right: 10px;
+}
+.close-button.MuiBox-root.css-bo6uw6 {
+  top: 27px;
+}
+.close-button.MuiBox-root.css-bo6uw6 button {
+  box-shadow: none;
+}

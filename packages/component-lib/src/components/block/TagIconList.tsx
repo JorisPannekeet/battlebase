@@ -22,28 +22,7 @@ export const TagIconList = React.memo(
         display={"inline-flex"}
         className={"tagIconList"}
       >
-        {campaignTagConfig.map((item) => {
-          if (
-            item.scenarios?.includes(scenario) &&
-            item.symbols?.includes(symbol) &&
-            item.endShow >= Date.now() &&
-            item.startShow <= Date.now()
-          ) {
-            return (
-              <Avatar
-                alt={item.name}
-                style={{
-                  width: size ? size : "var(--svg-size-medium)",
-                  height: size ? size : "var(--svg-size-medium)",
-                  marginRight: theme.unit / 2,
-                }}
-                src={item.iconSource}
-              />
-            );
-          } else {
-            return <></>;
-          }
-        })}
+        nah
       </Typography>
     );
   }

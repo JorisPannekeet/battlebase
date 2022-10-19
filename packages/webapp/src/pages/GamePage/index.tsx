@@ -5,6 +5,7 @@ import React, { useEffect, useMemo } from "react";
 import { useAccount, unlockAccount } from "@loopring-web/core";
 import { SlayTheWeb } from "./ui/index";
 import { useHeader } from "../../layouts/header/hook";
+import { walletServices } from "@loopring-web/web3-provider";
 import "./ui/index.css";
 
 export const Game = () => {
@@ -25,6 +26,9 @@ export const Game = () => {
   });
   const connectAccount = async () => {
     headerToolBarData[4].handleClick();
+  };
+  const handleDisconnect = () => {
+    walletServices.sendDisconnect("", "customer click disconnect");
   };
 
   useEffect(() => {
@@ -48,6 +52,7 @@ export const Game = () => {
           nfts=${allowedNFTs}
           connectEvent=${connectAccount}
           unlockEvent=${unlockAccount}
+          disconnectEvent=${handleDisconnect}
         />
       `,
       document.querySelector("#SlayTheWeb")

@@ -56,6 +56,7 @@ export class SlayTheWeb extends Component {
         connectEvent=${props.connectEvent}
         unlockEvent=${props.unlockEvent}
         accountState=${props.accountState}
+        disconnectEvent=${props.disconnectEvent}
       />`;
     if (gameMode === GameModes.decks)
       return html`<${Decks} back=${this.handleLoose} />`;

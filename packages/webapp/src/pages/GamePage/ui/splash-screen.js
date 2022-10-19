@@ -15,7 +15,12 @@ export default class SplashScreen extends Component {
         <h2>The NFT Dungeon Crawler Card Game</h2>
         <div>
           ${props.accountState === "ACTIVATED" &&
-          html`<p>Wallet ${props.account.addressShort} connected !</p>`}
+          html`<p>Wallet ${props.account.addressShort} connected !</p>
+            <div>
+              <button onClick=${() => props.disconnectEvent()}>
+                Disconnect
+              </button>
+            </div>`}
           ${props.accountState === "LOCKED" &&
           html` <div class="Options">
             <p>Wallet ${props.account.addressShort} connected !</p>

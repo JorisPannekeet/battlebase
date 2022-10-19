@@ -186,8 +186,8 @@ export type LOOPRING_NFT_METADATA = {
   [key in keyof typeof LOOPRING_TAKE_NFT_META_KET]?: string | undefined;
 };
 
-export const NFTLimit = 9999,
-  CollectionLimit = 999;
+export const NFTLimit = 99999,
+  CollectionLimit = 100;
 
 export const AddAssetList = {
   FromMyL1: {

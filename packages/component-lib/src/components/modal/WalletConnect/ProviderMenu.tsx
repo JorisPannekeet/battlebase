@@ -70,17 +70,7 @@ export const ProviderMenu = ({
       key: string,
       handleSelect?: (event: React.MouseEvent, key: string) => void
     ) => {
-      if (handleSelect && checkboxValue) {
-        handleSelect(event, key);
-        setIsShake(false);
-      } else if (!checkboxValue) {
-        setIsShake(true);
-        setTimeout(() => {
-          if (isShake) {
-            setIsShake(false);
-          }
-        }, 80);
-      }
+      handleSelect(event, key);
     },
     [checkboxValue, isShake]
   );
@@ -118,7 +108,7 @@ export const ProviderMenu = ({
           justifyContent={"stretch"}
           alignItems={"flex-start"}
         >
-          <MuiFormControlLabel
+          {/* <MuiFormControlLabel
             control={
               <CheckboxStyled
                 className={isShake ? "shake" : ""}
@@ -152,7 +142,7 @@ export const ProviderMenu = ({
                 .
               </Trans>
             }
-          />
+          /> */}
         </BoxStyle>
       </Box>
       <Box
@@ -170,7 +160,7 @@ export const ProviderMenu = ({
         <>
           {gatewayList.map((item: GatewayItem) => (
             <Box key={item.key} marginTop={1.5}>
-              <MenuBtnStyled
+              {/* <MenuBtnStyled
                 variant={"outlined"}
                 size={"large"}
                 className={`${isMobile ? "isMobile" : ""} ${
@@ -187,7 +177,21 @@ export const ProviderMenu = ({
                 }}
               >
                 {t(item.keyi18n)}
-              </MenuBtnStyled>
+              </MenuBtnStyled> */}
+              <button
+                className="walletConnectBtns"
+                onClick={(e) => {
+                  _handleSelect(
+                    e,
+                    item.key,
+                    item.handleSelect ? item.handleSelect : handleSelect
+                  );
+                }}
+              >
+                {" "}
+                {t(item.keyi18n)}
+                <img src={item.imgSrc} alt={item.key} height={36} />
+              </button>
             </Box>
           ))}
         </>
