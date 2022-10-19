@@ -367,8 +367,9 @@ stw.dealCards()`);
           html`<${Overlay}>
             <${QuestRoom}
               gameState=${state}
-              onChoose=${this.handleCampfireChoice}
+              selectRelic=${this.selectRelic}
               onContinue=${this.goToNextRoom}
+              nfts=${nfts}
             />
           <//>`
         }
