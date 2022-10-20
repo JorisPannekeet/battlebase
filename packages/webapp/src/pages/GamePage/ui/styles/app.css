@@ -523,7 +523,7 @@ table {
 }
 
 .hero-card:nth-child(2) .hero-card-image {
-  background: url("../images/heroes/p2a.png");
+  background: url("../images/heroes/P2A.png");
   background-size: cover;
 }
 

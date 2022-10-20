@@ -10,39 +10,46 @@
 
 // Class representing a power.
 class Power {
-	/**
-	 * @param {POWER} power - The base power to create a class from
-	 */
-	constructor(power) {
-		const {name, description, type, target, use} = power
-		this.name = name
-		this.description = description
-		this.type = type
-		this.target = target
-		this.use = use
-	}
+  /**
+   * @param {POWER} power - The base power to create a class from
+   */
+  constructor(power) {
+    const { name, description, type, target, use } = power;
+    this.name = name;
+    this.description = description;
+    this.type = type;
+    this.target = target;
+    this.use = use;
+  }
 }
 
 export const regen = new Power({
-	type: 'buff',
-	name: 'Regen',
-	description: 'Heals an amount of health points equal to Regen stacks',
-	target: 'player',
-	use: (stacks) => stacks,
-})
+  type: "buff",
+  name: "Regen",
+  description: "Heals an amount of health points equal to Regen stacks",
+  target: "player",
+  use: (stacks) => stacks,
+});
 
 export const vulnerable = new Power({
-	type: 'debuff',
-	name: 'Vulnerable',
-	description: 'Takes 50% more damage while Vulnerable',
-	use: (dmg) => Math.floor(dmg * 1.5),
-})
+  type: "debuff",
+  name: "Vulnerable",
+  description: "Takes 50% more damage while Vulnerable",
+  use: (dmg) => Math.floor(dmg * 1.5),
+});
 
 export const weak = new Power({
-	type: 'debuff',
-	name: 'Weak',
-	description: 'Weakened targets deal 25% less damage',
-	use: (dmg) => Math.floor(dmg * 0.75),
-})
+  type: "debuff",
+  name: "Weak",
+  description: "Weakened targets deal 25% less damage",
+  use: (dmg) => Math.floor(dmg * 0.75),
+});
 
-export default {regen, vulnerable, weak}
+export const boost = new Power({
+  type: "buff",
+  name: "Boost",
+  description: "Next attack deals 8 additional damage",
+  use: (dmg) => dmg + 8,
+});
+
+export default { regen, vulnerable, weak, boost };

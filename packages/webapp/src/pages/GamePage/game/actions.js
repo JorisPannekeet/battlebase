@@ -189,7 +189,6 @@ function goToNextStage(state) {
 }
 
 function useRelic(state, { relic }) {
-  console.log({ relic });
   switch (relic.action) {
     case "addBlock":
       return produce(state, (draft) => {
@@ -197,7 +196,11 @@ function useRelic(state, { relic }) {
       });
       break;
     case "addAttack":
-      return produce(state);
+      return produce(state, (draft) => {
+        if (state.turn === 1) {
+          draft.player.powers.boost = 8;
+        }
+      });
       break;
     default:
       return;
@@ -239,8 +242,16 @@ function playCard(state, { card, target }) {
     // we prioritize this over the actual enemy where you dropped the card.
     const newTarget =
       card.target === CardTargets.allEnemies ? card.target : target;
+
+    // Determine damage amount and apply relics if needed.
     let amount = card.damage;
     if (newState.player.powers.weak) amount = powers.weak.use(amount);
+    if (newState.player.powers.boost) {
+      amount = powers.boost.use(amount);
+      newState = produce(newState, (draft) => {
+        draft.player.powers.boost = 0;
+      });
+    }
     newState = removeHealth(newState, { target: newTarget, amount });
   }
   if (card.powers) newState = applyCardPowers(newState, { target, card });

@@ -11,10 +11,10 @@ export default class QuestRoom extends Component {
     });
     const shuffled = availableRelics.sort(() => 0.5 - Math.random());
     const randomRelics = shuffled.slice(0, 3);
-    console.log({ randomRelics });
+
     return html`
       <h1 center medium>Event room</h1>
-      <p center>Aren't you a lucky one, now pick 1!</p>
+      <p center>Aren't you a lucky one, you're allowed to choose a relic!</p>
       ${randomRelics
         ? html`
             <div class="Cards Cards--grid">

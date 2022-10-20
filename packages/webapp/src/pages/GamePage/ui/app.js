@@ -256,6 +256,8 @@ stw.dealCards()`);
     this.update(this.dealCards);
     const room = this.state.dungeon.graph[move.y][move.x].room;
 
+    //TODO: fix for multiple relics
+
     if (room.type === "monster") {
       const battleStartRelic = this.state.relics.find(
         (item) => item.type === "battleStart"

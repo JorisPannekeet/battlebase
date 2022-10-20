@@ -8,8 +8,8 @@ const relics = [
   },
   {
     address: "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a", // Power to the apes
-    type: "firstAttack",
-    description: "Your first attack deals 8 additional damage",
+    type: "battleStart",
+    description: "Your first attack deals 8 additional damage each encounter",
     action: "addAttack",
     value: 8,
   },
