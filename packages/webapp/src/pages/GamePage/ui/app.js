@@ -376,13 +376,12 @@ stw.dealCards()`);
 
 				<div class="Targets Split">
 					<div class="Targets-group">
-						<${Player} model=${state.player} name="Player" />
+						<${Player} model=${state.player} hero=${state.hero} name=${state.hero} />
 					</div>
 					<div class="Targets-group">
 						${
               room.monsters &&
               room.monsters.map((monster) => {
-                console.log(monster);
                 return html`<${Monster}
                   model=${monster}
                   gameState=${state}

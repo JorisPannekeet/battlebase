@@ -97,17 +97,14 @@ function decideRoomType(nodeType, floor, state) {
   let stage;
   switch (state.stage) {
     case 1:
-      console.log("stage 1 monsters loaded");
       stage = allMonsters.stage1Monsters;
       break;
     case 2:
-      console.log("stage 2 monsters loaded");
       stage = allMonsters.stage2Monsters;
       break;
     default:
       stage = allMonsters.stage1Monsters;
   }
-  console.log("stage monsters:", stage.monsters);
   const pickRandomFromObj = (obj) => obj[shuffle(Object.keys(obj))[0]];
   if (floor === 0) return StartRoom();
   if (nodeType === "C") return CampfireRoom();

@@ -135,9 +135,13 @@ export function getCardRewards(amount = 3, hero) {
     case "P2A":
       deckCards = decks.testDeck;
       break;
+    case "IceCream":
+      deckCards = decks.testDeck;
+      break;
     default:
       deckCards = decks.defaultDeck;
   }
+  // filter out boring cards
   const niceCards = deckCards
     .filter((card) => card.name !== "Strike")
     .filter((card) => card.name !== "Defend");

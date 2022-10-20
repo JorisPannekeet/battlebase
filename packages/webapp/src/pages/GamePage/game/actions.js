@@ -56,7 +56,7 @@ function createNewGame() {
       block: 0,
       powers: {},
     },
-    hero: "",
+    hero: "Default",
     relics: [],
     selectedDeck: 0,
     dungeon: {},

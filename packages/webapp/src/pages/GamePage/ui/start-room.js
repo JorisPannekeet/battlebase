@@ -113,7 +113,14 @@ export default class StartRoom extends Component {
                 </div>
               </div>
               <div class="selector">
-                <button disabled>select</button>
+                <button
+                  onClick=${() => {
+                    this.props.onSelect("IceCream");
+                    this.setState({ heroSelected: true });
+                  }}
+                >
+                  select
+                </button>
               </div>
             </div>
 

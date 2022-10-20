@@ -63,13 +63,13 @@ class Target extends Component {
     // if (gainedBlock > 0) this.setState({gainedBlock})
   }
 
-  render({ model, type, name, children }, state) {
+  render({ model, type, name, children, hero }, state) {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
     // TODO: replace image with player and monster specific assets
     let image;
     if (type === "player") {
-      image = require(`./images/${type}.png`).default;
+      image = require(`./images/heroes/${hero}.png`).default;
     } else {
       image = require(`./images/${model.image}`).default;
     }
