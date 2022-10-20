@@ -381,10 +381,14 @@ stw.dealCards()`);
 					<div class="Targets-group">
 						${
               room.monsters &&
-              room.monsters.map(
-                (monster) =>
-                  html`<${Monster} model=${monster} gameState=${state} />`
-              )
+              room.monsters.map((monster) => {
+                console.log(monster);
+                return html`<${Monster}
+                  model=${monster}
+                  gameState=${state}
+                  name=${monster.name}
+                />`;
+              })
             }
 					</div>
 				</div>

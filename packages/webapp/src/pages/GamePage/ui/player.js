@@ -67,13 +67,19 @@ class Target extends Component {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
     // TODO: replace image with player and monster specific assets
-    const image = require(`./images/${type}.png`).default;
+    let image;
+    if (type === "player") {
+      image = require(`./images/${type}.png`).default;
+    } else {
+      image = require(`./images/${model.image}`).default;
+    }
+
     return html`
       <div
         class=${`Target${isDead ? " Target--isDead" : ""}`}
         data-type=${type}
       >
-        <h2><span class="Target-name">${name}</span> ${children}</h2>
+        <h2>${children}<span class="Target-name">${name}</span></h2>
         <img id="${type}-image" class=${type} src=${image} />
         <${Healthbar} max=${model.maxHealth} value=${hp} block=${model.block} />
         <${Powers} powers=${model.powers} />

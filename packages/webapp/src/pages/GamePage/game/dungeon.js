@@ -1,14 +1,9 @@
 import { uuid, shuffle, random as randomBetween } from "./utils.js";
 import { StartRoom, CampfireRoom, QuestRoom } from "./dungeon-rooms.js";
-import {
-  easyMonsters,
-  monsters,
-  elites,
-  bosses,
-} from "../content/dungeon-encounters.js";
+import { allMonsters } from "../content/monsters/index.js";
 
 /**
- * A procedural generated dungeon map for Slay the Web. Again, heavily inspired by Slay the Spire.
+ * A procedural generated dungeon map.
  * @param {object} options
  * @param {number} options.width how many nodes on each floor
  * @param {number} options.height how many floors
@@ -38,7 +33,7 @@ const defaultOptions = {
  * @param {object} options
  * @returns {DUNGEON}
  */
-export default function Dungeon(options = {}) {
+export default function Dungeon(options = {}, state) {
   options = Object.assign(defaultOptions, options);
 
   const graph = generateGraph(options);
@@ -61,7 +56,7 @@ export default function Dungeon(options = {}) {
   graph.forEach((floor, floorNumber) => {
     floor.map((node) => {
       if (node.type) {
-        node.room = decideRoomType(node.type, floorNumber);
+        node.room = decideRoomType(node.type, floorNumber, state);
       }
     });
   });
@@ -98,15 +93,30 @@ function decideNodeType(nodeTypes, floor) {
  * @param {number} floor
  * @returns {object} room
  */
-function decideRoomType(nodeType, floor /*, graph*/) {
+function decideRoomType(nodeType, floor, state) {
+  let stage;
+  switch (state.stage) {
+    case 1:
+      console.log("stage 1 monsters loaded");
+      stage = allMonsters.stage1Monsters;
+      break;
+    case 2:
+      console.log("stage 2 monsters loaded");
+      stage = allMonsters.stage2Monsters;
+      break;
+    default:
+      stage = allMonsters.stage1Monsters;
+  }
+  console.log("stage monsters:", stage.monsters);
   const pickRandomFromObj = (obj) => obj[shuffle(Object.keys(obj))[0]];
   if (floor === 0) return StartRoom();
   if (nodeType === "C") return CampfireRoom();
   if (nodeType === "Q") return QuestRoom();
-  if (nodeType === "M" && floor < 2) return pickRandomFromObj(easyMonsters);
-  if (nodeType === "M") return pickRandomFromObj(monsters);
-  if (nodeType === "E") return pickRandomFromObj(elites);
-  if (nodeType === "boss") return pickRandomFromObj(bosses);
+  if (nodeType === "M" && floor < 2)
+    return pickRandomFromObj(stage.easyMonsters);
+  if (nodeType === "M") return pickRandomFromObj(stage.monsters);
+  if (nodeType === "E") return pickRandomFromObj(stage.elites);
+  if (nodeType === "boss") return pickRandomFromObj(stage.bosses);
   throw new Error(
     `Could not match node type "${nodeType}" with a dungeon room`
   );

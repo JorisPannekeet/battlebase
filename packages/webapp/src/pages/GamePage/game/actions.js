@@ -67,7 +67,7 @@ function createNewGame() {
 // By default a new game doesn't come with a dungeon. You have to set one explicitly. Look in dungeon-encounters.js for inspiration.
 /** @returns {State} */
 function setDungeon(state, dungeon) {
-  if (!dungeon) dungeon = dungeonWithMap();
+  if (!dungeon) dungeon = dungeonWithMap(state);
   state.dungeon = dungeon;
   return state;
   // return produce(state, (draft) => {
@@ -182,8 +182,8 @@ function selectRelic(state, { relic }) {
 function goToNextStage(state) {
   return produce(state, (draft) => {
     if (state.stage <= 9) {
-      draft.dungeon = dungeonWithMap();
       draft.stage = state.stage + 1;
+      draft.dungeon = dungeonWithMap(draft);
     }
   });
 }
@@ -245,6 +245,7 @@ function playCard(state, { card, target }) {
   }
   if (card.powers) newState = applyCardPowers(newState, { target, card });
   // if (card.use) newState = card.use(newState, {target, card})
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   newState = useCardActions(newState, { target, card });
   return newState;
 }

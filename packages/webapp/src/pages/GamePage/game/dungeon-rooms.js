@@ -99,5 +99,7 @@ export function Monster(
     intents: randomIntents || props.intents,
     // A counter to keep track of which intent to run next.
     nextIntent: 0,
+    name: props.name,
+    image: props.image,
   };
 }

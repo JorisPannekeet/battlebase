@@ -25,7 +25,9 @@ export default function createNewGame() {
   function createNewState() {
     let state = actions.createNewGame();
     state = actions.setDungeon(state);
-    state = actions.addStarterDeck(state);
+    if (state.stage === 1) {
+      state = actions.addStarterDeck(state);
+    }
     //state = actions.drawCards(state)
     return state;
   }
