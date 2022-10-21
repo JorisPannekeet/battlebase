@@ -421,7 +421,12 @@ stw.dealCards()`);
         <div id="relics" class="relics" topleft>
         ${state.relics.map((relic) => {
           return html`
-            <img src=${relic.metadata.imageSize.original} with="20" />
+            <span
+              class="tooltipped tooltipped-s"
+              aria-label=${relic.description}
+            >
+              <img src=${relic.metadata.imageSize.original} with="20" />
+            </span>
           `;
         })}
         </div>

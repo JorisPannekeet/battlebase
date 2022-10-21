@@ -658,3 +658,26 @@ table {
 .close-button.MuiBox-root.css-bo6uw6 button {
   box-shadow: none;
 }
+.landpage-hero {
+  background: url("../images/scenes/bg2.png");
+  background-size: "cover";
+  background-position: center left;
+  background-repeat: no-repeat;
+}
+.landingpage h1 {
+  font-size: 48px !important;
+}
+.MuiTypography-body1 {
+  font-size: 32px !important;
+}
+.landingpage h2 {
+  font-size: 30px;
+}
+.landingpage h3,
+.landingpage h4,
+.landingpage h5 {
+  font-size: 26px;
+}
+.MuiAppBar-root {
+  display: none !important;
+}

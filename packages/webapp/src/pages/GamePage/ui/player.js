@@ -6,6 +6,7 @@ import {
   weak as weakPower,
   vulnerable as vulnerablePower,
   regen as regenPower,
+  boost as boostpower,
 } from "../game/powers.js";
 
 export const Player = (props) => {
@@ -66,7 +67,6 @@ class Target extends Component {
   render({ model, type, name, children, hero }, state) {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
-    // TODO: replace image with player and monster specific assets
     let image;
     if (type === "player") {
       image = require(`./images/heroes/${hero}.png`).default;
@@ -124,6 +124,7 @@ const Powers = (props) => {
       <${Power} amount=${props.powers.vulnerable} power=${vulnerablePower} />
       <${Power} amount=${props.powers.regen} power=${regenPower} />
       <${Power} amount=${props.powers.weak} power=${weakPower} />
+      <${Power} amount=${props.powers.boost} power=${boostpower} />
     </div>
   `;
 };

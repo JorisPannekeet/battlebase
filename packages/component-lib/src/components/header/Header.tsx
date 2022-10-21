@@ -470,8 +470,7 @@ export const Header = withTranslation(["layout", "common"], { withRef: true })(
               alignItems={"stretch"}
               flexDirection={"row"} //!isMobile ? "row" : "column"}
             >
-              <LoopringLogo />
-              {!isLandPage
+              {isLandPage
                 ? getDrawerChoices({
                     menuList: headerMenuData,
                     i18n,
@@ -498,21 +497,10 @@ export const Header = withTranslation(["layout", "common"], { withRef: true })(
                 t,
                 ...rest,
               })}
-              {!!isLandPage && (
-                <ButtonStyled
-                  size={"small"}
-                  disabled={isMaintaining}
-                  variant={"contained"}
-                  onClick={() => history.push("/trade/lite/LRC-ETH")}
-                >
-                  {t("labelLaunchApp")}
-                </ButtonStyled>
-              )}
             </Box>
           </ToolBarStyled>
         );
       }, [
-        isLandPage,
         getDrawerChoices,
         headerMenuData,
         i18n,
@@ -556,122 +544,73 @@ export const Header = withTranslation(["layout", "common"], { withRef: true })(
               </Typography>
             </Box>
             <Box display={"flex"} alignItems={"center"}>
-              {isLandPage ? (
-                <>
-                  {location.pathname === "/wallet" ? (
-                    <NodeMenuItem
-                      {...{ ...headerMenuLandingData[0], ...rest, t }}
-                      handleListKeyDown={() =>
-                        history.push(
-                          "" +
-                            headerMenuLandingData[0].router?.path.replace(
-                              "${pair}",
-                              pair
-                            )
-                        )
-                      }
+              <Box
+                component={"ul"}
+                display="flex"
+                alignItems="center"
+                justifyContent={"flex-end"}
+                color={"textColorSecondary"}
+                marginRight={1}
+              >
+                {getMenuButtons({
+                  toolbarList: headerToolBarData,
+                  i18n,
+                  t,
+                  ...rest,
+                })}
+              </Box>
+              <ClickAwayListener
+                onClickAway={() => {
+                  popupState.close();
+                }}
+              >
+                <Box
+                  display="flex"
+                  alignContent="center"
+                  justifyContent={"flex-start"}
+                  alignItems={"stretch"}
+                  flexDirection={"row"} //!isMobile ? "row" : "column"}
+                >
+                  <Typography
+                    display={"inline-flex"}
+                    alignItems={"center"}
+                    {...bindTrigger(popupState)}
+                  >
+                    <MenuIcon
+                      // fontSize={"large"}
+                      style={{ height: 28, width: 28 }}
+                      // color={"primary"}
                     />
-                  ) : (
-                    <NodeMenuItem
-                      {...{ ...headerMenuLandingData[1], ...rest, t }}
-                      handleListKeyDown={() =>
-                        history.push(
-                          "" +
-                            headerMenuLandingData[1].router?.path.replace(
-                              "${pair}",
-                              pair
-                            )
-                        )
-                      }
-                    />
-                  )}
+                  </Typography>
 
-                  {getMenuButtons({
-                    toolbarList: _headerToolBarData,
-                    i18n,
-                    t,
-                    ...rest,
-                  })}
-                  <ButtonStyled
-                    size={"small"}
-                    disabled={isMaintaining}
-                    variant={"contained"}
-                    onClick={() => history.push("/trade/lite/LRC-ETH")}
-                  >
-                    {t("labelLaunchMobileApp", "")}
-                  </ButtonStyled>
-                </>
-              ) : (
-                <>
-                  <Box
-                    component={"ul"}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent={"flex-end"}
-                    color={"textColorSecondary"}
-                    marginRight={1}
-                  >
-                    {getMenuButtons({
-                      toolbarList: headerToolBarData,
-                      i18n,
-                      t,
-                      ...rest,
-                    })}
-                  </Box>
-                  <ClickAwayListener
-                    onClickAway={() => {
-                      popupState.close();
+                  <PopoverPure
+                    {...bindPopper(popupState)}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "center",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
                     }}
                   >
                     <Box
-                      display="flex"
-                      alignContent="center"
-                      justifyContent={"flex-start"}
+                      className={"mobile"}
+                      display={"flex"}
                       alignItems={"stretch"}
-                      flexDirection={"row"} //!isMobile ? "row" : "column"}
+                      flexDirection={"column"}
                     >
-                      <Typography
-                        display={"inline-flex"}
-                        alignItems={"center"}
-                        {...bindTrigger(popupState)}
-                      >
-                        <MenuIcon
-                          // fontSize={"large"}
-                          style={{ height: 28, width: 28 }}
-                          // color={"primary"}
-                        />
-                      </Typography>
-
-                      <PopoverPure
-                        {...bindPopper(popupState)}
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "center",
-                        }}
-                        transformOrigin={{
-                          vertical: "top",
-                          horizontal: "center",
-                        }}
-                      >
-                        <Box
-                          className={"mobile"}
-                          display={"flex"}
-                          alignItems={"stretch"}
-                          flexDirection={"column"}
-                        >
-                          {getDrawerChoices({
-                            menuList: _headerMenuData,
-                            i18n,
-                            t,
-                            handleListKeyDown: popupState.close,
-                            ...rest,
-                          })}
-                        </Box>
-                      </PopoverPure>
+                      {getDrawerChoices({
+                        menuList: _headerMenuData,
+                        i18n,
+                        t,
+                        handleListKeyDown: popupState.close,
+                        ...rest,
+                      })}
                     </Box>
-                  </ClickAwayListener>
-                </>
-              )}
+                  </PopoverPure>
+                </Box>
+              </ClickAwayListener>
             </Box>
           </ToolBarStyled>
         );

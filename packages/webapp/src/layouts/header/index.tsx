@@ -37,6 +37,7 @@ const Header = withTranslation("common")(
       const { allowTrade } = useSystem();
       const { account } = useAccount();
       // myLog("headerToolBarData", headerToolBarData);
+
       return (
         <>
           {isHideOnScroll ? (
