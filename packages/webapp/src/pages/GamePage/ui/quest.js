@@ -7,7 +7,10 @@ import relics from "../content/relics.js";
 export default class QuestRoom extends Component {
   render(props, state) {
     const availableRelics = props.nfts.filter((item) => {
-      return props.gameState.relics.indexOf(item) === -1;
+      return (
+        props.gameState.relics.indexOf(item) === -1 &&
+        item.tokenAddress !== props.gameState.relics.address
+      );
     });
     const shuffled = availableRelics.sort(() => 0.5 - Math.random());
     const randomRelics = shuffled.slice(0, 3);

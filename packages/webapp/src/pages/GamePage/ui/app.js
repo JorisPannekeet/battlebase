@@ -256,17 +256,16 @@ stw.dealCards()`);
     this.update(this.dealCards);
     const room = this.state.dungeon.graph[move.y][move.x].room;
 
-    //TODO: fix for multiple relics
-
     if (room.type === "monster") {
-      const battleStartRelic = this.state.relics.find(
+      const battleStartRelics = this.state.relics.filter(
         (item) => item.type === "battleStart"
       );
-      if (battleStartRelic) {
-        console.log("Triggering battleStart relic");
-        this.game.enqueue({ type: "useRelic", relic: battleStartRelic });
+      battleStartRelics.map((relic) => {
+        console.log("Triggering battleStart relic: ", relic);
+
+        this.game.enqueue({ type: "useRelic", relic: relic });
         this.update();
-      }
+      });
     }
   }
   render(props, state) {
