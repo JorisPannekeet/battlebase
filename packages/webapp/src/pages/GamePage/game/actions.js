@@ -197,9 +197,7 @@ function useRelic(state, { relic }) {
       break;
     case "addAttack":
       return produce(state, (draft) => {
-        if (state.turn === 1) {
-          draft.player.powers.boost = 8;
-        }
+        draft.player.powers.boost = 8;
       });
       break;
     default:
