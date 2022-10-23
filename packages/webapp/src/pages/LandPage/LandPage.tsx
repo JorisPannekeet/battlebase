@@ -93,7 +93,7 @@ export const LandPage = withTranslation(["landPage", "common"])(
                   whiteSpace={"pre-line"}
                   lineHeight={"100px"}
                 >
-                  The Descent
+                  Downfall
                 </Typography>
                 <Typography
                   component={"h2"}
