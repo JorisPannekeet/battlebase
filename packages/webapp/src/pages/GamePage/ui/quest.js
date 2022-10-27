@@ -18,7 +18,7 @@ export default class QuestRoom extends Component {
     return html`
       <h1 center medium>Event room</h1>
       <p center>Aren't you a lucky one, you're allowed to choose a relic!</p>
-      ${randomRelics
+      ${randomRelics.length
         ? html`
             <div class="Cards Cards--grid">
               ${randomRelics.map((relic) => {

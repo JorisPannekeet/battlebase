@@ -69,7 +69,12 @@ class Target extends Component {
     const hp = isDead ? 0 : model.currentHealth;
     let image;
     if (type === "player") {
-      image = require(`./images/heroes/${hero}.png`).default;
+      if (hero === "Default") {
+        image = require(`./images/heroes/hero1.gif`).default;
+        name = "Hero";
+      } else {
+        image = require(`./images/heroes/${hero}.png`).default;
+      }
     } else {
       image = require(`./images/${model.image}`).default;
     }
