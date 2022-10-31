@@ -64,7 +64,7 @@ class Target extends Component {
     // if (gainedBlock > 0) this.setState({gainedBlock})
   }
 
-  render({ model, type, name, children, hero }, state) {
+  render({ model, type, name, children, hero, monsterIndex }, state) {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
     let image;
@@ -83,11 +83,12 @@ class Target extends Component {
       <div
         class=${`Target${isDead ? " Target--isDead" : ""}`}
         data-type=${type}
+        data-monster=${type === "enemy" ? monsterIndex : ""}
       >
         <h2>${children}<span class="Target-name">${name}</span></h2>
-        <img id="${type}-image" class=${type} src=${image} />
         <${Healthbar} max=${model.maxHealth} value=${hp} block=${model.block} />
         <${Powers} powers=${model.powers} />
+        <img id="${type}-image" class=${type} src=${image} />
         <div class="Target-combatText Split">
           <${FCT}
             key=${model.block}

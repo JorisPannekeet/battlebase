@@ -27,21 +27,6 @@ export default class StartRoom extends Component {
                 <p>Start with the default deck, no NFT's needed.</p>
               </div>
 
-              <div class="hero-card-footer">
-                <div class="info">
-                  <div class="value">51784</div>
-                  <div class="type">used</div>
-                </div>
-                <div class="info">
-                  <div class="value">329</div>
-                  <div class="type">cards</div>
-                </div>
-                <div class="info">
-                  <div class="value">4.5</div>
-                  <div class="type">winrate</div>
-                </div>
-              </div>
-
               <div class="selector">
                 <button
                   onClick=${() => {
@@ -63,20 +48,6 @@ export default class StartRoom extends Component {
                 <p>Use the Power to the Apes deck and ....</p>
               </div>
 
-              <div class="hero-card-footer">
-                <div class="info">
-                  <div class="value">51784</div>
-                  <div class="type">used</div>
-                </div>
-                <div class="info">
-                  <div class="value">329</div>
-                  <div class="type">cards</div>
-                </div>
-                <div class="info">
-                  <div class="value">4.5</div>
-                  <div class="type">winrate</div>
-                </div>
-              </div>
               <div class="selector">
                 <button
                   onClick=${() => {
@@ -98,20 +69,6 @@ export default class StartRoom extends Component {
                 <p>Not working yet.</p>
               </div>
 
-              <div class="hero-card-footer">
-                <div class="info">
-                  <div class="value">51784</div>
-                  <div class="type">used</div>
-                </div>
-                <div class="info">
-                  <div class="value">329</div>
-                  <div class="type">cards</div>
-                </div>
-                <div class="info">
-                  <div class="value">4.5</div>
-                  <div class="type">winrate</div>
-                </div>
-              </div>
               <div class="selector">
                 <button
                   onClick=${() => {
@@ -133,20 +90,6 @@ export default class StartRoom extends Component {
                 <p>Not working yet</p>
               </div>
 
-              <div class="hero-card-footer">
-                <div class="info">
-                  <div class="value">51784</div>
-                  <div class="type">used</div>
-                </div>
-                <div class="info">
-                  <div class="value">329</div>
-                  <div class="type">cards</div>
-                </div>
-                <div class="info">
-                  <div class="value">4.5</div>
-                  <div class="type">winrate</div>
-                </div>
-              </div>
               <div class="selector">
                 <button disabled>select</button>
               </div>

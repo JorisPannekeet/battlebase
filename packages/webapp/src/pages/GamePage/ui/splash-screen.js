@@ -47,7 +47,7 @@ export default class SplashScreen extends Component {
 					${
             localStorage.getItem("saveGame")
               ? html`
-							<li><button  onClick=${props.onContinue}>Continue Game</button></li>
+							<li><button    onClick=${props.onContinue}>Continue Game</button></li>
 							<li><button  onClick=${props.onNewGame}>New Game</a></li>
 				`
               : html`<li><button onClick=${props.onNewGame}>Play</a></li>`

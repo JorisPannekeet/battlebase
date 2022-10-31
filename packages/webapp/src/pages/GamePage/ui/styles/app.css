@@ -32,7 +32,6 @@ html {
 .enemy {
   margin: 0 auto;
   width: 100%;
-  max-height: 300px;
 }
 
 /* Minimum font size */
@@ -196,7 +195,7 @@ h2 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url("../images/scenes/limbo_test.png");
+  background-image: url("../images/scenes/limbo.png");
 }
 /* .App-background[data-room-index="1"] {
   background-image: url("../images/scenes/arietty.jpg");

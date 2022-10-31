@@ -126,7 +126,14 @@ stw.dealCards()`);
   playCard(cardId, target, cardElement) {
     // Play the card.
     const card = this.state.hand.find((c) => c.id === cardId);
+    const player = document.querySelector(".player-group");
     this.game.enqueue({ type: "playCard", card, target });
+    if (card.type === "attack" || card.damage) {
+      gsap.from(player, {
+        x: 150,
+        duration: 0.5,
+      });
+    }
 
     const supportsFlip = typeof Flip !== "undefined";
     let flip;
@@ -162,6 +169,19 @@ stw.dealCards()`);
   }
   endTurn() {
     sfx.endTurn();
+    const room = getCurrRoom(this.state);
+
+    room.monsters.map((monster, index) => {
+      const m = document.querySelector(
+        `[data-monster="${index}"]:not(.Target--isDead)`
+      );
+
+      gsap.from(m, {
+        x: -150,
+        duration: 0.5,
+        delay: index * 0.2,
+      });
+    });
     gsap.effects.discardHand(".Hand .Card", {
       onComplete: reallyEndTurn.bind(this),
     });
@@ -280,7 +300,9 @@ stw.dealCards()`);
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>
-				<figure class="App-background" data-room-index=${state.dungeon.y}></div>
+				<figure class="App-background" data-room-index=${state.dungeon.y} data-stage=${
+      state.stage
+    }></div>
 
 				${
           room.type === "start" &&
@@ -376,17 +398,18 @@ stw.dealCards()`);
         }
 
 				<div class="Targets Split">
-					<div class="Targets-group">
+					<div class="Targets-group player-group">
 						<${Player} model=${state.player} hero=${state.hero} name=${state.hero} />
 					</div>
-					<div class="Targets-group">
+					<div class="Targets-group monster-group">
 						${
               room.monsters &&
-              room.monsters.map((monster) => {
+              room.monsters.map((monster, index) => {
                 return html`<${Monster}
                   model=${monster}
                   gameState=${state}
                   name=${monster.name}
+                  monsterIndex=${index}
                 />`;
               })
             }
