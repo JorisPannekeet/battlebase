@@ -18,6 +18,7 @@ import {
   isDungeonCompleted,
   isStageCompleted,
 } from "../game/utils-state.js";
+import { getEnemiesStats } from "./dungeon-stats.js";
 import * as backend from "../game/backend.js";
 
 // UI Components
@@ -41,7 +42,7 @@ Object.keys(realSfx).forEach((key) => {
 });
 
 const load = () =>
-  JSON.parse(decodeURIComponent(window.location.hash.split("#")[1]));
+  JSON.parse(decodeURIComponent(localStorage.getItem("saveGame")));
 
 export default class App extends Component {
   constructor() {
@@ -72,11 +73,11 @@ export default class App extends Component {
     sfx.startGame();
 
     // If there is a saved game state, use it.
-    // const savedGameState = window.location.hash && load();
-    // if (savedGameState) {
-    //   this.game.state = savedGameState;
-    //   this.setState(savedGameState, this.dealCards);
-    // }
+    const savedGameState = localStorage.getItem("saveGame") && load();
+    if (savedGameState) {
+      this.game.state = savedGameState;
+      this.setState(savedGameState, this.dealCards);
+    }
 
     this.enableConsole();
   }
@@ -228,7 +229,11 @@ stw.dealCards()`);
     this.update();
   }
   handleNextStage() {
-    this.game.enqueue({ type: "goToNextStage" });
+    // TODO save stage score in state.scores[]
+    const stats = getEnemiesStats(this.game.state.dungeon);
+    const stageScore =
+      stats.encountered + stats.finalHealth + stats.killed + stats.maxHealth;
+    this.game.enqueue({ type: "goToNextStage", score: stageScore });
     this.update();
     this.goToNextRoom();
   }
@@ -337,6 +342,7 @@ stw.dealCards()`);
           didWinStage &&
           html`<${Overlay}>
             <h2 center>Stage ${state.stage} Completed!</h2>
+            <${DungeonStats} state=${state}><//>
             <p center>
               <button onClick=${() => this.handleNextStage()}>
                 Start stage ${state.stage + 1}

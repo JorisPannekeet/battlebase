@@ -61,6 +61,7 @@ function createNewGame() {
     selectedDeck: 0,
     dungeon: {},
     stage: 1,
+    scores: [],
   };
 }
 
@@ -179,9 +180,10 @@ function selectRelic(state, { relic }) {
 }
 
 /* Clear dungeon and go to next stage */
-function goToNextStage(state) {
+function goToNextStage(state, { score }) {
   return produce(state, (draft) => {
     if (state.stage <= 9) {
+      draft.scores[state.stage] = score;
       draft.stage = state.stage + 1;
       draft.dungeon = dungeonWithMap(draft);
     }

@@ -337,6 +337,7 @@ h2 {
 .Hand {
   margin-top: 1rem;
   margin-bottom: -1rem;
+  z-index: 1;
 }
 .Hand .Cards {
   padding-left: 4rem;
