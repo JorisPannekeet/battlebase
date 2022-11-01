@@ -5,6 +5,7 @@
   "description": "dexwebapp new version",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@loopring-web/common-resources": "1.0.0",
     "@loopring-web/component-lib": "1.0.0",
     "@loopring-web/core": "1.0.0",
@@ -13,6 +14,7 @@
     "esm": "^3.2.25",
     "ethers": "^5.5.4",
     "export-from-json": "^1.4.0",
+    "graphql": "^16.6.0",
     "gsap": "^3.11.1",
     "immer": "^9.0.15",
     "lodash": "^4.17.20",
