@@ -88,6 +88,7 @@ class Target extends Component {
         <h2>${children}<span class="Target-name">${name}</span></h2>
         <${Healthbar} max=${model.maxHealth} value=${hp} block=${model.block} />
         <${Powers} powers=${model.powers} />
+        <img src="" id="skill" />
         <img id="${type}-image" class=${type} src=${image} />
         <div class="Target-combatText Split">
           <${FCT}

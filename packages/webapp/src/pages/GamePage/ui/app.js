@@ -135,6 +135,15 @@ stw.dealCards()`);
         duration: 0.5,
       });
     }
+    if (card.block) {
+      console.log("played block card");
+      const image = require("./images/skills/block2.gif").default;
+      const skillEl = document.getElementById("skill");
+      skillEl.src = image;
+      setTimeout(() => {
+        skillEl.src = "";
+      }, 1000);
+    }
 
     const supportsFlip = typeof Flip !== "undefined";
     let flip;
@@ -229,7 +238,6 @@ stw.dealCards()`);
     this.update();
   }
   handleNextStage() {
-    // TODO save stage score in state.scores[]
     const stats = getEnemiesStats(this.game.state.dungeon);
     const stageScore =
       stats.encountered + stats.finalHealth + stats.killed + stats.maxHealth;

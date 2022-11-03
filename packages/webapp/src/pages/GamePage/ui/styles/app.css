@@ -692,3 +692,9 @@ table {
 .MuiAppBar-root {
   display: none !important;
 }
+#skill {
+  position: absolute;
+  width: 70%;
+  top: 50%;
+  left: 20%;
+}
