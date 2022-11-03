@@ -53,6 +53,7 @@ export default class SplashScreen extends Component {
               : html`<li><button onClick=${props.onNewGame}>Play</a></li>`
           }
 					<li><a class="Button" onClick=${props.openDecks}>Decks</a></li>
+          <li><button onClick=${props.getRuns}>Get runs</button></li>
 					<li><button onClick=${() =>
             this.setState({
               showTutorial: !state.showTutorial,

@@ -6,7 +6,22 @@ import { useAccount, unlockAccount } from "@loopring-web/core";
 import { SlayTheWeb } from "./ui/index";
 import { useHeader } from "../../layouts/header/hook";
 import { walletServices } from "@loopring-web/web3-provider";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  gql,
+} from "@apollo/client";
 import "./ui/index.css";
+
+const httpLink = new HttpLink({
+  uri: "https://gamedata.betty.app/api/runtime/0c3b5088fa0147eda7d5eecd58348f7e",
+});
+export const client = new ApolloClient({
+  link: httpLink as any,
+  cache: new InMemoryCache(),
+});
 
 export const Game = () => {
   const account = store.getState().account;
@@ -17,6 +32,29 @@ export const Game = () => {
   ];
   const accountTotal = useAccount();
   const { walletLayer2NFT } = useWalletLayer2NFT();
+
+  const getRuns = () => {
+    return client
+      .query({
+        query: gql`
+          query GetRuns {
+            allRuns {
+              results {
+                id
+                nickname
+                gamedata
+                walletAddress
+                score
+              }
+            }
+          }
+        `,
+      })
+      .then((result) => {
+        console.log(result);
+        return result;
+      });
+  };
 
   const allowedNFTs = [];
   allowedCollections.forEach((filterValue) => {
@@ -53,6 +91,7 @@ export const Game = () => {
           connectEvent=${connectAccount}
           unlockEvent=${unlockAccount}
           disconnectEvent=${handleDisconnect}
+          getRuns=${getRuns}
         />
       `,
       document.querySelector("#SlayTheWeb")
