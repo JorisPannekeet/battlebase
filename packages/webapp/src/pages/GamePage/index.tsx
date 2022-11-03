@@ -20,6 +20,9 @@ const httpLink = new HttpLink({
 });
 export const client = new ApolloClient({
   link: httpLink as any,
+  fetchOptions: {
+    mode: "no-cors",
+  },
   cache: new InMemoryCache(),
 });
 
