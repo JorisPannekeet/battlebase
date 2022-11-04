@@ -35,7 +35,7 @@ export class SlayTheWeb extends Component {
 
   handleNewGame() {
     this.setState({ gameMode: GameModes.gameplay });
-    // clearing saved game goes here, if i had one
+    localStorage.setItem("saveGame", "");
   }
   handleWin() {
     this.setState({ gameMode: GameModes.win });
@@ -58,6 +58,7 @@ export class SlayTheWeb extends Component {
         accountState=${props.accountState}
         disconnectEvent=${props.disconnectEvent}
         getRuns=${props.getRuns}
+        runs=${props.runs}
       />`;
     if (gameMode === GameModes.decks)
       return html`<${Decks} back=${this.handleLoose} />`;
@@ -67,6 +68,7 @@ export class SlayTheWeb extends Component {
           onWin=${this.handleWin}
           onLoose=${this.handleLoose}
           nfts=${props.nfts}
+          account=${props.connectedAccount}
         />
       `;
     if (gameMode === GameModes.win)

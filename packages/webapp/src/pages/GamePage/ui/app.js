@@ -63,6 +63,7 @@ export default class App extends Component {
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleMapMove = this.handleMapMove.bind(this);
     this.handleNextStage = this.handleNextStage.bind(this);
+    this.postRun = this.postRun.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -245,6 +246,20 @@ stw.dealCards()`);
     this.update();
     this.goToNextRoom();
   }
+  postRun() {
+    const score = this.game.state.scores.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+
+    console.log({ acc: props.account });
+    backend.postRun(
+      JSON.stringify(this.game.state),
+      props.account.addressShort,
+      props.account.address,
+      score
+    );
+  }
   handleCampfireChoice(choice, reward) {
     // Depending on the choice, run an action.
     if (choice === "rest") {
@@ -333,6 +348,9 @@ stw.dealCards()`);
           html`<${Overlay}>
             <p center>You are dead.</p>
             <${DungeonStats} state=${state}><//>
+            <button onclick=${() => this.postRun()}>
+              Post run to leaderboards
+            </button>
             <button onclick=${() => this.props.onLoose()}>Try again?</button>
           <//> `
         }

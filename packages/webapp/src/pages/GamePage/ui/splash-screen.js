@@ -53,7 +53,7 @@ export default class SplashScreen extends Component {
               : html`<li><button onClick=${props.onNewGame}>Play</a></li>`
           }
 					<li><a class="Button" onClick=${props.openDecks}>Decks</a></li>
-          <li><button onClick=${props.getRuns}>Get runs</button></li>
+          
 					<li><button onClick=${() =>
             this.setState({
               showTutorial: !state.showTutorial,
@@ -82,6 +82,23 @@ export default class SplashScreen extends Component {
           </div>
         `}
       </article>
+
+      <div class="leaderboard">
+        <h2 center>Leaderboard</h2>
+        <table class="rwd-table">
+          <tr>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+          ${props.runs[0].map(
+            (run) =>
+              html`<tr>
+                <td>${run.nickname}</td>
+                <td>${run.score}</td>
+              </tr>`
+          )}
+        </table>
+      </div>
       <img class="cloud c1" src="${c1}" />
       <img class="cloud c2" src="${c2}" />
     `;

@@ -32,9 +32,10 @@ export const Game = () => {
   const allowedCollections = [
     "0xfe86f18373f116a1a4db56a0bde6ac638f36251b",
     "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a",
-  ];
+  ]; // Collections filtered for relics
   const accountTotal = useAccount();
   const { walletLayer2NFT } = useWalletLayer2NFT();
+  let runs = [];
 
   const getRuns = () => {
     return client
@@ -54,8 +55,8 @@ export const Game = () => {
         `,
       })
       .then((result) => {
-        console.log(result);
-        return result;
+        runs.push(result.data.allRuns.results);
+        return result.data.allRuns.results;
       });
   };
 
@@ -84,6 +85,7 @@ export const Game = () => {
       renderObject();
     }, 1000);
   }, []);
+  getRuns();
   const renderObject = () => {
     render(
       html`
@@ -95,6 +97,7 @@ export const Game = () => {
           unlockEvent=${unlockAccount}
           disconnectEvent=${handleDisconnect}
           getRuns=${getRuns}
+          runs=${runs}
         />
       `,
       document.querySelector("#SlayTheWeb")

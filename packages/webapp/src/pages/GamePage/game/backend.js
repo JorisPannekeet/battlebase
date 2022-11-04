@@ -8,15 +8,35 @@ const apiUrl =
  * @body [gamedata,nickname,wallet_address,score]
  */
 export function postRun(game, nickname, wallet_address, score) {
-  return fetch(apiUrl, {
-    credentials: "include",
-    headers: {
-      "content-type": "application/json",
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var graphql = JSON.stringify({
+    operationName: null,
+    query: "mutation {action(id: $id, input: $input)}",
+    variables: {
+      id: "81b7c25e133249c4b4783392812a8eaf",
+      input: {
+        gamedata: game,
+        wallet_address: wallet_address,
+        nickname: nickname,
+        score: score,
+      },
     },
-    body: `{"operationName":null,"query":"mutation {action(id: $id, input: $input) },variables:{id:81b7c25e133249c4b4783392812a8eaf,input:{gamedata:${game},wallet_address:${wallet_address},nickname:${nickname},score:${score}}}}`,
+  });
+  var requestOptions = {
     method: "POST",
-    mode: "cors",
-  }).then(() => {});
+    headers: myHeaders,
+    body: graphql,
+    redirect: "follow",
+  };
+
+  return fetch(apiUrl, requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.log("error", error));
 }
 
 /**
