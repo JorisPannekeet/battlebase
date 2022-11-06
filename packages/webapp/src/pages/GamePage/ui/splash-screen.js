@@ -87,12 +87,14 @@ export default class SplashScreen extends Component {
         <h2 center>Leaderboard</h2>
         <table class="rwd-table">
           <tr>
+            <th>#</th>
             <th>Name</th>
             <th>Score</th>
           </tr>
           ${props.runs[0].map(
-            (run) =>
+            (run, index) =>
               html`<tr>
+                <td>${index + 1}</td>
                 <td>${run.nickname}</td>
                 <td>${run.score}</td>
               </tr>`
