@@ -1,7 +1,6 @@
 .Targets {
   flex: 1;
   position: relative;
-  top: 20%;
 }
 .Targets-group {
   display: flex;

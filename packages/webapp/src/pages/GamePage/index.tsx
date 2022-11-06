@@ -42,7 +42,7 @@ export const Game = () => {
       .query({
         query: gql`
           query GetRuns {
-            allRuns {
+            allRuns(take: 5) {
               results {
                 id
                 nickname

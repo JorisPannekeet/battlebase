@@ -52,6 +52,7 @@ export default class App extends Component {
     this.state = {};
     this.game = {};
     this.overlayIndex = 11;
+    this.runPosted = false;
 
     // Scope methods
     this.playCard = this.playCard.bind(this);
@@ -246,19 +247,23 @@ stw.dealCards()`);
     this.update();
     this.goToNextRoom();
   }
-  postRun() {
+  postRun(acc) {
     const score = this.game.state.scores.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
+    const stats = getEnemiesStats(this.game.state.dungeon);
+    const stageScore =
+      stats.encountered + stats.finalHealth + stats.killed + stats.maxHealth;
+    const finalScore = score + stageScore;
 
-    console.log({ acc: props.account });
     backend.postRun(
       JSON.stringify(this.game.state),
-      props.account.addressShort,
-      props.account.address,
-      score
+      acc.addressShort,
+      acc.account.accAddress,
+      finalScore
     );
+    this.runPosted = true;
   }
   handleCampfireChoice(choice, reward) {
     // Depending on the choice, run an action.
@@ -348,9 +353,19 @@ stw.dealCards()`);
           html`<${Overlay}>
             <p center>You are dead.</p>
             <${DungeonStats} state=${state}><//>
-            <button onclick=${() => this.postRun()}>
-              Post run to leaderboards
-            </button>
+            ${nfts.length
+              ? html`
+                  <div>
+                    <button
+                      disabled=${this.runPosted}
+                      onclick=${() => this.postRun(props.account)}
+                    >
+                      Post run to leaderboards
+                    </button>
+                  </div>
+                `
+              : ""}
+
             <button onclick=${() => this.props.onLoose()}>Try again?</button>
           <//> `
         }
@@ -359,9 +374,23 @@ stw.dealCards()`);
           didWinEntireGame &&
           html`<${Overlay}>
             <p center>
-              <button onclick=${() => this.props.onWin()}>You win!</button>
+              <button onclick=${() => this.props.onWin()}>
+                You have completed Downfall!
+              </button>
             </p>
             <${DungeonStats} state=${state}><//>
+            ${nfts.length
+              ? html`
+                  <div>
+                    <button
+                      disabled=${this.runPosted}
+                      onclick=${() => this.postRun(props.account)}
+                    >
+                      Post run to leaderboards
+                    </button>
+                  </div>
+                `
+              : ""}
           <//> `
         }
         ${
