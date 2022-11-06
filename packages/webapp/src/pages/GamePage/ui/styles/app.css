@@ -478,6 +478,11 @@ table {
   .container {
     flex-wrap: wrap;
   }
+  .leaderboard {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+  }
 }
 .hero-card {
   position: relative;
