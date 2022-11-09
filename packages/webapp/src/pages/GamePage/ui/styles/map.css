@@ -81,7 +81,7 @@ slay-map-node[current][type] {
 }
 slay-map-node[current][type]:after {
   content: "you are here";
-  font-size: px;
+  font-size: 20px;
   position: absolute;
   top: -31px;
 }
