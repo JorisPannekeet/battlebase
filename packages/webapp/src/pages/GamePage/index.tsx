@@ -1,10 +1,16 @@
 // @ts-nocheck
 import { html, render } from "./web_modules/htm/preact/standalone.module.js";
-import { useWalletLayer2NFT, store } from "@loopring-web/core";
 import React, { useEffect, useMemo } from "react";
-import { useAccount, unlockAccount } from "@loopring-web/core";
+import {
+  useAccount,
+  unlockAccount,
+  useMyNFTCollection,
+  useWalletLayer2NFT,
+  store,
+} from "@loopring-web/core";
 import { SlayTheWeb } from "./ui/index";
 import { useHeader } from "../../layouts/header/hook";
+import { useMyNFT } from "../NFTPage/MyNFT/useMyNFT";
 import { walletServices } from "@loopring-web/web3-provider";
 import {
   ApolloClient,
@@ -14,6 +20,7 @@ import {
   gql,
 } from "@apollo/client";
 import "./ui/index.css";
+import { info } from "console";
 
 const httpLink = new HttpLink({
   uri: "https://gamedata.betty.app/api/runtime/0c3b5088fa0147eda7d5eecd58348f7e",
@@ -29,12 +36,15 @@ export const client = new ApolloClient({
 export const Game = () => {
   const account = store.getState().account;
   const { headerToolBarData } = useHeader();
-  const allowedCollections = [
+  const allowedCreators = [
     "0xfe86f18373f116a1a4db56a0bde6ac638f36251b",
     "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a",
   ]; // Collections filtered for relics
+  const allowedCollections = ["749", "835", "2040", "838", "2509", "1991"]; // Collections filtered for relics
   const accountTotal = useAccount();
   const { walletLayer2NFT } = useWalletLayer2NFT();
+  const { copyToastOpen, ...collectionListProps } = useMyNFTCollection();
+
   let runs = [];
 
   const getRuns = () => {
@@ -61,11 +71,20 @@ export const Game = () => {
   };
 
   const allowedNFTs = [];
+  // allowedCollections.forEach((filterValue) => {
+  //   allowedNFTs.push(
+  //     ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
+  //   );
+  // });
+  console.log(collectionListProps.collectionList);
   allowedCollections.forEach((filterValue) => {
     allowedNFTs.push(
-      ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
+      ...collectionListProps.collectionList.filter((val) =>
+        val.id?.toString().includes(filterValue)
+      )
     );
   });
+  console.log({ allowedNFTs });
   const connectAccount = async () => {
     headerToolBarData[4].handleClick();
   };

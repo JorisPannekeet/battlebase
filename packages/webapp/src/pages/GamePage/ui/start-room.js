@@ -114,18 +114,14 @@ export default class StartRoom extends Component {
                         class="Card-inner"
                         onClick=${() => this.props.selectRelic(nft)}
                       >
-                        <h3 class="Card-name">${nft.metadata.base.name}</h3>
+                        <h3 class="Card-name">${nft.name}</h3>
                         <figure class="Card-media relic">
-                          <img
-                            src=${nft.metadata.imageSize.original}
-                            alt=${nft.metadata.base.name}
-                          />
+                          <img src=${nft.avatar} alt=${nft.name} />
                         </figure>
                         <p class="Card-type">Relic</p>
                         <p class="Card-description">
-                          ${relics.find(
-                            (item) => item.address === nft.tokenAddress
-                          ).description}
+                          ${relics.find((item) => item.id === nft.id)
+                            .relicDescription}
                         </p>
                       </div>
                     </article>`;

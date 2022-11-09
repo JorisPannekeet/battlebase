@@ -169,7 +169,7 @@ function selectHero(state, { hero }) {
 
 function selectRelic(state, { relic }) {
   const nft = relic;
-  const stats = relics.find((item) => item.address === nft.tokenAddress);
+  const stats = relics.find((item) => item.id === nft.id);
   const newRelic = {
     ...stats,
     ...nft,
