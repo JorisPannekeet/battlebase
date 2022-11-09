@@ -8,101 +8,100 @@ export default class SplashScreen extends Component {
     const c1 = require("./images/cloud1.png").default;
     const c2 = require("./images/cloud2.png").default;
     return html`
-      <article class="Splash Splash--fadein">
-        <div class="title-container">
-          <h1 style="margin-top:8vh">Down<span class="titlep2">fall</span></h1>
-        </div>
-        <h2>The NFT Dungeon Crawler Card Game</h2>
-        <div>
-          ${props.accountState === "ACTIVATED" &&
-          html`<p>Wallet ${props.account.addressShort} connected !</p>
-            <div>
-              <button onClick=${() => props.disconnectEvent()}>
-                Disconnect
-              </button>
-            </div>`}
-          ${props.accountState === "LOCKED" &&
-          html` <div class="Options">
-            <p>Wallet ${props.account.addressShort} connected !</p>
-            <div>
-              <button onClick=${() => props.unlockEvent()}>
-                Unlock account
-              </button>
-              <p center>
-                Don't worry this is just so your NFT's can be used in-game!
-              </p>
+      <div class="c-hud">
+        <div class="c-hud__content">
+          <article class="Splash Splash--fadein">
+            <div class="title-container">
+              <h1>Down<span class="titlep2">fall</span></h1>
             </div>
-          </div>`}
-          ${props.accountState === "UN_CONNECT" &&
-          html`<p>Wallet not connected</p>
+            <h2>The NFT Dungeon Crawler Card Game</h2>
             <div>
-              <button onClick=${() => props.connectEvent()}>
-                Connect wallet
-              </button>
-            </div>`}
-        </div>
-        ${props.accountState !== "LOCKED" &&
-        html`
-				<ul class="Options">
-					${
-            localStorage.getItem("saveGame")
-              ? html`
-							<li><button    onClick=${props.onContinue}>Continue Game</button></li>
-							<li><button  onClick=${props.onNewGame}>New Game</a></li>
-				`
-              : html`<li><button onClick=${props.onNewGame}>Play</a></li>`
-          }
-					<li><a class="Button" onClick=${props.openDecks}>Decks</a></li>
-          
-					<li><button onClick=${() =>
-            this.setState({
-              showTutorial: !state.showTutorial,
-            })}>Manual</a></li>
-				</ul>`}
-        ${state.showTutorial &&
-        html`
-          <div class="Splash-details Article">
-            <p><strong>What's going on?</strong></p>
-            <p>Some text about the story...</p>
-            <p>
-              Every turn you draw 5 cards from your draw pile. Cards cost energy
-              to play, and you get 3 energy every turn.
-            </p>
-            <p>
-              Cards can deal damage to monsters, block enemy attacks or make
-              them weak or vulnerable. They can heal you and other things.
-              You'll figure it out.
-            </p>
-            <p>Beware, whenever you end your turn, the monsters take turn.</p>
-            <p>
-              Should you manage to kill the monsters in a room before they end
-              you, you'll proceed to the next room. Maybe there will be rewards.
-              Can you reach the end?
-            </p>
-          </div>
-        `}
-      </article>
+              ${props.accountState === "ACTIVATED" &&
+              html`<p>Wallet ${props.account.addressShort} connected !</p>
+                <div>
+                  <button onClick=${() => props.disconnectEvent()}>
+                    Disconnect
+                  </button>
+                </div>`}
+              ${props.accountState === "LOCKED" &&
+              html` <div class="Options">
+                <p>Wallet ${props.account.addressShort} connected !</p>
+                <div>
+                  <button onClick=${() => props.unlockEvent()} class="cybr-btn">
+                    Unlock account<span aria-hidden>_</span>
+                    <span aria-hidden class="cybr-btn__glitch"
+                      >Unlock account_</span
+                    >
+                    <span aria-hidden class="cybr-btn__tag">R25</span>
+                  </button>
+                  <p center>
+                    Don't worry this is just so your NFT's can be used in-game!
+                  </p>
+                </div>
+              </div>`}
+              ${props.accountState === "UN_CONNECT" &&
+              html`<p>Wallet not connected</p>
+                <div>
+                  <button
+                    onClick=${() => props.connectEvent()}
+                    class="cybr-btn"
+                  >
+                    Connect Wallet<span aria-hidden>_</span>
+                    <span aria-hidden class="cybr-btn__glitch"
+                      >Connect Wallet_</span
+                    >
+                    <span aria-hidden class="cybr-btn__tag">R25</span>
+                  </button>
+                </div>`}
+            </div>
+          </article>
 
-      <div class="leaderboard">
-        <h2 center>Leaderboard</h2>
-        <table class="rwd-table">
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Score</th>
-          </tr>
-          ${props.runs[0].map(
-            (run, index) =>
-              html`<tr>
-                <td>${index + 1}</td>
-                <td>${run.nickname}</td>
-                <td>${run.score}</td>
-              </tr>`
-          )}
-        </table>
+          ${props.accountState !== "LOCKED" &&
+          html` <ul class="Options">
+            ${localStorage.getItem("saveGame")
+              ? html`
+            <li><button    onClick=${props.onContinue}>Continue Game</button></li>
+            <li><button  onClick=${props.onNewGame}>New Game</a></li>
+      `
+              : html`<li>
+                  <button onClick=${props.onNewGame} class="cybr-btn">
+                    Play<span aria-hidden>_</span>
+                    <span aria-hidden class="cybr-btn__glitch">Play_</span>
+                    <span aria-hidden class="cybr-btn__tag">R25</span>
+                  </button>
+                </li>`}
+            <li>
+              <button onClick=${props.openDecks} class="cybr-btn cybr-blue">
+                Decks<span aria-hidden>_</span>
+                <span aria-hidden class="cybr-btn__glitch">Decks_</span>
+                <span aria-hidden class="cybr-btn__tag">R25</span>
+              </button>
+            </li>
+
+            <li></li>
+          </ul>`}
+
+          <div class="leaderboard">
+            <h2 center>Leaderboard</h2>
+            <table class="rwd-table">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+              ${props.runs[0].map(
+                (run, index) =>
+                  html`<tr>
+                    <td>${index + 1}</td>
+                    <td>${run.nickname}</td>
+                    <td>${run.score}</td>
+                  </tr>`
+              )}
+            </table>
+          </div>
+        </div>
+        <div class="c-hud__inner"></div>
       </div>
-      <img class="cloud c1" src="${c1}" />
-      <img class="cloud c2" src="${c2}" />
     `;
   }
 }

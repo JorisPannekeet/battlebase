@@ -29,7 +29,7 @@ export default class CampfireRoom extends Component {
     if (choice === "removeCard") label = "Choose a card to remove";
     return html`
       <h1 center medium>Campfire</h1>
-      <ul class="Options">
+      <ul class="Options campfire">
         ${isChoosingCard
           ? html`
               <li>
