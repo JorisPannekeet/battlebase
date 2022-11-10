@@ -1,3 +1,4 @@
+import { IsMobile } from "@loopring-web/loopring-sdk";
 import {
   html,
   Component,
@@ -5,6 +6,37 @@ import {
 
 export default class SplashScreen extends Component {
   render(props, state) {
+    const Menu = () => {
+      return html`
+        ${props.accountState !== "LOCKED" &&
+        html` <ul class="Options ${isMobile && html`mobile`}">
+          ${localStorage.getItem("saveGame")
+            ? html`
+      <li><button    onClick=${props.onContinue}>Continue Game</button></li>
+      <li><button  onClick=${props.onNewGame}>New Game</a></li>
+`
+            : html`<li>
+                <button onClick=${props.onNewGame} class="cybr-btn">
+                  Play<span aria-hidden>_</span>
+                  <span aria-hidden class="cybr-btn__glitch">Play_</span>
+                  <span aria-hidden class="cybr-btn__tag">R25</span>
+                </button>
+              </li>`}
+          <li>
+            <button onClick=${props.openDecks} class="cybr-btn cybr-blue">
+              Decks<span aria-hidden>_</span>
+              <span aria-hidden class="cybr-btn__glitch">Decks_</span>
+              <span aria-hidden class="cybr-btn__tag">R25</span>
+            </button>
+          </li>
+
+          <li></li>
+        </ul>`}
+      `;
+    };
+    const isMobile = navigator.userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i
+    );
     const c1 = require("./images/cloud1.png").default;
     const c2 = require("./images/cloud2.png").default;
     return html`
@@ -53,33 +85,10 @@ export default class SplashScreen extends Component {
                     <span aria-hidden class="cybr-btn__tag">R25</span>
                   </button>
                 </div>`}
+              ${isMobile && html`<${Menu} />`}
             </div>
           </article>
-
-          ${props.accountState !== "LOCKED" &&
-          html` <ul class="Options">
-            ${localStorage.getItem("saveGame")
-              ? html`
-            <li><button    onClick=${props.onContinue}>Continue Game</button></li>
-            <li><button  onClick=${props.onNewGame}>New Game</a></li>
-      `
-              : html`<li>
-                  <button onClick=${props.onNewGame} class="cybr-btn">
-                    Play<span aria-hidden>_</span>
-                    <span aria-hidden class="cybr-btn__glitch">Play_</span>
-                    <span aria-hidden class="cybr-btn__tag">R25</span>
-                  </button>
-                </li>`}
-            <li>
-              <button onClick=${props.openDecks} class="cybr-btn cybr-blue">
-                Decks<span aria-hidden>_</span>
-                <span aria-hidden class="cybr-btn__glitch">Decks_</span>
-                <span aria-hidden class="cybr-btn__tag">R25</span>
-              </button>
-            </li>
-
-            <li></li>
-          </ul>`}
+          ${!isMobile && html`<${Menu} />`}
 
           <div class="leaderboard">
             <h2 center>Leaderboard</h2>

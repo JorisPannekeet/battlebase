@@ -39,7 +39,7 @@ export const Game = () => {
   const allowedCreators = [
     "0xfe86f18373f116a1a4db56a0bde6ac638f36251b",
     "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a",
-  ]; // Collections filtered for relics
+  ]; // creators filtered for relics .. not used
   const allowedCollections = ["749", "835", "2040", "838", "2509", "1991"]; // Collections filtered for relics
   const accountTotal = useAccount();
   const { walletLayer2NFT } = useWalletLayer2NFT();
@@ -76,7 +76,6 @@ export const Game = () => {
   //     ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
   //   );
   // });
-  console.log(collectionListProps.collectionList);
   allowedCollections.forEach((filterValue) => {
     allowedNFTs.push(
       ...collectionListProps.collectionList.filter((val) =>
@@ -84,7 +83,6 @@ export const Game = () => {
       )
     );
   });
-  console.log({ allowedNFTs });
   const connectAccount = async () => {
     headerToolBarData[4].handleClick();
   };
@@ -94,10 +92,11 @@ export const Game = () => {
 
   useEffect(() => {
     console.log("rendering game");
+
     setTimeout(() => {
       renderObject();
     }, 1000);
-  }, [account.readyState, walletLayer2NFT]);
+  }, [account.readyState, collectionListProps.collectionList]);
 
   const renderGame = useMemo(() => {
     setTimeout(() => {

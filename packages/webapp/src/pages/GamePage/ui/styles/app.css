@@ -419,7 +419,7 @@ h2 {
   /* border-radius: 1em; */
   border: 2px solid black;
 }
-.Options:not(.campfire) {
+.Options:not(.campfire, .mobile) {
   position: absolute;
   top: 0;
   right: 0;

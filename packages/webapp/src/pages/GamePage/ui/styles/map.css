@@ -60,8 +60,8 @@ slay-map-node {
   /* All nodes are disabled by default */
   pointer-events: none;
   visibility: hidden;
-  width: 150px;
-  height: 150px;
+  /* width: 150px;
+  height: 150px; */
 }
 slay-map-node[linked] {
   visibility: visible;
@@ -78,10 +78,12 @@ slay-map-node[current][type] {
   background-color: var(--bg);
   opacity: 1;
   z-index: 2;
+  width: 100px;
+  height: 100px;
 }
 slay-map-node[current][type]:after {
   content: "you are here";
-  font-size: 20px;
+  font-size: 18px;
   position: absolute;
   top: -31px;
 }
