@@ -42,9 +42,23 @@ export const Game = () => {
   ]; // creators filtered for relics .. not used
   const allowedCollections = ["749", "835", "2040", "838", "2509", "1991"]; // Collections filtered for relics
   const accountTotal = useAccount();
-  const { walletLayer2NFT } = useWalletLayer2NFT();
-  const { copyToastOpen, ...collectionListProps } = useMyNFTCollection();
+  const { copyToastOpen, isLoading, ...collectionListProps } =
+    useMyNFTCollection();
+  //const { nftList, walletLayer2NFT } = useMyNFT({});
+  // let nftData = [];
 
+  // nftList.map((item) => {
+  //   const collectionMeta = collectionListProps.collectionList?.find(
+  //     (_item: any) => {
+  //       return (
+  //         _item?.contractAddress?.toLowerCase() ===
+  //         item?.tokenAddress?.toLowerCase()
+  //       );
+  //     }
+  //   );
+  //   nftData.push({ ...item, collectionMeta });
+  // });
+  // console.log({ nftData });
   let runs = [];
 
   const getRuns = () => {

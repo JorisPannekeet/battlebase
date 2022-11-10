@@ -37,6 +37,7 @@ export const MyNFTList = withTranslation("common")(
       total,
       onPageChange: collectionPageChange,
     } = useMyNFT({ collectionMeta });
+    console.log({ collectionMeta });
     const { baseURL } = useSystem();
 
     return (
