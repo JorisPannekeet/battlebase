@@ -52,7 +52,6 @@ export default class App extends Component {
     this.state = {};
     this.game = {};
     this.overlayIndex = 11;
-    this.runPosted = false;
 
     // Scope methods
     this.playCard = this.playCard.bind(this);
@@ -263,7 +262,6 @@ stw.dealCards()`);
       acc.account.accAddress,
       finalScore
     );
-    this.runPosted = true;
   }
   handleCampfireChoice(choice, reward) {
     // Depending on the choice, run an action.
@@ -355,18 +353,21 @@ stw.dealCards()`);
             <${DungeonStats} state=${state}><//>
             ${nfts.length
               ? html`
-                  <div>
+                  <div center>
                     <button
-                      disabled=${this.runPosted}
-                      onclick=${() => this.postRun(props.account)}
+                      onclick=${() => {
+                        this.postRun(props.account);
+                        props.onLoose();
+                      }}
                     >
-                      Post run to leaderboards
+                      Save run and leave
                     </button>
                   </div>
                 `
               : ""}
-
-            <button onclick=${() => this.props.onLoose()}>Try again?</button>
+            <div center>
+              <button onclick=${() => props.onLoose()}>Try again?</button>
+            </div>
           <//> `
         }
 
@@ -381,16 +382,24 @@ stw.dealCards()`);
             <${DungeonStats} state=${state}><//>
             ${nfts.length
               ? html`
-                  <div>
+                  <div center>
                     <button
-                      disabled=${this.runPosted}
-                      onclick=${() => this.postRun(props.account)}
+                      onclick=${() => {
+                        this.postRun(props.account);
+                        props.onLoose();
+                      }}
                     >
-                      Post run to leaderboards
+                      Save run and leave
                     </button>
                   </div>
                 `
-              : ""}
+              : html`
+                  <div center>
+                    <button onclick=${() => props.onLoose()}>
+                      Return to homescreen
+                    </button>
+                  </div>
+                `}
           <//> `
         }
         ${
