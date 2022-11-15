@@ -78,6 +78,10 @@ class Target extends Component {
           image = require(`./images/heroes/PTTA.gif`).default;
           name = "Power to the apes";
           break;
+        case "IceCream":
+          image = require(`./images/heroes/ice_v1.gif`).default;
+          name = "Ice Cream Society";
+          break;
         default:
           image = require(`./images/heroes/${hero}.png`).default;
       }

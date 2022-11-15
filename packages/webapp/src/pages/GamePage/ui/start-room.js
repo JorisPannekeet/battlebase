@@ -22,9 +22,12 @@ export default class StartRoom extends Component {
               <div class="hero-card-image"></div>
 
               <div class="hero-card-body">
-                <span class="power">No type</span>
-                <h2>Default</h2>
-                <p>Start with the default deck, no NFT's needed.</p>
+                <span class="power">Deck type</span>
+                <h2>Specter</h2>
+                <p>
+                  Specter uses evasive manouvres and poisonous skills to win his
+                  battles.
+                </p>
               </div>
 
               <div class="selector">
@@ -43,9 +46,12 @@ export default class StartRoom extends Component {
               <div class="hero-card-image"></div>
 
               <div class="hero-card-body">
-                <span class="power">Street Power</span>
-                <h2>P2A</h2>
-                <p>Use the Power to the Apes deck and ....</p>
+                <span class="power">Deck type</span>
+                <h2>Ape</h2>
+                <p>
+                  Use the Power to the Apes deck and destroy your opponents
+                  using bleed damage
+                </p>
               </div>
 
               <div class="selector">
@@ -64,9 +70,12 @@ export default class StartRoom extends Component {
               <div class="hero-card-image"></div>
 
               <div class="hero-card-body">
-                <span class="power">Knight Power</span>
+                <span class="power">Deck type</span>
                 <h2>Ice Cream</h2>
-                <p>Not working yet.</p>
+                <p>
+                  General Ice Cream will obliterate enemies using his ice
+                  abilities!
+                </p>
               </div>
 
               <div class="selector">
@@ -85,8 +94,8 @@ export default class StartRoom extends Component {
               <div class="hero-card-image"></div>
 
               <div class="hero-card-body">
-                <span class="power">Brilliant Power</span>
-                <h2>Sera</h2>
+                <span class="power">Deck type</span>
+                <h2>Sakura</h2>
                 <p>Not working yet</p>
               </div>
 

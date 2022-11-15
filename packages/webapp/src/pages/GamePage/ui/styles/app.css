@@ -528,7 +528,8 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("../images/heroes/3.png");
+  background: url("../images/heroes/hero1.gif");
+  background-color: #9e5161;
   background-size: cover;
 }
 
@@ -553,17 +554,19 @@ table {
 }
 
 .hero-card:nth-child(2) .hero-card-image {
-  background: url("../images/heroes/P2A.png");
+  background: url("../images/heroes/PTTA.gif");
+  background-color: #34495e;
   background-size: cover;
 }
 
 .hero-card:nth-child(3) .hero-card-image {
-  background: url("../images/heroes/239.png");
+  background: url("../images/heroes/ice_v1.gif");
+  background-color: #4891ba;
   background-size: cover;
 }
 
 .hero-card:nth-child(4) .hero-card-image {
-  background: url("../images/heroes/503.png");
+  background: url("../images/cards/placeholder.png");
   background-size: cover;
 }
 
