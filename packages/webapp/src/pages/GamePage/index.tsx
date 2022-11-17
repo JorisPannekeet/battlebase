@@ -44,7 +44,7 @@ export const Game = () => {
   const accountTotal = useAccount();
   const { copyToastOpen, isLoading, ...collectionListProps } =
     useMyNFTCollection();
-  //const { nftList, walletLayer2NFT } = useMyNFT({});
+  const { nftList, walletLayer2NFT } = useMyNFT({});
   // let nftData = [];
 
   // nftList.map((item) => {
@@ -85,18 +85,18 @@ export const Game = () => {
   };
 
   const allowedNFTs = [];
-  // allowedCollections.forEach((filterValue) => {
-  //   allowedNFTs.push(
-  //     ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
-  //   );
-  // });
-  allowedCollections.forEach((filterValue) => {
+  allowedCreators.forEach((filterValue) => {
     allowedNFTs.push(
-      ...collectionListProps.collectionList.filter((val) =>
-        val.id?.toString().includes(filterValue)
-      )
+      ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
     );
   });
+  // allowedCollections.forEach((filterValue) => {
+  //   allowedNFTs.push(
+  //     ...collectionListProps.collectionList.filter((val) =>
+  //       val.id?.toString().includes(filterValue)
+  //     )
+  //   );
+  // });
   const connectAccount = async () => {
     headerToolBarData[4].handleClick();
   };

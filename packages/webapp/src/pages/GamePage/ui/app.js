@@ -517,7 +517,7 @@ stw.dealCards()`);
               class="tooltipped tooltipped-s"
               aria-label=${relic.relicDescription}
             >
-              <img src=${relic.avatar} with="20" />
+              <img src=${relic.metadata.imageSize.original} with="20" />
             </span>
           `;
         })}

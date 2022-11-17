@@ -13,6 +13,25 @@ export default class StartRoom extends Component {
   }
 
   render() {
+    const allRelics = [];
+    this.props.nfts.map((nft) => {
+      const relic = relics.find(
+        (item) =>
+          item.address === nft.tokenAddress &&
+          nft.metadata.base.name.includes(item.matchingData)
+      );
+      if (relic) {
+        allRelics.push({ ...relic, ...nft });
+      }
+    });
+    const shuffled = allRelics.sort(() => 0.5 - Math.random()); //shuffle relics
+    const uniques = shuffled.filter(
+      (value, index, self) =>
+        index ===
+        self.findIndex((t) => t.relicDescription === value.relicDescription)
+    );
+    const randomRelics = uniques.slice(0, 3); // pick 3
+
     return html`
       <article>
         ${!this.state.heroSelected &&
@@ -117,21 +136,21 @@ export default class StartRoom extends Component {
           ${this.props.nfts.length
             ? html`
                 <div class="Cards Cards--grid">
-                  ${this.props.nfts.map((nft) => {
+                  ${randomRelics.map((nft) => {
                     return html` <article class="Card relic-card">
                       <div
                         class="Card-inner"
                         onClick=${() => this.props.selectRelic(nft)}
                       >
-                        <h3 class="Card-name">${nft.name}</h3>
+                        <h3 class="Card-name">${nft.metadata.base.name}</h3>
                         <figure class="Card-media relic">
-                          <img src=${nft.avatar} alt=${nft.name} />
+                          <img
+                            src=${nft.metadata.imageSize.original}
+                            alt=${nft.metadata.base.name}
+                          />
                         </figure>
                         <p class="Card-type">Relic</p>
-                        <p class="Card-description">
-                          ${relics.find((item) => item.id === nft.id)
-                            .relicDescription}
-                        </p>
+                        <p class="Card-description">${nft.relicDescription}</p>
                       </div>
                     </article>`;
                   })}

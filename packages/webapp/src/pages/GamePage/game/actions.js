@@ -169,7 +169,11 @@ function selectHero(state, { hero }) {
 
 function selectRelic(state, { relic }) {
   const nft = relic;
-  const stats = relics.find((item) => item.id === nft.id);
+  const stats = relics.find(
+    (item) =>
+      item.address === nft.tokenAddress &&
+      nft.metadata.base.name.includes(item.matchingData)
+  );
   const newRelic = {
     ...stats,
     ...nft,
@@ -202,6 +206,20 @@ function useRelic(state, { relic }) {
         draft.player.powers.boost = 8;
       });
       break;
+    case "addVulnerable":
+      return produce(state, (draft) => {
+        draft.dungeon.graph[draft.dungeon.y][
+          draft.dungeon.x
+        ].room.monsters.forEach((monster) => {
+          monster.powers["vulnerable"] = relic.value;
+        });
+      });
+    case "addCard":
+      return drawCards(state, { amount: relic.value });
+    case "addHealth":
+      return addHealth(state, { target: "player", amount: relic.value });
+    case "addEnergy":
+      return addEnergyToPlayer(state);
     default:
       return;
   }

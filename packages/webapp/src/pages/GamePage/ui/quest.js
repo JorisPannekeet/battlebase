@@ -6,14 +6,32 @@ import relics from "../content/relics.js";
 
 export default class QuestRoom extends Component {
   render(props, state) {
-    const availableRelics = props.nfts.filter((nft) => {
-      return props.gameState.relics.some((rel) => {
-        return rel.tokenAddress !== nft.tokenAddress;
-      });
+    const allRelics = [];
+    props.nfts.map((nft) => {
+      const relic = relics.find(
+        (item) =>
+          item.address === nft.tokenAddress &&
+          nft.metadata.base.name.includes(item.matchingData)
+      );
+      if (relic) {
+        allRelics.push({ ...relic, ...nft });
+      }
     });
+    const shuffled = allRelics.sort(() => 0.5 - Math.random()); //shuffle relics
+    const uniques = shuffled
+      .filter(
+        (value, index, self) =>
+          index ===
+          self.findIndex((t) => t.relicDescription === value.relicDescription)
+      )
+      .filter((nft) => {
+        return props.gameState.relics.some((rel) => {
+          return rel.relicDescription !== nft.relicDescription;
+        });
+      }); // remove dupes
 
-    const shuffled = availableRelics.sort(() => 0.5 - Math.random());
-    const randomRelics = shuffled.slice(0, 3);
+    const randomRelics = uniques.slice(0, 3); // pick 3
+    console.log({ uniques, randomRelics });
 
     return html`
       <h1 center medium>Event room</h1>
@@ -35,11 +53,7 @@ export default class QuestRoom extends Component {
                       />
                     </figure>
                     <p class="Card-type">Relic</p>
-                    <p class="Card-description">
-                      ${relics.find(
-                        (item) => item.address === relic.tokenAddress
-                      ).description}
-                    </p>
+                    <p class="Card-description">${relic.relicDescription}</p>
                   </div>
                 </article>`;
               })}
