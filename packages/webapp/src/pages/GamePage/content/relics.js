@@ -19,8 +19,8 @@ const relics = [
     id: 749,
   },
   {
-    address: "0xfe86f18373f116a1a4db56a0bde6ac638f36251b", // Ice team delta
-    matchingData: ["Sergeant", "Major", "Private", "Captain"],
+    address: "0x1d006a27bd82e10f9194d30158d91201e9930420", // Metaboy
+    matchingData: "MetaBoy",
     type: "battleStart",
     relicDescription: "Draw 2 additional cards at the start of each encounter",
     action: "addCard",

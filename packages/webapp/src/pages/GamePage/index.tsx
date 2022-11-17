@@ -39,6 +39,8 @@ export const Game = () => {
   const allowedCreators = [
     "0xfe86f18373f116a1a4db56a0bde6ac638f36251b",
     "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a",
+    "free",
+    "0x1d006a27bd82e10f9194d30158d91201e9930420",
   ]; // creators filtered for relics .. not used
   const allowedCollections = ["749", "835", "2040", "838", "2509", "1991"]; // Collections filtered for relics
   const accountTotal = useAccount();
