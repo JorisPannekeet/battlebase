@@ -234,7 +234,7 @@ h2 {
 .App-background::before,
 .App-background::after {
   content: "";
-  background: linear-gradient(to bottom, #0f1642, transparent);
+  background: linear-gradient(to bottom, #000, transparent);
   position: absolute;
   top: 0;
   left: 0;
@@ -245,7 +245,7 @@ h2 {
 .App-background::after {
   top: initial;
   bottom: 0;
-  background: linear-gradient(to top, #0f1642, transparent);
+  background: linear-gradient(to top, #000, transparent);
 }
 
 .App-background,
