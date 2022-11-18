@@ -178,6 +178,7 @@ function selectRelic(state, { relic }) {
     ...stats,
     ...nft,
   };
+
   return produce(state, (draft) => {
     draft.relics.push(newRelic);
   });
@@ -218,6 +219,10 @@ function useRelic(state, { relic }) {
       return drawCards(state, { amount: relic.value });
     case "addHealth":
       return addHealth(state, { target: "player", amount: relic.value });
+    case "addMaxHealth":
+      return produce(state, (draft) => {
+        draft.player.maxHealth = draft.player.maxHealth + relic.value;
+      });
     case "addEnergy":
       return addEnergyToPlayer(state);
     default:
@@ -527,6 +532,17 @@ function takeMonsterTurn(state, monsterIndex) {
     if (intent.damage) {
       //TODO: show attack animation;
       let amount = intent.damage;
+      const dodgeRelics = state.relics.filter(
+        (item) => item.action === "addDodge%"
+      );
+      console.log({ rel: state.relics });
+      dodgeRelics.map((relic) => {
+        console.log("Triggering dodge relic: ", relic);
+        const calc = Math.random() * 100;
+        if (calc < 10) {
+          amount = "Dodged";
+        }
+      });
       if (monster.powers.weak) amount = powers.weak.use(amount);
       const updatedPlayer = removeHealth(draft, {
         target: "player",

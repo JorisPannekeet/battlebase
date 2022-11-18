@@ -85,13 +85,35 @@ export const Game = () => {
         return result.data.allRuns.results;
       });
   };
-
+  const f2pRelics = [
+    {
+      metadata: {
+        base: { name: "Sacred frog" },
+        imageSize: {
+          original:
+            "https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg",
+        },
+      },
+      tokenAddress: "free",
+    },
+    {
+      metadata: {
+        base: { name: "Sacred cat" },
+        imageSize: {
+          original:
+            "https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0",
+        },
+      },
+      tokenAddress: "free",
+    },
+  ];
   const allowedNFTs = [];
   allowedCreators.forEach((filterValue) => {
     allowedNFTs.push(
       ...walletLayer2NFT.filter((val) => val.tokenAddress.includes(filterValue))
     );
   });
+  allowedNFTs.push(...f2pRelics);
   // allowedCollections.forEach((filterValue) => {
   //   allowedNFTs.push(
   //     ...collectionListProps.collectionList.filter((val) =>

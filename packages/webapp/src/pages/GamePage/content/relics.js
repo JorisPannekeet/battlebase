@@ -55,5 +55,23 @@ const relics = [
     value: 2,
     id: 2509,
   },
+  {
+    address: "free", // FREE
+    matchingData: "Sacred frog",
+    type: "enemyDmgCalc",
+    relicDescription: "Have a 10% chance to dodge enemy attacks each turn",
+    action: "addDodge%",
+    value: 1,
+    id: null,
+  },
+  {
+    address: "free", // FREE
+    matchingData: "Sacred cat",
+    type: "start",
+    relicDescription: "Increse your max HP by 8",
+    action: "addMaxHealth",
+    value: 8,
+    id: null,
+  },
 ];
 export default relics;

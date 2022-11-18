@@ -68,6 +68,9 @@
     height: 70px;
   }
 }
+.relic-card .Card-name {
+  font-size: 20px;
+}
 .Card-name {
   margin: 0.5rem 0;
   padding: 0.5rem 0 0.1rem;

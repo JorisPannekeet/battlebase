@@ -64,6 +64,7 @@ export default class App extends Component {
     this.handleMapMove = this.handleMapMove.bind(this);
     this.handleNextStage = this.handleNextStage.bind(this);
     this.postRun = this.postRun.bind(this);
+    this.checkRelicTrigger = this.checkRelicTrigger.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -297,6 +298,20 @@ stw.dealCards()`);
     this.game.enqueue({ type: "selectRelic", relic: nft });
     this.update();
     this.goToNextRoom();
+    setTimeout(() => {
+      this.checkRelicTrigger();
+    }, 1000);
+  }
+  checkRelicTrigger() {
+    const startRelics = this.state.relics.filter(
+      (item) => item.type === "start"
+    );
+    startRelics.map((relic) => {
+      console.log("Triggering battleStart relic: ", relic);
+
+      this.game.enqueue({ type: "useRelic", relic: relic });
+      this.update();
+    });
   }
   handleMapMove(move) {
     console.log("Made a move");

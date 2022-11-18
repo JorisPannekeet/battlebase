@@ -72,7 +72,7 @@ class Target extends Component {
       switch (hero) {
         case "Default":
           image = require(`./images/heroes/hero1.gif`).default;
-          name = "Hero";
+          name = "Specter";
           break;
         case "P2A":
           image = require(`./images/heroes/PTTA.gif`).default;

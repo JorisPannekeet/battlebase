@@ -31,7 +31,7 @@ export default class StartRoom extends Component {
         self.findIndex((t) => t.relicDescription === value.relicDescription)
     );
     const randomRelics = uniques.slice(0, 3); // pick 3
-
+    console.log({ nft: this.props.nfts });
     return html`
       <article>
         ${!this.state.heroSelected &&
