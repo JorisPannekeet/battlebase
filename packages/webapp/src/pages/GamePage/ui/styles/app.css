@@ -67,7 +67,7 @@ body {
 }
 
 a,
-button:not(.cybr-btn),
+button,
 summary {
   cursor: url(../images/cursors/point.png) 10 0, auto !important;
 }
@@ -83,7 +83,7 @@ a {
 }
 
 .Button,
-button:not(.cybr-btn) {
+button {
   font-size: 1.25rem;
   padding: 0.4em 1em 0.4em;
   border: none;
@@ -94,18 +94,18 @@ button:not(.cybr-btn) {
   text-decoration: none;
 }
 .Button + .Button,
-button:not(.cybr-btn) + button:not(.cybr-btn) {
+button + button {
   margin-left: 0.2em;
 }
 .Button:hover,
 .Button:focus,
-button:not(.cybr-btn):hover,
-button:not(.cybr-btn):focus {
+button:hover,
+button:focus {
   background: hsl(43deg 96% 27%);
   box-shadow: 0 0.1em var(--text-inverse);
 }
 .Button:active,
-button:not(.cybr-btn):active {
+button:active {
   position: relative;
   top: 0.1em;
   box-shadow: none;
@@ -280,7 +280,30 @@ h2 {
   grid-gap: 5%;
 }
 
-.EnergyBadge {
+.EnergyBadge:not(.Card-energy) {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  width: 6em;
+  height: 6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+
+  margin-left: 1rem;
+  background-image: url("../images/crystal.gif");
+  background-size: cover;
+}
+.EnergyBadge > span {
+  font-feature-settings: "onum" on;
+}
+/* .no-energy .EnergyBadge {
+  background: #272d2b;
+} */
+.Card-energy {
+  -webkit-transform: rotate3d(5, 15, 3, -20deg);
   transform: rotate3d(5, 15, 3, -20deg);
   position: relative;
   z-index: 1;
@@ -290,21 +313,22 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid hsla(0, 0%, 0%, 0.8);
+  border: 3px solid rgba(0, 0, 0, 0.8);
+  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   background-color: var(--teal);
   text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
     -1px 1px 0 #000, 1px 1px 0 #000;
   box-shadow: 0 0 0.1em var(--lightblue);
   margin-left: 1rem;
-  transition: background 700ms;
+  transition: background 0.7s;
 }
-.EnergyBadge > span {
+
+.Card-energy > span {
+  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
+  -webkit-font-feature-settings: "onum" on;
   font-feature-settings: "onum" on;
-}
-.no-energy .EnergyBadge {
-  background: #272d2b;
 }
 
 @keyframes pulse {
