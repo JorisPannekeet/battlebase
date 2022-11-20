@@ -366,7 +366,7 @@ stw.dealCards()`);
           html`<${Overlay}>
             <p center>You are dead.</p>
             <${DungeonStats} state=${state}><//>
-            ${nfts.length
+            ${props.account.length
               ? html`
                   <div center>
                     <button
@@ -395,7 +395,7 @@ stw.dealCards()`);
               </button>
             </p>
             <${DungeonStats} state=${state}><//>
-            ${nfts.length
+            ${props.account.length
               ? html`
                   <div center>
                     <button
