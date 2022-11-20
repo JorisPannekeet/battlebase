@@ -182,25 +182,39 @@ stw.dealCards()`);
   endTurn() {
     sfx.endTurn();
     const room = getCurrRoom(this.state);
+    const title = document.getElementById("turnTxt");
+    title.innerText = "Enemy Turn";
+    setTimeout(() => {
+      title.innerText = "";
+    }, 500);
 
-    room.monsters.map((monster, index) => {
-      const m = document.querySelector(
-        `[data-monster="${index}"]:not(.Target--isDead)`
-      );
+    setTimeout(() => {
+      room.monsters.map((monster, index) => {
+        const m = document.querySelector(
+          `[data-monster="${index}"]:not(.Target--isDead)`
+        );
 
-      gsap.from(m, {
-        x: -150,
-        duration: 0.5,
-        delay: index * 0.2,
+        gsap.from(m, {
+          x: -150,
+          duration: 0.5,
+          delay: index * 0.2,
+        });
       });
-    });
-    gsap.effects.discardHand(".Hand .Card", {
-      onComplete: reallyEndTurn.bind(this),
-    });
-    function reallyEndTurn() {
-      this.game.enqueue({ type: "endTurn" });
-      this.update(this.dealCards);
-    }
+      gsap.effects.discardHand(".Hand .Card", {
+        onComplete: reallyEndTurn.bind(this),
+      });
+      function reallyEndTurn() {
+        this.game.enqueue({ type: "endTurn" });
+        this.update(this.dealCards);
+      }
+      setTimeout(() => {
+        title.innerText = "Player Turn";
+        setTimeout(() => {
+          title.innerText = "";
+        }, 1000);
+      }, 1000);
+    }, 1000);
+    // TODO: show "enemy turn", wait a second, do intents, wait a second, show "player turn"
   }
   // Animate the cards in and make sure any new cards are draggable.
   dealCards() {
@@ -487,6 +501,7 @@ stw.dealCards()`);
 					<div class="Targets-group player-group">
 						<${Player} model=${state.player} hero=${state.hero} name=${state.hero} />
 					</div>
+          <div class="turnText"><h1 id="turnTxt"></h1></div>
 					<div class="Targets-group monster-group">
 						${
               room.monsters &&
