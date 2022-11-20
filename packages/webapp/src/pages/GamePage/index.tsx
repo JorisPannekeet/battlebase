@@ -98,7 +98,7 @@ export const Game = () => {
     },
     {
       metadata: {
-        base: { name: "Sacred cat" },
+        base: { name: "Good luck cat" },
         imageSize: {
           original:
             "https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0",

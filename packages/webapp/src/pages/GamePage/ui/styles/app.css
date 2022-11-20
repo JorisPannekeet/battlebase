@@ -365,8 +365,7 @@ h2 {
 
 /* In your hand, the cards stack a bit */
 .Hand {
-  margin-top: 1rem;
-  margin-bottom: -1rem;
+  margin-top: -4rem;
   z-index: 1;
 }
 .Hand .Cards {
