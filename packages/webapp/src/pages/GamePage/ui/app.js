@@ -343,6 +343,7 @@ stw.dealCards()`);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
     const nfts = props.nfts;
+
     // There's a lot here because I did not want to split into too many files.
     return html`
 			<div class="App" tabindex="0" onKeyDown=${(e) => this.handleShortcuts(e)}>
@@ -366,7 +367,7 @@ stw.dealCards()`);
           html`<${Overlay}>
             <p center>You are dead.</p>
             <${DungeonStats} state=${state}><//>
-            ${props.account.length
+            ${props.account.account.readyState !== "UN_CONNECT"
               ? html`
                   <div center>
                     <button
@@ -395,7 +396,7 @@ stw.dealCards()`);
               </button>
             </p>
             <${DungeonStats} state=${state}><//>
-            ${props.account.length
+            ${props.account.account.readyState !== "UN_CONNECT"
               ? html`
                   <div center>
                     <button
