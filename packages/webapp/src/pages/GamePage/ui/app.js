@@ -183,10 +183,14 @@ stw.dealCards()`);
     sfx.endTurn();
     const room = getCurrRoom(this.state);
     const title = document.getElementById("turnTxt");
+    gsap.from(title, {
+      y: -150,
+      duration: 0.5,
+    });
     title.innerText = "Enemy Turn";
     setTimeout(() => {
       title.innerText = "";
-    }, 500);
+    }, 800);
 
     setTimeout(() => {
       room.monsters.map((monster, index) => {
@@ -208,6 +212,10 @@ stw.dealCards()`);
         this.update(this.dealCards);
       }
       setTimeout(() => {
+        gsap.from(title, {
+          y: -150,
+          duration: 0.5,
+        });
         title.innerText = "Player Turn";
         setTimeout(() => {
           title.innerText = "";

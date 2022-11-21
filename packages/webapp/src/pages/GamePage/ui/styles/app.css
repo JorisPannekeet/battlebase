@@ -364,11 +364,17 @@ h2 {
 }
 .turnText {
   position: absolute;
-  left: 30%;
   top: 50%;
   z-index: 99999;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.462);
+  width: 100%;
+  text-align: center;
+}
+.turnText h1 {
+  background-image: none;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
 }
 /* In your hand, the cards stack a bit */
 .Hand {
