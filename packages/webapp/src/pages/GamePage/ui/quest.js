@@ -48,7 +48,10 @@ export default class QuestRoom extends Component {
                     <h3 class="Card-name">${relic.metadata.base.name}</h3>
                     <figure class="Card-media relic">
                       <img
-                        src=${relic.metadata.imageSize.original}
+                        src=${relic.tokenAddress === "free"
+                          ? require(`./images/relics/${relic.metadata.imageSize.original}`)
+                              .default
+                          : relic.metadata.imageSize.original}
                         alt=${relic.metadata.base.name}
                       />
                     </figure>

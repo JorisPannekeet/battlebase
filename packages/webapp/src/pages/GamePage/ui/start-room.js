@@ -145,7 +145,10 @@ export default class StartRoom extends Component {
                         <h3 class="Card-name">${nft.metadata.base.name}</h3>
                         <figure class="Card-media relic">
                           <img
-                            src=${nft.metadata.imageSize.original}
+                            src=${nft.tokenAddress === "free"
+                              ? require(`./images/relics/${nft.metadata.imageSize.original}`)
+                                  .default
+                              : nft.metadata.imageSize.original}
                             alt=${nft.metadata.base.name}
                           />
                         </figure>

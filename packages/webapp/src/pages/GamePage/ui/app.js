@@ -556,7 +556,13 @@ stw.dealCards()`);
               class="tooltipped tooltipped-s"
               aria-label=${relic.relicDescription}
             >
-              <img src=${relic.metadata.imageSize.original} with="20" />
+              <img
+                src=${relic.tokenAddress === "free"
+                  ? require(`./images/relics/${relic.metadata.imageSize.original}`)
+                      .default
+                  : relic.metadata.imageSize.original}
+                with="20"
+              />
             </span>
           `;
         })}

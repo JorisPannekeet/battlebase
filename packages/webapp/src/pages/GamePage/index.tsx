@@ -90,8 +90,7 @@ export const Game = () => {
       metadata: {
         base: { name: "Sacred frog" },
         imageSize: {
-          original:
-            "https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg",
+          original: "frog.png",
         },
       },
       tokenAddress: "free",
@@ -100,8 +99,7 @@ export const Game = () => {
       metadata: {
         base: { name: "Good luck cat" },
         imageSize: {
-          original:
-            "https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0",
+          original: "cat.png",
         },
       },
       tokenAddress: "free",

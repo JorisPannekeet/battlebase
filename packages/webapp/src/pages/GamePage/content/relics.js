@@ -68,7 +68,7 @@ const relics = [
     address: "free", // FREE
     matchingData: "Good luck cat",
     type: "start",
-    relicDescription: "Increse your max HP by 8",
+    relicDescription: "Increase your max HP by 8",
     action: "addMaxHealth",
     value: 8,
     id: null,
