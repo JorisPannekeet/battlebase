@@ -1,8 +1,8 @@
 {
-  "name": "loopring-web",
+  "name": "Downfall",
   "version": "0.1.0",
-  "author": "Loopring Dex Frontend Team",
-  "description": "dex web app new version",
+  "author": "Joris Pannekeet",
+  "description": "Downfall NFT dungeon crawler card game",
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
   "engines": {
