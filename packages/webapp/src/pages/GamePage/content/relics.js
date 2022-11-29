@@ -56,6 +56,15 @@ const relics = [
     id: 2509,
   },
   {
+    address: "0xf232a9bf3839385311afd7835bac68166120e26b", // Ghostd
+    matchingData: "Ghostd",
+    type: "death",
+    relicDescription: "When you die recover 30% HP, works only once", // TODO: make this.
+    action: "addHealth",
+    value: 2,
+    id: 2509,
+  },
+  {
     address: "free", // FREE
     matchingData: "Sacred frog",
     type: "enemyDmgCalc",

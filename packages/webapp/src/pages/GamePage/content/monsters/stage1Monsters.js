@@ -126,8 +126,8 @@ elites["monster7"] = MonsterRoom(
       {},
       { block: 6 },
     ],
-    name: "Elite monster 1",
-    image: "monsters/slime.gif",
+    name: "Ghostd",
+    image: "monsters/ghostd_gif.gif",
   })
 );
 monsters["monster10"] = MonsterRoom(
@@ -144,8 +144,8 @@ elites["monster9"] = MonsterRoom(
     hp: 60,
     intents: [{ damage: 12 }, { damage: 11, weak: 1 }, { damage: 4, block: 6 }],
     random: 6,
-    name: "Elite monster 2",
-    image: "monsters/elite.gif",
+    name: "Ghostd",
+    image: "monsters/ghostd_gif.gif",
   })
 );
 elites["Tougher"] = MonsterRoom(

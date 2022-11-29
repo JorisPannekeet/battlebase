@@ -65,6 +65,7 @@ export default class App extends Component {
     this.handleNextStage = this.handleNextStage.bind(this);
     this.postRun = this.postRun.bind(this);
     this.checkRelicTrigger = this.checkRelicTrigger.bind(this);
+    this.activateUltimate = this.activateUltimate.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -285,6 +286,10 @@ stw.dealCards()`);
       acc.account.accAddress,
       finalScore
     );
+  }
+  activateUltimate() {
+    this.game.enqueue({ type: "triggerUltimate", hero: this.state.hero });
+    this.update();
   }
   handleCampfireChoice(choice, reward) {
     // Depending on the choice, run an action.
@@ -600,6 +605,17 @@ stw.dealCards()`);
 						<${Cards} gameState=${state} type="drawPile" />
 					</div>
 				<//>
+
+        <div bottomleft id="ulti">
+        
+          <button onClick=${this.activateUltimate} disabled=${
+      this.game.state.turn < 4 || this.game.state.player.ultimateUsed === true
+    }><span
+    class="tooltipped tooltipped-s"
+    aria-label="Deal 10 damage to all enemies, available after 4 turns"
+  >Ultimate</span></button>
+    
+        </div>
 
 				<${OverlayWithButton} id="DiscardPile" bottomright>
 					<button onClick=${() =>

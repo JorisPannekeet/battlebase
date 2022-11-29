@@ -55,6 +55,7 @@ function createNewGame() {
       currentHealth: 72,
       block: 0,
       powers: {},
+      ultimateUsed: false,
     },
     hero: "Default",
     relics: [],
@@ -353,6 +354,17 @@ function addEnergyToPlayer(state) {
     draft.player.currentEnergy = draft.player.currentEnergy + 1;
   });
 }
+const triggerUltimate = (state, { hero }) => {
+  let newState = removeHealth(state, {
+    target: CardTargets.allEnemies,
+    amount: 10,
+  });
+  newState = produce(newState, (draft) => {
+    draft.player.ultimateUsed = true;
+  });
+
+  return newState;
+};
 
 /**
  * Removes health from a target, respecting vulnerable and block.
@@ -588,6 +600,8 @@ function move(state, { move }) {
     draft.dungeon.pathTaken.push({ x: move.x, y: move.y });
     draft.dungeon.x = move.x;
     draft.dungeon.y = move.y;
+    draft.turn = 1;
+    draft.player.ultimateUsed = false;
     // if (number === state.dungeon.rooms.length - 1) {
     // 	throw new Error('You have reached the end of the dungeon. Congratulations.')
     // }
@@ -717,6 +731,7 @@ const allActions = {
   goToNextStage,
   selectRelic,
   useRelic,
+  triggerUltimate,
 };
 
 export default allActions;
