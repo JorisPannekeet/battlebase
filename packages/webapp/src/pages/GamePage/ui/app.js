@@ -66,6 +66,7 @@ export default class App extends Component {
     this.postRun = this.postRun.bind(this);
     this.checkRelicTrigger = this.checkRelicTrigger.bind(this);
     this.activateUltimate = this.activateUltimate.bind(this);
+    this.isPlayerDead = this.isPlayerDead.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -361,9 +362,26 @@ stw.dealCards()`);
       });
     }
   }
+  isPlayerDead() {
+    if (this.state.player.currentHealth < 1) {
+      const deathRelics = this.state.relics.filter(
+        (item) => item.type === "death"
+      );
+      deathRelics.map((relic) => {
+        if (!this.state.player.usedRelics.includes(relic)) {
+          console.log("Triggering death relic: ", relic);
+
+          this.game.enqueue({ type: "useRelic", relic: relic });
+          this.update();
+        }
+      });
+    }
+
+    return this.state.player.currentHealth < 1;
+  }
   render(props, state) {
     if (!state.player) return;
-    const isDead = state.player.currentHealth < 1;
+    const isDead = this.isPlayerDead();
     const didWin = isCurrRoomCompleted(state);
     const didWinEntireGame = isDungeonCompleted(state);
     const didWinStage = isStageCompleted(state);
@@ -606,7 +624,7 @@ stw.dealCards()`);
 					</div>
 				<//>
 
-        <div bottomleft id="ulti">
+        <div topcenter id="ulti">
         
           <button onClick=${this.activateUltimate} disabled=${
       this.game.state.turn < 4 || this.game.state.player.ultimateUsed === true

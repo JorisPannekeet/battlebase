@@ -60,8 +60,8 @@ const relics = [
     matchingData: "Ghostd",
     type: "death",
     relicDescription: "When you die recover 30% HP, works only once", // TODO: make this.
-    action: "addHealth",
-    value: 2,
+    action: "addHealthPercentage",
+    value: 0.3,
     id: 2509,
   },
   {

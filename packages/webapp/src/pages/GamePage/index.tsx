@@ -41,7 +41,8 @@ export const Game = () => {
     "0x76dea21c8ddf828e5ca1dd20a61dbd4a763ed28a",
     "free",
     "0x1d006a27bd82e10f9194d30158d91201e9930420",
-  ]; // creators filtered for relics .. not used
+    "0xf232a9bf3839385311afd7835bac68166120e26b",
+  ];
   const allowedCollections = ["749", "835", "2040", "838", "2509", "1991"]; // Collections filtered for relics
   const accountTotal = useAccount();
   const { copyToastOpen, isLoading, ...collectionListProps } =

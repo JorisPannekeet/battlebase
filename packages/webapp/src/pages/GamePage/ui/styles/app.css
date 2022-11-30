@@ -252,8 +252,8 @@ h2 {
   box-shadow: none;
   border: 1px solid white;
   position: absolute;
-  bottom: 80px;
-  left: 20px;
+  top: 10px;
+  left: 44%;
   animation: pulseEndTurn 1.5s infinite alternate;
   animation-timing-function: ease-out;
 }
@@ -265,9 +265,7 @@ h2 {
 #ulti button:hover {
   background: var(--yellow);
 }
-#ulti button:active {
-  top: auto !important;
-}
+
 #ulti {
   z-index: 3;
 }
@@ -308,6 +306,8 @@ h2 {
 
 .EnergyBadge:not(.Card-energy) {
   position: relative;
+  top: -100px;
+  left: -50px;
   z-index: 1;
   font-size: 1.5rem;
   width: 6em;

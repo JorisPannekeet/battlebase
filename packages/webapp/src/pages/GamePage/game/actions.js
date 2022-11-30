@@ -56,6 +56,7 @@ function createNewGame() {
       block: 0,
       powers: {},
       ultimateUsed: false,
+      usedRelics: [],
     },
     hero: "Default",
     relics: [],
@@ -202,12 +203,10 @@ function useRelic(state, { relic }) {
       return produce(state, (draft) => {
         draft.player.block = state.player.block + relic.value;
       });
-      break;
     case "addAttack":
       return produce(state, (draft) => {
         draft.player.powers.boost = 8;
       });
-      break;
     case "addVulnerable":
       return produce(state, (draft) => {
         draft.dungeon.graph[draft.dungeon.y][
@@ -220,6 +219,12 @@ function useRelic(state, { relic }) {
       return drawCards(state, { amount: relic.value });
     case "addHealth":
       return addHealth(state, { target: "player", amount: relic.value });
+    case "addHealthPercentage":
+      const amount = state.player.maxHealth * relic.value;
+      return produce(state, (draft) => {
+        draft.player.currentHealth = Math.round(amount);
+        draft.player.usedRelics.push(relic);
+      });
     case "addMaxHealth":
       return produce(state, (draft) => {
         draft.player.maxHealth = draft.player.maxHealth + relic.value;
