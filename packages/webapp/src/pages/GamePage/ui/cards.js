@@ -18,11 +18,29 @@ export default class Cards extends Component {
 
 export function Card(card, gameState) {
   const isDisabled = !canPlay(card, gameState);
+  const atk = require("./images/cards/attack.png").default;
+  const def = require("./images/cards/defend_card.png").default;
   const image = card.image
     ? require(`./images/cards/${card.image}`).default
     : require("./images/cards/placeholder.png").default;
 
   //const image = require("./images/cards/placeholder.png").default;
+  console.log(card.type);
+  return html` <article
+    class="Card"
+    data-card-type=${card.type}
+    data-card-target=${card.target}
+    key=${card.id}
+    data-id=${card.id}
+    disabled=${isDisabled}
+    style="background: url("${
+      card.type === "attack" ? atk : def
+    }");background-size:cover;"
+  >
+  <h3 class="Card-name">${card.name}</h3>
+  <p class="Card-description">${card.description}</p>
+
+  </article>`;
   return html`
     <article
       class="Card"

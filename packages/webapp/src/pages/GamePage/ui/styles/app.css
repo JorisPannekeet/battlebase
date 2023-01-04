@@ -427,7 +427,7 @@ h2 {
 .Hand .Card:hover {
   /* transition-duration: 60ms; */
   /* transform: translate3d(0, -1rem, 0) scale(1.25) rotate(0deg) !important; */
-  box-shadow: 0 0 0.75em gold;
+  /* box-shadow: 0 0 0.75em gold; */
   z-index: 1;
 }
 

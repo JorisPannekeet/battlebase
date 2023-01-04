@@ -20,7 +20,6 @@ import {
   gql,
 } from "@apollo/client";
 import "./ui/index.css";
-import { info } from "console";
 
 const httpLink = new HttpLink({
   uri: "https://gamedata.betty.app/api/runtime/0c3b5088fa0147eda7d5eecd58348f7e",
@@ -113,13 +112,7 @@ export const Game = () => {
     );
   });
   allowedNFTs.push(...f2pRelics);
-  // allowedCollections.forEach((filterValue) => {
-  //   allowedNFTs.push(
-  //     ...collectionListProps.collectionList.filter((val) =>
-  //       val.id?.toString().includes(filterValue)
-  //     )
-  //   );
-  // });
+  const nftReady = allowedNFTs.length > f2pRelics.length;
   const connectAccount = async () => {
     headerToolBarData[4].handleClick();
   };
@@ -129,11 +122,16 @@ export const Game = () => {
 
   useEffect(() => {
     console.log("rendering game");
+    setTimeout(() => {
+      if (account.readyState === "ACTIVATED" && !nftReady) {
+        alert("error loading nfts, please disconnect and reconnect");
+      }
+    }, 2000);
 
     setTimeout(() => {
       renderObject();
     }, 1000);
-  }, [account.readyState, collectionListProps.collectionList]);
+  }, [nftReady, account.readyState]);
 
   const renderGame = useMemo(() => {
     setTimeout(() => {
@@ -141,6 +139,7 @@ export const Game = () => {
     }, 1000);
   }, []);
   getRuns();
+  console.log({ allowedNFTs, nftReady, nftList });
   const renderObject = () => {
     render(
       html`

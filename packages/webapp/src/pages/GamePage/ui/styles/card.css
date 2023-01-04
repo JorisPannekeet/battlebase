@@ -17,8 +17,8 @@
 .Card {
   position: relative;
   display: flex;
-  border: 0.5em ridge #53b5a8;
-  border-image-source: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAA7ElEQVRYhe2YMQ6DMAxFcwBGRtaeoFUv0K2qOAa36NYDVmLjMmHB0VfqEJbG3xKRvkTiAE+OnYBD2FrfDdFSAVvfDfH7vpsqQQnMMk9xmad0jWOacJ4o79fGVSgEEsPnda1qbx7a8mdifxcIJ7aKm6qHBOZxuTURQsm7i0Djc/y7fAHhYEsgTCYqD6lZRrVk1h6iAZIYoglqOg/RAflZMtwLKDZGOg+dQe0OiO60t8oyutP+/B5yF9R0QH6yTEiplgxJW+jQv30urHagJ0v22n2lSkjyEF196EjRqlRK0cowaNfmaLYfGOuyHjKsYnCffLyABLkAAAAASUVORK5CYII=) !important;
+  /* border: 0.5em ridge #53b5a8; */
+  /* border-image-source: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAA7ElEQVRYhe2YMQ6DMAxFcwBGRtaeoFUv0K2qOAa36NYDVmLjMmHB0VfqEJbG3xKRvkTiAE+OnYBD2FrfDdFSAVvfDfH7vpsqQQnMMk9xmad0jWOacJ4o79fGVSgEEsPnda1qbx7a8mdifxcIJ7aKm6qHBOZxuTURQsm7i0Djc/y7fAHhYEsgTCYqD6lZRrVk1h6iAZIYoglqOg/RAflZMtwLKDZGOg+dQe0OiO60t8oyutP+/B5yF9R0QH6yTEiplgxJW+jQv30urHagJ0v22n2lSkjyEF196EjRqlRK0cowaNfmaLYfGOuyHjKsYnCffLyABLkAAAAASUVORK5CYII=) !important; */
   /* border-image-source: url("../images/cards/border_3.png") !important; */
   border-image-repeat: repeat !important;
   border-image-slice: 6 6 6 6 !important;
@@ -28,11 +28,17 @@
   image-rendering: -moz-crisp-edges !important;
   image-rendering: pixelated !important;
 }
-.Card[data-card-type="attack"] {
+.Card.relic-card {
+  border: 0.5em ridge #53b5a8;
+  /* border-image-source: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAA7ElEQVRYhe2YMQ6DMAxFcwBGRtaeoFUv0K2qOAa36NYDVmLjMmHB0VfqEJbG3xKRvkTiAE+OnYBD2FrfDdFSAVvfDfH7vpsqQQnMMk9xmad0jWOacJ4o79fGVSgEEsPnda1qbx7a8mdifxcIJ7aKm6qHBOZxuTURQsm7i0Djc/y7fAHhYEsgTCYqD6lZRrVk1h6iAZIYoglqOg/RAflZMtwLKDZGOg+dQe0OiO60t8oyutP+/B5yF9R0QH6yTEiplgxJW+jQv30urHagJ0v22n2lSkjyEF196EjRqlRK0cowaNfmaLYfGOuyHjKsYnCffLyABLkAAAAASUVORK5CYII=) !important; */
   border-image-source: url("../images/cards/border_4.png") !important;
+  border-radius: 10px;
+}
+.Card[data-card-type="attack"] {
+  /* border-image-source: url("../images/cards/border_4.png") !important; */
 }
 .Card[data-card-type="skill"] {
-  border-image-source: url("../images/cards/border_3.png") !important;
+  /* border-image-source: url("../images/cards/border_3.png") !important; */
 }
 .Card-inner {
   width: 100%;
@@ -72,7 +78,7 @@
   font-size: 20px;
 }
 .Card-name {
-  margin: 0.5rem 0;
+  margin: 6px auto !important;
   padding: 0.5rem 0 0.1rem;
   margin: 0;
   /* background-color: #111;
@@ -99,6 +105,10 @@
   padding-right: 0.2em;
   min-height: 2.5em;
   margin: 0;
+  position: absolute;
+  bottom: 40px;
+  max-width: 165px;
+  left: 29px;
 }
 .Card-energy {
   position: absolute;

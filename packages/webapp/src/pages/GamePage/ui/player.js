@@ -64,7 +64,7 @@ class Target extends Component {
     // if (gainedBlock > 0) this.setState({gainedBlock})
   }
 
-  render({ model, type, name, children, hero, monsterIndex }, state) {
+  render({ model, type, name, children, hero, monsterIndex, relics }, state) {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
     let image;

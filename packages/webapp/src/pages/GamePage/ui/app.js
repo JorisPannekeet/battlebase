@@ -530,7 +530,9 @@ stw.dealCards()`);
 
 				<div class="Targets Split">
 					<div class="Targets-group player-group">
-						<${Player} model=${state.player} hero=${state.hero} name=${state.hero} />
+						<${Player} model=${state.player} hero=${state.hero} name=${state.hero} relics=${
+      state.relics
+    }/>
 					</div>
           <div class="turnText"><h1 id="turnTxt"></h1></div>
 					<div class="Targets-group monster-group">
@@ -594,7 +596,9 @@ stw.dealCards()`);
 				
 
              <${OverlayWithButton} id="Map" topright key=${1}>
-              <button align-right onClick=${() => this.toggleOverlay("#Map")}>
+              <button disabled=${
+                room.type === "start"
+              } align-right onClick=${() => this.toggleOverlay("#Map")}>
                 <u>M</u>ap
               </button>
               <div class="Overlay-content">
