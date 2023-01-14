@@ -3,12 +3,14 @@ import {
   Component,
 } from "../web_modules/htm/preact/standalone.module.js";
 import relics from "../content/relics";
+import { heroes } from "../content/heroes.js";
 
 export default class StartRoom extends Component {
   constructor() {
     super();
     this.state = {
       heroSelected: false,
+      selectedHero: heroes[0],
     };
   }
 
@@ -31,101 +33,52 @@ export default class StartRoom extends Component {
         self.findIndex((t) => t.relicDescription === value.relicDescription)
     );
     const randomRelics = uniques.slice(0, 3); // pick 3
-    console.log({ nft: this.props.nfts });
+
     return html`
-      <article>
+      <article
+        class="start-room"
+        style="background-image:url(${require(`./images/heroes/backgrounds/${this.state.selectedHero.background}`)
+          .default});"
+      >
         ${!this.state.heroSelected &&
-        html` <h1 center medium>Select Hero</h1>
-          <div class="container">
-            <div class="hero-card">
-              <div class="hero-card-image"></div>
-
-              <div class="hero-card-body">
-                <span class="power">Deck type</span>
-                <h2>Specter</h2>
-                <p>
-                  Specter uses evasive manouvres and poisonous skills to win his
-                  battles.
-                </p>
-              </div>
-
-              <div class="selector">
-                <button
-                  onClick=${() => {
-                    this.props.onSelect("Default");
-                    this.setState({ heroSelected: true });
-                  }}
-                >
-                  select
-                </button>
-              </div>
-            </div>
-
-            <div class="hero-card">
-              <div class="hero-card-image"></div>
-
-              <div class="hero-card-body">
-                <span class="power">Deck type</span>
-                <h2>Ape</h2>
-                <p>
-                  Use the Power to the Apes deck and destroy your opponents
-                  using bleed damage
-                </p>
-              </div>
-
-              <div class="selector">
-                <button
-                  onClick=${() => {
-                    this.props.onSelect("P2A");
-                    this.setState({ heroSelected: true });
-                  }}
-                >
-                  select
-                </button>
-              </div>
-            </div>
-
-            <div class="hero-card">
-              <div class="hero-card-image"></div>
-
-              <div class="hero-card-body">
-                <span class="power">Deck type</span>
-                <h2>Ice Cream</h2>
-                <p>
-                  General Ice Cream will obliterate enemies using his ice
-                  abilities!
-                </p>
-              </div>
-
-              <div class="selector">
-                <button
-                  onClick=${() => {
-                    this.props.onSelect("IceCream");
-                    this.setState({ heroSelected: true });
-                  }}
-                >
-                  select
-                </button>
-              </div>
-            </div>
-
-            <div class="hero-card">
-              <div class="hero-card-image"></div>
-
-              <div class="hero-card-body">
-                <span class="power">Deck type</span>
-                <h2>Sakura</h2>
-                <p>Not working yet</p>
-              </div>
-
-              <div class="selector">
-                <button disabled>select</button>
-              </div>
-            </div>
-          </div>
-          <p center>
+        html`
+          <p class="hero-btns">
             <button onclick=${() => window.location.reload()}>Leave</button>
-          </p>`}
+            <button
+              onclick=${() => {
+                this.props.onSelect(this.state.selectedHero);
+                this.setState({ heroSelected: true });
+              }}
+            >
+              Next
+            </button>
+          </p>
+          <h1 center medium>Select Hero</h1>
+          <div class="selected-hero">
+            <img
+              src="${require(`./images/heroes/${this.state.selectedHero.image}`)
+                .default}"
+            />
+          </div>
+          <div class="hero-container">
+            ${heroes.map((hero) => {
+              return html`
+                <div class="hero-select">
+                  <a
+                    onClick=${() => {
+                      // this.props.onSelect(hero.name);
+                      this.setState({ selectedHero: hero });
+                    }}
+                  >
+                    <img
+                      src="${require(`./images/heroes/${hero.image}`).default}"
+                    />
+                  </a>
+                </div>
+              `;
+            })}
+          </div>
+        `}
         ${this.state.heroSelected &&
         html`
           <h1 center medium>Select Relic</h1>

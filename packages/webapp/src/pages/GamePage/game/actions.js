@@ -5,6 +5,7 @@ import { getTargets, getCurrRoom } from "./utils-state.js";
 import powers from "./powers.js";
 import { dungeonWithMap } from "../content/dungeon-encounters.js";
 import { conditionsAreValid } from "./conditions.js";
+import { heroes } from "../content/heroes.js";
 import relics from "../content/relics";
 
 // Without this, immer.js will throw an error if our `state` is modified outside of an action.
@@ -58,7 +59,7 @@ function createNewGame() {
       ultimateUsed: false,
       usedRelics: [],
     },
-    hero: "Default",
+    hero: heroes[0],
     relics: [],
     selectedDeck: 0,
     dungeon: {},

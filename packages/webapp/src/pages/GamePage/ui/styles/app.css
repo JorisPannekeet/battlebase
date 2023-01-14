@@ -874,3 +874,42 @@ table {
 .rwd-table td:before {
   color: #dd5;
 }
+.hero-container {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+}
+.hero-select {
+  width: 100%;
+  max-width: 150px;
+  position: relative;
+  border: 3px solid grey;
+  margin: 0px 10px;
+}
+.selected-hero {
+  width: 25%;
+  margin: 0 auto;
+}
+.hero-select img,
+.selected-hero img {
+  width: 100%;
+}
+.start-room {
+  z-index: 10;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column;
+  text-align: center;
+  padding: 1rem;
+}
+.hero-btns {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}

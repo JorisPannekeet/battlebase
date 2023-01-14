@@ -121,15 +121,10 @@ export const LandPage = withTranslation(["landPage", "common"])(
               <TitleTypography isMobile={isMobile}>
                 Collectible NFT cards
               </TitleTypography>
-              <Typography
-                marginTop={1.5}
-                variant={isMobile ? "h5" : "h4"}
-                lineHeight={"24px"}
-                whiteSpace={"pre-line"}
-                textAlign={"center"}
-              >
-                TODO: NFT playcards here in a slider
-              </Typography>
+              <img
+                src={require("./cards.png").default}
+                style={{ width: "100%" }}
+              />
             </Grid>
           </ContainerStyled>
         </Box>

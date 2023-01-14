@@ -126,7 +126,7 @@ export const Game = () => {
       if (account.readyState === "ACTIVATED" && !nftReady) {
         alert("error loading nfts, please disconnect and reconnect");
       }
-    }, 2000);
+    }, 5000);
 
     setTimeout(() => {
       renderObject();

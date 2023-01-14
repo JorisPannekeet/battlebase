@@ -398,13 +398,12 @@ stw.dealCards()`);
 
 				${
           room.type === "start" &&
-          html`<${Overlay}
-            ><${StartRoom}
-              onContinue=${this.goToNextRoom}
-              onSelect=${this.selectHero}
-              nfts=${nfts}
-              selectRelic=${this.selectRelic}
-          /><//>`
+          html`<${StartRoom}
+            onContinue=${this.goToNextRoom}
+            onSelect=${this.selectHero}
+            nfts=${nfts}
+            selectRelic=${this.selectRelic}
+          />`
         }
 
 				${
@@ -530,9 +529,9 @@ stw.dealCards()`);
 
 				<div class="Targets Split">
 					<div class="Targets-group player-group">
-						<${Player} model=${state.player} hero=${state.hero} name=${state.hero} relics=${
-      state.relics
-    }/>
+						<${Player} model=${state.player} hero=${state.hero} name=${
+      state.hero.name
+    } relics=${state.relics}/>
 					</div>
           <div class="turnText"><h1 id="turnTxt"></h1></div>
 					<div class="Targets-group monster-group">

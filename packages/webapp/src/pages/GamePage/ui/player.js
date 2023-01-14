@@ -68,23 +68,9 @@ class Target extends Component {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
     let image;
+    console.log(hero);
     if (type === "player") {
-      switch (hero) {
-        case "Default":
-          image = require(`./images/heroes/hero1.gif`).default;
-          name = "Specter";
-          break;
-        case "P2A":
-          image = require(`./images/heroes/PTTA.gif`).default;
-          name = "Power to the apes";
-          break;
-        case "IceCream":
-          image = require(`./images/heroes/ice_v1.gif`).default;
-          name = "Ice Cream Society";
-          break;
-        default:
-          image = require(`./images/heroes/${hero}.png`).default;
-      }
+      image = require(`./images/heroes/${hero.image}`).default;
     } else {
       image = require(`./images/${model.image}`).default;
     }
