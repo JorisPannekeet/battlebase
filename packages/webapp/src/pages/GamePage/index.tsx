@@ -139,7 +139,6 @@ export const Game = () => {
     }, 1000);
   }, []);
   getRuns();
-  console.log({ allowedNFTs, nftReady, nftList });
   const renderObject = () => {
     render(
       html`

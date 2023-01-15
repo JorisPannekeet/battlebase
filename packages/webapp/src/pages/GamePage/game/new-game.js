@@ -21,14 +21,10 @@ import ActionManager from "./action-manager.js";
 export default function createNewGame() {
   const actionManager = ActionManager({ debug: false });
 
-  // Adds a dungeon, starter deck and draws cards.
+  // Adds a dungeon
   function createNewState() {
     let state = actions.createNewGame();
     state = actions.setDungeon(state);
-    if (state.stage === 1) {
-      state = actions.addStarterDeck(state);
-    }
-    //state = actions.drawCards(state)
     return state;
   }
 

@@ -128,19 +128,9 @@ export function getRandomCards(list, amount) {
  * @returns {Array.<CARD>}
  */
 export function getCardRewards(amount = 3, hero) {
-  // Remove boring cards from rewards.
-  // TODO: Only NFT cards
-  let deckCards;
-  switch (hero) {
-    case "P2A":
-      deckCards = decks.testDeck;
-      break;
-    case "IceCream":
-      deckCards = decks.testDeck;
-      break;
-    default:
-      deckCards = decks.defaultDeck;
-  }
+  // Select deck depending on hero
+  const deckCards = decks[hero.deckname];
+
   // filter out boring cards
   const niceCards = deckCards
     .filter((card) => card.name !== "Strike")

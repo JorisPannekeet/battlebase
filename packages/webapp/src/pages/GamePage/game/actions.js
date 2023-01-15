@@ -79,24 +79,15 @@ function setDungeon(state, dungeon) {
   // })
 }
 
-// Draws a "starter" deck to your discard pile. Normally you'd run this as you start the game.
-// TODO: this will change depending on the selected hero
-function addStarterDeck(state) {
-  const deck = [
-    createCard("Defend"),
-    createCard("Defend"),
-    createCard("Defend"),
-    createCard("Defend"),
-    createCard("Strike"),
-    createCard("Strike"),
-    createCard("Strike"),
-    createCard("Strike"),
-    createCard("Strike"),
-    createCard("Bash"),
-  ];
+// Draws a "starter" deck to your discard pile. This will run on hero select.
+function addStarterDeck(state, hero) {
+  const starterDeck = [];
+  hero.starterdeck.map((item) => {
+    starterDeck.push(createCard(item));
+  });
   return produce(state, (draft) => {
-    draft.deck = deck;
-    draft.drawPile = shuffle(deck);
+    draft.deck = starterDeck;
+    draft.drawPile = shuffle(starterDeck);
   });
 }
 
@@ -165,7 +156,8 @@ function upgradeCard(state, { card }) {
 
 /*Select a hero*/
 function selectHero(state, { hero }) {
-  return produce(state, (draft) => {
+  const newState = addStarterDeck(state, hero);
+  return produce(newState, (draft) => {
     draft.hero = hero;
   });
 }
