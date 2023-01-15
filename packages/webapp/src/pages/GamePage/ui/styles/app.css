@@ -22,7 +22,12 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+h2,
+h3,
+h4,
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
 .player {
   margin: 0 auto;
   width: 80%;
@@ -887,12 +892,27 @@ table {
   position: relative;
   border: 3px solid grey;
   margin: 0px 10px;
+  height: 150px;
+}
+.hero-select:hover,
+.hero-select.active {
+  border: 3px solid gold;
+  box-shadow: 0px 0px 17px 2px gold;
+}
+.hero-select:hover img,
+.hero-select.active img {
+  filter: none;
 }
 .selected-hero {
   width: 25%;
   margin: 0 auto;
 }
-.hero-select img,
+.hero-select img {
+  height: 145px;
+  width: 145px;
+  object-fit: cover;
+  filter: grayscale(100);
+}
 .selected-hero img {
   width: 100%;
 }

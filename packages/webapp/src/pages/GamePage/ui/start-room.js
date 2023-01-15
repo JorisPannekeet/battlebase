@@ -59,11 +59,17 @@ export default class StartRoom extends Component {
               src="${require(`./images/heroes/${this.state.selectedHero.image}`)
                 .default}"
             />
+            <h3>${this.state.selectedHero.name}</h3>
+            <p>Deck type: ${this.state.selectedHero.type}</p>
           </div>
           <div class="hero-container">
             ${heroes.map((hero) => {
               return html`
-                <div class="hero-select">
+                <div
+                  class="hero-select ${this.state.selectedHero.id === hero.id
+                    ? "active"
+                    : ""}"
+                >
                   <a
                     onClick=${() => {
                       // this.props.onSelect(hero.name);
@@ -71,7 +77,8 @@ export default class StartRoom extends Component {
                     }}
                   >
                     <img
-                      src="${require(`./images/heroes/${hero.image}`).default}"
+                      src="${require(`./images/heroes/thumbnails/${hero.thumbnail}`)
+                        .default}"
                     />
                   </a>
                 </div>

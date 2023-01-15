@@ -20,6 +20,7 @@ export const heroes = [
     type: "Normal",
     image: "PTTA.gif",
     background: "p2a.png",
+    thumbnail: "p2a.png",
   },
   {
     id: 2,
@@ -42,6 +43,7 @@ export const heroes = [
     type: "Poison",
     image: "hero1.gif",
     background: "specter.jpeg",
+    thumbnail: "specter.png",
   },
   {
     id: 3,
@@ -64,6 +66,7 @@ export const heroes = [
     type: "Ice",
     image: "ice_v1.gif",
     background: "ice.jpeg",
+    thumbnail: "ice.png",
   },
   {
     id: 4,
@@ -85,5 +88,6 @@ export const heroes = [
     type: "Wind",
     image: "hero1.gif",
     background: "sakura.jpeg",
+    thumbnail: "sakura.png",
   },
 ];
