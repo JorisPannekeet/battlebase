@@ -122,11 +122,6 @@ export const Game = () => {
 
   useEffect(() => {
     console.log("rendering game");
-    setTimeout(() => {
-      if (account.readyState === "ACTIVATED" && !nftReady) {
-        alert("error loading nfts, please disconnect and reconnect");
-      }
-    }, 5000);
 
     setTimeout(() => {
       renderObject();

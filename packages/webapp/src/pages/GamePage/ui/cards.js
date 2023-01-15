@@ -24,8 +24,6 @@ export function Card(card, gameState) {
     ? require(`./images/cards/${card.image}`).default
     : require("./images/cards/placeholder.png").default;
 
-  //const image = require("./images/cards/placeholder.png").default;
-  console.log(card.type);
   return html` <article
     class="Card"
     data-card-type=${card.type}
