@@ -38,7 +38,6 @@ export default function Dungeon(options = {}, state) {
 
   const graph = generateGraph(options);
   const paths = generatePaths(graph, options.customPaths);
-  console.log({ graph });
 
   // Add ".edges" to each node from the paths, so we know which connections it has.
   // Would be cool if this was part of "generatePaths".

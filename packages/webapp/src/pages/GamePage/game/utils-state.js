@@ -96,6 +96,6 @@ export function isDungeonCompleted(state) {
     })
     .filter(Boolean);
   return (
-    clearedRooms.length === state.dungeon.graph.length && state.stage === 9
+    clearedRooms.length === state.dungeon.graph.length && state.stage === 2
   );
 }

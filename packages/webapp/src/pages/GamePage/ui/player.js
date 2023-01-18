@@ -68,7 +68,7 @@ class Target extends Component {
     const isDead = model.currentHealth < 1;
     const hp = isDead ? 0 : model.currentHealth;
     let image;
-    console.log(hero);
+
     if (type === "player") {
       image = require(`./images/heroes/${hero.image}`).default;
     } else {

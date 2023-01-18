@@ -49,7 +49,7 @@ export default class App extends Component {
     super();
     // Props
     this.base = undefined;
-    this.state = {};
+    this.state = { showStageName: false };
     this.game = {};
     this.overlayIndex = 11;
 
@@ -224,7 +224,6 @@ stw.dealCards()`);
         }, 1000);
       }, 1000);
     }, 1000);
-    // TODO: show "enemy turn", wait a second, do intents, wait a second, show "player turn"
   }
   // Animate the cards in and make sure any new cards are draggable.
   dealCards() {
@@ -264,12 +263,17 @@ stw.dealCards()`);
     this.update();
   }
   handleNextStage() {
+    this.setState({ showStageName: true });
     const stats = getEnemiesStats(this.game.state.dungeon);
     const stageScore =
       stats.encountered + stats.finalHealth + stats.killed + stats.maxHealth;
     this.game.enqueue({ type: "goToNextStage", score: stageScore });
     this.update();
     this.goToNextRoom();
+    document.getElementById("map-overlay").scrollTo(0, 0);
+    setTimeout(() => {
+      this.setState({ showStageName: false });
+    }, 2000);
   }
   postRun(acc) {
     const score = this.game.state.scores.reduce(
@@ -404,6 +408,17 @@ stw.dealCards()`);
             nfts=${nfts}
             selectRelic=${this.selectRelic}
           />`
+        }
+        ${
+          this.state.showStageName &&
+          html`
+            <div class="stage-start">
+              <div class="stage-start-content">
+                <h2>Stage ${state.stage}</h2>
+                <h1>Lust</h1>
+              </div>
+            </div>
+          `
         }
 
 				${
@@ -600,7 +615,7 @@ stw.dealCards()`);
               } align-right onClick=${() => this.toggleOverlay("#Map")}>
                 <u>M</u>ap
               </button>
-              <div class="Overlay-content">
+              <div class="Overlay-content" id="map-overlay">
 						<${Map} dungeon=${state.dungeon} stage=${state.stage} onMove=${
       this.handleMapMove
     } />

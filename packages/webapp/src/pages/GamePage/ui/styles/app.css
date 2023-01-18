@@ -933,3 +933,18 @@ table {
   display: flex;
   justify-content: space-between;
 }
+.stage-start {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.stage-start-content {
+  margin: auto;
+}

@@ -10,8 +10,17 @@ export default class StartRoom extends Component {
     super();
     this.state = {
       heroSelected: false,
+      displayStage: false,
       selectedHero: heroes[0],
     };
+    this.startGame = this.startGame.bind(this);
+  }
+
+  startGame(nft) {
+    this.setState({ displayStage: true });
+    setTimeout(() => {
+      this.props.selectRelic(nft);
+    }, 2000);
   }
 
   render() {
@@ -100,7 +109,7 @@ export default class StartRoom extends Component {
                     return html` <article class="Card relic-card">
                       <div
                         class="Card-inner"
-                        onClick=${() => this.props.selectRelic(nft)}
+                        onClick=${() => this.startGame(nft)}
                       >
                         <h3 class="Card-name">${nft.metadata.base.name}</h3>
                         <figure class="Card-media relic">
@@ -121,10 +130,19 @@ export default class StartRoom extends Component {
               `
             : html` <p center>No Relics in wallet or no wallet connected</p>
                 <div center>
-                  <button onClick=${() => this.props.onContinue()}>
+                  <button onClick=${() => this.startGame()}>
                     Start descent
                   </button>
                 </div>`}
+        `}
+        ${this.state.displayStage &&
+        html`
+          <div class="stage-start">
+            <div class="stage-start-content">
+              <h2>Stage 1</h2>
+              <h1>Limbo</h1>
+            </div>
+          </div>
         `}
       </article>
     `;
