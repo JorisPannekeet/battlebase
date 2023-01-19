@@ -36,6 +36,7 @@ import enableDragDrop from "./dragdrop.js";
 
 // Temporary hack to disabled sounds without touching game code.
 import realSfx from "./sounds.js";
+import { id } from "@ethersproject/hash";
 const sfx = {};
 Object.keys(realSfx).forEach((key) => {
   sfx[key] = () => null;
@@ -52,6 +53,7 @@ export default class App extends Component {
     this.state = { showStageName: false };
     this.game = {};
     this.overlayIndex = 11;
+    this.audio = new Audio();
 
     // Scope methods
     this.playCard = this.playCard.bind(this);
@@ -67,6 +69,7 @@ export default class App extends Component {
     this.checkRelicTrigger = this.checkRelicTrigger.bind(this);
     this.activateUltimate = this.activateUltimate.bind(this);
     this.isPlayerDead = this.isPlayerDead.bind(this);
+    this.audioController = this.audioController.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -346,14 +349,13 @@ stw.dealCards()`);
     });
   }
   handleMapMove(move) {
-    console.log("Made a move");
     this.toggleOverlay("#Map");
     this.setState({ didPickCard: false });
     this.game.enqueue({ type: "move", move });
 
     this.update(this.dealCards);
     const room = this.state.dungeon.graph[move.y][move.x].room;
-
+    this.audioController(room.type, "start");
     if (room.type === "monster") {
       const battleStartRelics = this.state.relics.filter(
         (item) => item.type === "battleStart"
@@ -383,6 +385,25 @@ stw.dealCards()`);
 
     return this.state.player.currentHealth < 1;
   }
+  audioController(room, trigger) {
+    this.audio.volume = 0.01;
+    if (trigger === "stop") {
+      this.audio.pause();
+    } else {
+      switch (room) {
+        case "start":
+          this.audio.src = require("./audio/menu.mp3").default;
+          this.audio.play();
+          break;
+        case "monster":
+          this.audio.src = require("./audio/battle.mp3").default;
+          this.audio.play();
+          break;
+        default:
+          this.audio.pause();
+      }
+    }
+  }
   render(props, state) {
     if (!state.player) return;
     const isDead = this.isPlayerDead();
@@ -392,6 +413,15 @@ stw.dealCards()`);
     const room = getCurrRoom(state);
     const noEnergy = !state.player.currentEnergy;
     const nfts = props.nfts;
+
+    if (
+      !didWinEntireGame &&
+      !didWinStage &&
+      didWin &&
+      room.type === "monster"
+    ) {
+      this.audioController(room.type, "stop");
+    }
 
     // There's a lot here because I did not want to split into too many files.
     return html`
@@ -407,6 +437,7 @@ stw.dealCards()`);
             onSelect=${this.selectHero}
             nfts=${nfts}
             selectRelic=${this.selectRelic}
+            audio=${this.audioController}
           />`
         }
         ${

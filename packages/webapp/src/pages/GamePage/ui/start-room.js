@@ -15,6 +15,9 @@ export default class StartRoom extends Component {
     };
     this.startGame = this.startGame.bind(this);
   }
+  componentDidMount() {
+    this.props.audio("start", "play");
+  }
 
   startGame(nft) {
     this.setState({ displayStage: true });
