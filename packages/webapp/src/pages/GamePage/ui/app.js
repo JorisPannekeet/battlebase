@@ -386,7 +386,8 @@ stw.dealCards()`);
     return this.state.player.currentHealth < 1;
   }
   audioController(room, trigger) {
-    this.audio.volume = 0.1;
+    this.audio.volume = 0.15;
+    this.audio.loop = true;
     if (trigger === "stop") {
       this.audio.pause();
     } else {
