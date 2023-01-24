@@ -234,17 +234,19 @@ stw.dealCards()`);
     sfx.startTurn();
     enableDragDrop(this.base, this.playCard);
 
-    room.monsters.map((monster, index) => {
-      if (monster.powers.poison >= 1) {
-        this.game.enqueue({ type: "applyPoison", target: monster, index });
-        this.update();
+    if (room.type === "monster") {
+      room.monsters.map((monster, index) => {
+        if (monster.powers.poison >= 1) {
+          this.game.enqueue({ type: "applyPoison", target: monster, index });
+          this.update();
+        }
+      });
+      if (this.state.player.powers.poison >= 1) {
+        setTimeout(() => {
+          this.game.enqueue({ type: "applyPoison", target: "player" });
+          this.update();
+        }, 1000);
       }
-    });
-    if (this.state.player.powers.poison >= 1) {
-      setTimeout(() => {
-        this.game.enqueue({ type: "applyPoison", target: "player" });
-        this.update();
-      }, 1000);
     }
   }
   toggleOverlay(el) {

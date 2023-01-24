@@ -48,8 +48,8 @@ export const weak = new Power({
 export const boost = new Power({
   type: "buff",
   name: "Boost",
-  description: "Next attack deals 8 additional damage",
-  use: (dmg) => dmg + 8,
+  description: "Next attack deals additional damage",
+  use: (stacks) => stacks,
 });
 
 export const poison = new Power({
@@ -57,6 +57,6 @@ export const poison = new Power({
   name: "Poison",
   description: "Poison, deals 1 damage x stack",
   target: "monster",
-  use: (stacks) => stacks,
+  use: (dmg, stacks) => dmg + stacks,
 });
-export default { regen, vulnerable, weak, boost };
+export default { regen, vulnerable, weak, boost, poison };

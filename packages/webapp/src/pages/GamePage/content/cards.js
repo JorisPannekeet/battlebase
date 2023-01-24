@@ -405,5 +405,107 @@ export default [
       this.description = "Apply 4 Poison to all enemies and 1 to yourself.";
     },
   },
+  {
+    name: "Antidote",
+    type: "skill",
+    energy: 1,
+    target: "player",
+    description: "Remove your Poison stacks.",
+    image: "placeholder.png",
+    damage: 0,
+    actions: [
+      {
+        type: "removePlayerPoison",
+      },
+    ],
+    upgrade() {
+      this.name = "Antidote+";
+      this.description = "Remove your Poison stacks. Gain 10 Block.";
+      this.block = 10;
+    },
+  },
+  {
+    name: "Afterburner",
+    type: "attack",
+    energy: 2,
+    target: "enemy",
+    description: "Deal 1 damage for every poison stack",
+    image: "strike.png",
+    actions: [
+      {
+        type: "dealDamageEqualToPoison",
+      },
+    ],
+    upgrade() {
+      this.upgraded = true;
+      this.name = "Afterburner+";
+      this.description =
+        "Deal 1 damage for every poison stack and gain 10 block";
+      this.block = 10;
+    },
+  },
+  {
+    name: "Toxic grenade",
+    type: "attack",
+    energy: 1,
+    target: "enemy",
+    description: "Apply 1 poison, 1 vulnerable and 1 weak",
+    image: "strike.png",
+    powers: {
+      weak: 1,
+      vulnerable: 1,
+      poison: 1,
+    },
+    upgrade() {
+      this.upgraded = true;
+      this.name = "Toxic grenade+";
+      this.description = "Apply 2 poison, 2 vulnerable and 2 weak";
+      this.powers = {
+        weak: 2,
+        vulnerable: 2,
+        poison: 2,
+      };
+    },
+  },
+  {
+    name: "Poison blade",
+    type: "attack",
+    energy: 3,
+    target: "enemy",
+    description: "Deal 10 damage and apply 2 poison",
+    image: "strike.png",
+    damage: 10,
+    powers: {
+      poison: 2,
+    },
+    upgrade() {
+      this.upgraded = true;
+      this.name = "Poison blade+";
+      this.description = "Deal 12 damage and apply 3 poison";
+      this.damage = 12;
+      this.powers = {
+        poison: 3,
+      };
+    },
+  },
+  {
+    name: "Steroid syringe",
+    type: "skill",
+    energy: 1,
+    target: "player",
+    description: "Your next attack deals 5 extra damage",
+    image: "strike.png",
+    powers: {
+      boost: 5,
+    },
+    upgrade() {
+      this.upgraded = true;
+      this.name = "Steroid syringe+";
+      this.description = "Your next attack deals 8 extra damage";
+      this.powers = {
+        boost: 8,
+      };
+    },
+  },
   // {name: 'Flex', energy: 0, type: 'skill', description: 'Gain 2 Strength.'},
 ];

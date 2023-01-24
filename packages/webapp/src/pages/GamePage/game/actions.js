@@ -269,7 +269,7 @@ function playCard(state, { card, target }) {
     let amount = card.damage;
     if (newState.player.powers.weak) amount = powers.weak.use(amount);
     if (newState.player.powers.boost) {
-      amount = powers.boost.use(amount);
+      amount = amount + newState.player.powers.boost;
       newState = produce(newState, (draft) => {
         draft.player.powers.boost = 0;
       });
@@ -343,6 +343,13 @@ const removePlayerDebuffs = (state) => {
   return produce(state, (draft) => {
     draft.player.powers.weak = 0;
     draft.player.powers.vulnerable = 0;
+    draft.player.powers.poison = 0;
+  });
+};
+
+const removePlayerPoison = (state) => {
+  return produce(state, (draft) => {
+    draft.player.powers.poison = 0;
   });
 };
 
@@ -433,11 +440,13 @@ function applyCardPowers(state, { card, target }) {
     });
   });
 }
-// applying poison to player
-function applyPlayerPoison(state, { amount }) {
-  console.log("tralalal");
+
+// applying poison state to player
+function applyPlayerPoison(state) {
   return produce(state, (draft) => {
-    draft.player.powers.poison = amount;
+    draft.player.powers.poison = draft.player.powers.poison
+      ? draft.player.powers.poison + 1
+      : 1;
   });
 }
 
@@ -664,6 +673,17 @@ function dealDamageEqualToWeak(state, { target }) {
     return draft;
   });
 }
+function dealDamageEqualToPoison(state, { target }) {
+  return produce(state, (draft) => {
+    getTargets(draft, target).forEach((t) => {
+      if (t.powers.poison) {
+        const amount = t.currentHealth - t.powers.poison;
+        t.currentHealth = amount;
+      }
+    });
+    return draft;
+  });
+}
 
 /**
  * Sets a single power on a specific target
@@ -754,6 +774,8 @@ const allActions = {
   triggerUltimate,
   applyPoison,
   applyPlayerPoison,
+  removePlayerPoison,
+  dealDamageEqualToPoison,
 };
 
 export default allActions;
