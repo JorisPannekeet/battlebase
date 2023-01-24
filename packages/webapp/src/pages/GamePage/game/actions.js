@@ -433,11 +433,33 @@ function applyCardPowers(state, { card, target }) {
     });
   });
 }
+// applying poison to player
+function applyPlayerPoison(state, { amount }) {
+  console.log("tralalal");
+  return produce(state, (draft) => {
+    draft.player.powers.poison = amount;
+  });
+}
+
+// Apply poison damage to target
+function applyPoison(state, { target, index }) {
+  if (target === "player") {
+    return removeHealth(state, {
+      target: `player`,
+      amount: state.player.powers.poison,
+    });
+  } else {
+    return removeHealth(state, {
+      target: `enemy${index}`,
+      amount: target.powers.poison,
+    });
+  }
+}
 
 // Helper to decrease all power stacks by one.
 function _decreasePowers(powers) {
   Object.entries(powers).forEach(([name, stacks]) => {
-    if (stacks > 0) powers[name] = stacks - 1;
+    if (stacks > 0 && name !== "poison") powers[name] = stacks - 1;
   });
 }
 
@@ -545,7 +567,7 @@ function takeMonsterTurn(state, monsterIndex) {
       const dodgeRelics = state.relics.filter(
         (item) => item.action === "addDodge%"
       );
-      console.log({ rel: state.relics });
+
       dodgeRelics.map((relic) => {
         console.log("Triggering dodge relic: ", relic);
         const calc = Math.random() * 100;
@@ -730,6 +752,8 @@ const allActions = {
   selectRelic,
   useRelic,
   triggerUltimate,
+  applyPoison,
+  applyPlayerPoison,
 };
 
 export default allActions;

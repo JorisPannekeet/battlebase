@@ -5,12 +5,10 @@ import {
 } from "../web_modules/htm/preact/standalone.module.js";
 import gsap from "./animations.js";
 import { Flip } from "../web_modules/gsap/Flip.js";
-// @ts-ignore
-//import Flip from 'https://slaytheweb-assets.netlify.app/gsap/Flip.js'
 
 // Game logic
 import createNewGame from "../game/new-game.js";
-import actions from "../game/actions.js";
+
 import { createCard, getCardRewards } from "../game/cards.js";
 import {
   getCurrRoom,
@@ -36,7 +34,7 @@ import enableDragDrop from "./dragdrop.js";
 
 // Temporary hack to disabled sounds without touching game code.
 import realSfx from "./sounds.js";
-import { id } from "@ethersproject/hash";
+
 const sfx = {};
 Object.keys(realSfx).forEach((key) => {
   sfx[key] = () => null;
@@ -230,9 +228,24 @@ stw.dealCards()`);
   }
   // Animate the cards in and make sure any new cards are draggable.
   dealCards() {
+    const room = getCurrRoom(this.state);
+
     gsap.effects.dealCards(".Hand .Card");
     sfx.startTurn();
     enableDragDrop(this.base, this.playCard);
+
+    room.monsters.map((monster, index) => {
+      if (monster.powers.poison >= 1) {
+        this.game.enqueue({ type: "applyPoison", target: monster, index });
+        this.update();
+      }
+    });
+    if (this.state.player.powers.poison >= 1) {
+      setTimeout(() => {
+        this.game.enqueue({ type: "applyPoison", target: "player" });
+        this.update();
+      }, 1000);
+    }
   }
   toggleOverlay(el) {
     if (typeof el === "string") el = this.base.querySelector(el);

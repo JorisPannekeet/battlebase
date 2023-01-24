@@ -131,7 +131,7 @@ export function getCardRewards(amount = 3, hero) {
   // Select deck depending on hero
   const deckCards = decks[hero.deckname];
 
-  // filter out boring cards
+  // filter out boring cards, TODO: change to not in hero.starterdeck
   const niceCards = deckCards
     .filter((card) => card.name !== "Strike")
     .filter((card) => card.name !== "Defend");

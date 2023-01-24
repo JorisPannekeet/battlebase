@@ -52,4 +52,11 @@ export const boost = new Power({
   use: (dmg) => dmg + 8,
 });
 
+export const poison = new Power({
+  type: "debuff",
+  name: "Poison",
+  description: "Poison, deals 1 damage x stack",
+  target: "monster",
+  use: (stacks) => stacks,
+});
 export default { regen, vulnerable, weak, boost };

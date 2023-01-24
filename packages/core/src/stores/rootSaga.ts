@@ -13,7 +13,6 @@ import { socketForks } from "./socket/saga";
 import { accountFork } from "./account/saga";
 import { amountForks } from "./amount/saga";
 import { tokenPricesSaga } from "./tokenPrices/saga";
-import { notifyForks } from "./notify/saga";
 import { walletLayer2NFTFork } from "./walletLayer2NFT/saga";
 import { layer1ActionHistoryForks } from "./localStore/layer1Store/saga";
 import { investForks } from "./invest";
@@ -71,7 +70,6 @@ function* mySaga() {
     ...socketForks,
     ...accountFork,
     ...amountForks,
-    ...notifyForks,
     ...layer1ActionHistoryForks,
   ]);
 }

@@ -7,6 +7,7 @@ import {
   vulnerable as vulnerablePower,
   regen as regenPower,
   boost as boostpower,
+  poison as poisonpower,
 } from "../game/powers.js";
 
 export const Player = (props) => {
@@ -128,6 +129,7 @@ const Powers = (props) => {
       <${Power} amount=${props.powers.regen} power=${regenPower} />
       <${Power} amount=${props.powers.weak} power=${weakPower} />
       <${Power} amount=${props.powers.boost} power=${boostpower} />
+      <${Power} amount=${props.powers.poison} power=${poisonpower} />
     </div>
   `;
 };

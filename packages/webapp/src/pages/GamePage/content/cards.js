@@ -359,5 +359,51 @@ export default [
       this.block = 5;
     },
   },
+  {
+    name: "Poison dart",
+    type: "attack",
+    energy: 1,
+    target: "enemy",
+    damage: 3,
+    description: "Deal 3 Damage and apply 1 Poison.",
+    image: "strike.png",
+    powers: {
+      poison: 1,
+    },
+    upgrade() {
+      this.damage = 6;
+      this.upgraded = true;
+      this.name = "Poison dart+";
+      this.powers.poison = 1;
+      this.description = "Deal 6 Damage and apply 1 poison.";
+    },
+  },
+  {
+    name: "Poison mist",
+    type: "attack",
+    energy: 2,
+    target: "allEnemies",
+    damage: 0,
+    description: "Apply 3 Poison to all enemies and 1 to yourself.",
+    image: "strike.png",
+    powers: {
+      poison: 3,
+    },
+    actions: [
+      {
+        type: "applyPlayerPoison",
+        parameter: {
+          amount: 1,
+        },
+      },
+    ],
+    upgrade() {
+      this.damage = 0;
+      this.upgraded = true;
+      this.name = "Poison mist+";
+      this.powers.poison = 4;
+      this.description = "Apply 4 Poison to all enemies and 1 to yourself.";
+    },
+  },
   // {name: 'Flex', energy: 0, type: 'skill', description: 'Gain 2 Strength.'},
 ];

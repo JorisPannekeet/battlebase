@@ -1,4 +1,4 @@
 import { defaultDeck } from "./default";
-import { testDeck } from "./testdeck";
+import { poison } from "./poison";
 
-export const decks = { defaultDeck, testDeck };
+export const decks = { defaultDeck, poison };
