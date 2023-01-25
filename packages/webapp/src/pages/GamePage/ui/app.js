@@ -141,7 +141,6 @@ stw.dealCards()`);
       });
     }
     if (card.block) {
-      console.log("played block card");
       const image = require("./images/skills/block2.gif").default;
       const skillEl = document.getElementById("skill");
       skillEl.src = image;
@@ -193,6 +192,32 @@ stw.dealCards()`);
     title.innerText = "Enemy Turn";
     setTimeout(() => {
       title.innerText = "";
+
+      // Apply poison damage
+      room.monsters.map((monster, index) => {
+        if (monster.powers.poison >= 1) {
+          this.game.enqueue({ type: "applyPoison", target: monster, index });
+          this.update();
+          const image = require("./images/skills/poison-animation.gif").default;
+          const skillEl = document
+            .querySelector(`[data-monster='${index}']`)
+            .querySelector("#skill");
+          skillEl.src = image;
+          setTimeout(() => {
+            skillEl.src = "";
+          }, 1600);
+        }
+      });
+      if (this.state.player.powers.poison >= 1) {
+        this.game.enqueue({ type: "applyPoison", target: "player" });
+        this.update();
+        const image = require("./images/skills/poison-animation.gif").default;
+        const skillEl = document.getElementById("skill");
+        skillEl.src = image;
+        setTimeout(() => {
+          skillEl.src = "";
+        }, 1600);
+      }
     }, 800);
 
     setTimeout(() => {
@@ -228,26 +253,9 @@ stw.dealCards()`);
   }
   // Animate the cards in and make sure any new cards are draggable.
   dealCards() {
-    const room = getCurrRoom(this.state);
-
     gsap.effects.dealCards(".Hand .Card");
     sfx.startTurn();
     enableDragDrop(this.base, this.playCard);
-
-    if (room.type === "monster") {
-      room.monsters.map((monster, index) => {
-        if (monster.powers.poison >= 1) {
-          this.game.enqueue({ type: "applyPoison", target: monster, index });
-          this.update();
-        }
-      });
-      if (this.state.player.powers.poison >= 1) {
-        setTimeout(() => {
-          this.game.enqueue({ type: "applyPoison", target: "player" });
-          this.update();
-        }, 1000);
-      }
-    }
   }
   toggleOverlay(el) {
     if (typeof el === "string") el = this.base.querySelector(el);

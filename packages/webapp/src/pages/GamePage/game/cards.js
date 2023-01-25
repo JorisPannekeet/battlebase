@@ -87,6 +87,7 @@ export class Card {
  * @param {string} name
  * @returns {CARD}
  */
+// TODO: replace cards with decks[hero.deckname]
 function findCard(name) {
   return cards.find((card) => card.name === name);
 }

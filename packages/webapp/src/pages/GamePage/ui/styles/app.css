@@ -570,6 +570,9 @@ table {
     top: auto !important;
     right: auto !important;
   }
+  .Hand .Cards .Card {
+    position: absolute;
+  }
 }
 .hero-card {
   position: relative;
@@ -791,7 +794,7 @@ table {
 #skill {
   position: absolute;
   width: 70%;
-  top: 50%;
+  top: 30%;
   left: 20%;
 }
 .leaderboard {

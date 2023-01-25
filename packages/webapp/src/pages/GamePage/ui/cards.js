@@ -10,13 +10,17 @@ export default class Cards extends Component {
     const cards = props.gameState[props.type];
     return html`
       <div class="Cards">
-        ${cards.map((card) => Card(card, props.gameState))}
+        ${cards.map((card, index) => Card(card, props.gameState, index))}
       </div>
     `;
   }
 }
 
-export function Card(card, gameState) {
+export function Card(card, gameState, index) {
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   const isDisabled = !canPlay(card, gameState);
   const atk = require("./images/cards/attack.png").default;
   const def = require("./images/cards/defend_card.png").default;
@@ -33,7 +37,9 @@ export function Card(card, gameState) {
     disabled=${isDisabled}
     style="background: url("${
       card.type === "attack" ? atk : def
-    }");background-size:cover;"
+    }");background-size:cover;${
+    isMobile && `left:calc(0px + 70px * ${index});`
+  }"
   >
   <h3 class="Card-name">${card.name}</h3>
   <p class="Card-description">${card.description}</p>

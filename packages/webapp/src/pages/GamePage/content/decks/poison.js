@@ -23,8 +23,9 @@ export const poison = [
     type: "attack",
     energy: 2,
     target: "allEnemies",
-    damage: 0,
-    description: "Apply 3 Poison to all enemies and 1 to yourself.",
+    damage: 6,
+    description:
+      "Deal 6 damage and 3 Poison to all enemies but you get 1 poison.",
     image: "strike.png",
     powers: {
       poison: 3,
@@ -38,11 +39,12 @@ export const poison = [
       },
     ],
     upgrade() {
-      this.damage = 0;
+      this.damage = 9;
       this.upgraded = true;
       this.name = "Poison mist+";
       this.powers.poison = 4;
-      this.description = "Apply 4 Poison to all enemies and 1 to yourself.";
+      this.description =
+        "Deal 9 damage and 4 Poison to all enemies but you get 1 poison.";
     },
   },
   {
