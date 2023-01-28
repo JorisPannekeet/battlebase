@@ -86,9 +86,9 @@ const relics = [
     address: "free", // FREE
     matchingData: "Rotting fish",
     type: "battleStart",
-    relicDescription: "Apply 2 poison to all enemies each encounter.",
+    relicDescription: "Apply 1 poison to all enemies each encounter.",
     action: "addPoison",
-    value: 2,
+    value: 1,
     id: null,
   },
 ];
