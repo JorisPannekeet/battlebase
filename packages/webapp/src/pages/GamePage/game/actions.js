@@ -233,6 +233,8 @@ function useRelic(state, { relic }) {
       });
     case "addEnergy":
       return addEnergyToPlayer(state);
+    case "addGold":
+      return addGold(state, { gold: relic.value });
     default:
       return;
   }

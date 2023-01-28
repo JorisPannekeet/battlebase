@@ -113,6 +113,15 @@ export const Game = () => {
       },
       tokenAddress: "free",
     },
+    {
+      metadata: {
+        base: { name: "Pocket money" },
+        imageSize: {
+          original: "pouch.png",
+        },
+      },
+      tokenAddress: "free",
+    },
   ];
   const allowedNFTs = [];
   allowedCreators.forEach((filterValue) => {

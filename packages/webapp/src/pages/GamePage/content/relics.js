@@ -91,5 +91,14 @@ const relics = [
     value: 1,
     id: null,
   },
+  {
+    address: "free", // FREE
+    matchingData: "Pocket money",
+    type: "start",
+    relicDescription: "Start with 10 gold.",
+    action: "addGold",
+    value: 10,
+    id: null,
+  },
 ];
 export default relics;
