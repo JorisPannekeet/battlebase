@@ -34,6 +34,7 @@ import enableDragDrop from "./dragdrop.js";
 
 // Temporary hack to disabled sounds without touching game code.
 import realSfx from "./sounds.js";
+import { ThirdPlaceIcon } from "@loopring-web/common-resources";
 
 const sfx = {};
 Object.keys(realSfx).forEach((key) => {
@@ -284,6 +285,12 @@ stw.dealCards()`);
     keymap[key] && keymap[key]();
   }
   handlePlayerReward(choice, card) {
+    const gold = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+    // add gold
+    this.game.enqueue({ type: "addGold", gold });
+    this.setState({ didGetGold: gold });
+    this.update();
+    // add card
     this.game.enqueue({ type: "addCardToDeck", card });
     this.setState({ didPickCard: card });
     this.update();
@@ -373,7 +380,7 @@ stw.dealCards()`);
   }
   handleMapMove(move) {
     this.toggleOverlay("#Map");
-    this.setState({ didPickCard: false });
+    this.setState({ didPickCard: false, didGetGold: undefined });
     this.game.enqueue({ type: "move", move });
 
     this.update(this.dealCards);
@@ -565,7 +572,8 @@ stw.dealCards()`);
                   />
                 `
               : html`<p center>
-                  Added <strong>${state.didPickCard.name}</strong> to your deck.
+                  Added <strong>${state.didPickCard.name} </strong> to your deck
+                  and ${state.didGetGold} Gold to your greedy ass.
                 </p>`}
             <p center>
               <button onclick=${() => this.goToNextRoom()}>
@@ -660,6 +668,11 @@ stw.dealCards()`);
             </span>
           `;
         })}
+        <div class="gold-ui">
+          <img src=${require(`./images/gold.png`).default} />${
+      state.player.gold
+    }
+        </div>
         </div>
 
 				

@@ -104,6 +104,15 @@ export const Game = () => {
       },
       tokenAddress: "free",
     },
+    {
+      metadata: {
+        base: { name: "Rotting fish" },
+        imageSize: {
+          original: "rotting-fish.png",
+        },
+      },
+      tokenAddress: "free",
+    },
   ];
   const allowedNFTs = [];
   allowedCreators.forEach((filterValue) => {

@@ -951,3 +951,7 @@ table {
 .stage-start-content {
   margin: auto;
 }
+.gold-ui {
+  margin-left: 20px;
+  display: inline-block;
+}

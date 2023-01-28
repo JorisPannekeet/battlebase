@@ -58,6 +58,7 @@ function createNewGame() {
       powers: {},
       ultimateUsed: false,
       usedRelics: [],
+      gold: 0,
     },
     hero: heroes[0],
     relics: [],
@@ -206,6 +207,14 @@ function useRelic(state, { relic }) {
           draft.dungeon.x
         ].room.monsters.forEach((monster) => {
           monster.powers["vulnerable"] = relic.value;
+        });
+      });
+    case "addPoison":
+      return produce(state, (draft) => {
+        draft.dungeon.graph[draft.dungeon.y][
+          draft.dungeon.x
+        ].room.monsters.forEach((monster) => {
+          monster.powers["poison"] = relic.value;
         });
       });
     case "addCard":
@@ -380,10 +389,15 @@ const triggerUltimate = (state, { hero }) => {
  * @returns {Object} - new state
  */
 const removeHealth = (state, { target, amount }) => {
+  const originalAmount = amount;
   return produce(state, (draft) => {
     getTargets(draft, target).forEach((t) => {
-      if (t.powers.vulnerable) amount = powers.vulnerable.use(amount);
-      let amountAfterBlock = t.block - amount;
+      amount = originalAmount;
+      if (t.powers.vulnerable && t.powers.vulnerable !== undefined)
+        amount = powers.vulnerable.use(amount);
+
+      let amountAfterBlock = t.block ? t.block - amount : 0 - amount;
+      console.log({ amount, amountAfterBlock });
       if (amountAfterBlock < 0) {
         t.block = 0;
         t.currentHealth = t.currentHealth + amountAfterBlock;
@@ -631,6 +645,11 @@ function addCardToDeck(state, { card }) {
   });
 }
 
+function addGold(state, { gold }) {
+  return produce(state, (draft) => {
+    draft.player.gold += gold;
+  });
+}
 // Records a move on the map.
 function move(state, { move }) {
   let nextState = reshuffleAndDraw(state);
@@ -792,6 +811,7 @@ const allActions = {
   removePlayerPoison,
   dealDamageEqualToPoison,
   multiplyPoisonStack,
+  addGold,
 };
 
 export default allActions;
