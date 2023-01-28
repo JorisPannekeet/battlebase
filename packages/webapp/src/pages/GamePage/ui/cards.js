@@ -41,6 +41,9 @@ export function Card(card, gameState, index) {
     isMobile && `left:calc(0px + 70px * ${index});`
   }"
   >
+  <p class="Card-energy EnergyBadge">
+  <span>${card.energy}</span>
+</p>
   <h3 class="Card-name">${card.name}</h3>
   <p class="Card-description">${card.description}</p>
 

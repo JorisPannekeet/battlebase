@@ -509,5 +509,34 @@ export default [
       };
     },
   },
+  {
+    name: "Radiation blast",
+    type: "attack",
+    energy: 2,
+    target: "enemy",
+    description: "Double the poison stacks of an enemy",
+    image: "strike.png",
+    actions: [
+      {
+        type: "multiplyPoisonStack",
+        parameter: {
+          multiplier: 2,
+        },
+      },
+    ],
+    upgrade() {
+      this.upgraded = true;
+      this.name = "Radiation blast+";
+      this.description = "Triple the poison stacks of an enemy";
+      this.actions = [
+        {
+          type: "multiplyPoisonStack",
+          parameter: {
+            multiplier: 3,
+          },
+        },
+      ];
+    },
+  },
   // {name: 'Flex', energy: 0, type: 'skill', description: 'Gain 2 Strength.'},
 ];

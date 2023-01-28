@@ -458,11 +458,26 @@ function applyPoison(state, { target, index }) {
       amount: state.player.powers.poison,
     });
   } else {
-    return removeHealth(state, {
-      target: `enemy${index}`,
-      amount: target.powers.poison,
+    return produce(state, (draft) => {
+      getTargets(draft, `enemy${index}`).forEach((t) => {
+        if (t.powers.poison && t.currentHealth > 0) {
+          t.currentHealth = t.currentHealth - t.powers.poison;
+        }
+      });
+      return draft;
     });
   }
+}
+
+function multiplyPoisonStack(state, { target, multiplier }) {
+  return produce(state, (draft) => {
+    getTargets(draft, target).forEach((t) => {
+      if (t.powers.poison) {
+        t.powers.poison = t.powers.poison * multiplier;
+      }
+    });
+    return draft;
+  });
 }
 
 // Helper to decrease all power stacks by one.
@@ -776,6 +791,7 @@ const allActions = {
   applyPlayerPoison,
   removePlayerPoison,
   dealDamageEqualToPoison,
+  multiplyPoisonStack,
 };
 
 export default allActions;
