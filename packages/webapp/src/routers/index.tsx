@@ -19,6 +19,7 @@ import {
 } from "@loopring-web/component-lib";
 import { NFTPage } from "../pages/NFTPage";
 import { Game } from "../pages/GamePage";
+import { useGetAssets } from "../pages/AssetPage/AssetPanel/hook";
 import { Footer } from "../layouts/footer";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
@@ -62,6 +63,26 @@ const ContentWrap = ({
           </Box>
         </Container>
       )}
+    </>
+  );
+};
+
+const WrapModal = () => {
+  const { depositProps } = useDeposit(false);
+  const { assetsRawData } = useGetAssets();
+  const location = useLocation();
+
+  return (
+    <>
+      <ModalGroup
+        assetsRawData={assetsRawData}
+        depositProps={depositProps}
+        isLayer1Only={
+          /(guardian)|(depositto)/gi.test(location.pathname ?? "")
+            ? true
+            : false
+        }
+      />
     </>
   );
 };
@@ -152,6 +173,7 @@ const RouterView = ({ state }: { state: keyof typeof SagaStatus }) => {
           )}
         />
       </Switch>
+      {state === SagaStatus.DONE && <WrapModal />}
 
       {searchParams && searchParams.has("nofooter") ? <></> : <Footer />}
     </>
