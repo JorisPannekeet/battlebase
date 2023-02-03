@@ -22,11 +22,9 @@ export function Card(card, gameState, index) {
       navigator.userAgent
     );
   const isDisabled = !canPlay(card, gameState);
-  const atk = require("./images/cards/attack.png").default;
-  const def = require("./images/cards/defend_card.png").default;
   const image = card.image
-    ? require(`./images/cards/${card.image}`).default
-    : require("./images/cards/placeholder.png").default;
+    ? require(`./images/cards/allCards/${card.image}`).default
+    : require("./images/cards/allCards/placeholder.png").default;
 
   return html` <article
     class="Card"
@@ -35,17 +33,19 @@ export function Card(card, gameState, index) {
     key=${card.id}
     data-id=${card.id}
     disabled=${isDisabled}
-    style="background: url("${
-      card.type === "attack" ? atk : def
-    }");background-size:cover;${
+    style="background: url("${image}");background-size:cover;${
     isMobile && `left:calc(0px + 70px * ${index});`
   }"
   >
-  <p class="Card-energy EnergyBadge">
-  <span>${card.energy}</span>
-</p>
-  <h3 class="Card-name">${card.name}</h3>
-  <p class="Card-description">${card.description}</p>
+  ${
+    !card.image &&
+    html` <p class="Card-energy EnergyBadge">
+        <span>${card.energy}</span>
+      </p>
+      <h3 class="Card-name">${card.name}</h3>
+      <p class="Card-description">${card.description}</p>`
+  }
+
 
   </article>`;
   return html`

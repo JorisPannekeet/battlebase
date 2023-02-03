@@ -8,7 +8,7 @@ export const defaultDeck = [
     target: "enemy",
     damage: 6,
     description: "Deal 6 Damage.",
-    image: "strike.png",
+    image: "Strike.png",
     upgrade() {
       this.damage = 9;
       this.upgraded = true;
@@ -22,7 +22,7 @@ export const defaultDeck = [
     energy: 1,
     block: 5,
     target: "player",
-    image: "defend.png",
+    image: "Defend.png",
     description: "Gain 5 Block.",
     upgrade() {
       this.block = 8;
@@ -37,7 +37,7 @@ export const defaultDeck = [
     energy: 2,
     damage: 8,
     target: "enemy",
-    image: "bash.png",
+    image: "Bash.png",
     powers: {
       vulnerable: 2,
     },
@@ -64,7 +64,7 @@ export const defaultDeck = [
     ],
     description:
       "Can only be played if every card in your hand is an Attack. Deal 14 damage.",
-    image: "placeholder.png",
+    image: "Clashstrike.png",
     upgrade() {
       this.name = "Clash+";
       this.damage = 17;
@@ -79,7 +79,7 @@ export const defaultDeck = [
     damage: 8,
     target: "allEnemies",
     description: "Deal 8 damage to all enemies.",
-    image: "placeholder.png",
+    image: "Cleave.png",
     upgrade() {
       this.damage = 11;
       this.upgraded = true;
@@ -95,7 +95,7 @@ export const defaultDeck = [
     block: 5,
     target: "enemy",
     description: "Deal 5 damage. Gain 5 Block.",
-    image: "placeholder.png",
+    image: "",
     upgrade() {
       this.damage = 7;
       this.block = 7;
@@ -114,7 +114,7 @@ export const defaultDeck = [
       weak: 1,
     },
     description: "Deal 7 Damage. Apply 1 Weak.",
-    image: "placeholder.png",
+    image: "SuckerPunch.png",
     upgrade() {
       this.damage = 8;
       this.upgraded = true;
@@ -133,7 +133,7 @@ export const defaultDeck = [
       vulnerable: 1,
     },
     description: "Deal 4 Damage. Apply 1 Vulnerable to all enemies.",
-    image: "placeholder.png",
+    image: "thundershock.png",
     upgrade() {
       this.name = "Thunderclap+";
       this.damage = 6;
@@ -147,7 +147,7 @@ export const defaultDeck = [
     target: "player",
     description:
       "Gain 5 Regen. Can only be played if your health is below 50%.",
-    image: "placeholder.png",
+    image: "Flourish.png",
     powers: {
       regen: 5,
     },
@@ -173,7 +173,7 @@ export const defaultDeck = [
     energy: 1,
     target: "player",
     description: "Gain 1 Health. Draw 2 Cards if your health is below 50%.",
-    image: "placeholder.png",
+    image: "SummerofSam.png",
     actions: [
       {
         type: "addHealth",
@@ -204,12 +204,12 @@ export const defaultDeck = [
     },
   },
   {
-    name: "Body Slam",
+    name: "Counter Slam",
     energy: 1,
     type: "attack",
     target: "enemy",
     description: "Deal Damage equal to your Block.",
-    image: "placeholder.png",
+    image: "CounterSlam.png",
     actions: [
       {
         type: "dealDamageEqualToBlock",
@@ -226,7 +226,7 @@ export const defaultDeck = [
     energy: 3,
     target: "allEnemies",
     description: "Deal 2 Damage to all enemies and suck it into life.",
-    image: "placeholder.png",
+    image: "Succube.png",
     damage: 2,
     actions: [
       {
@@ -245,7 +245,7 @@ export const defaultDeck = [
     energy: 1,
     target: "allEnemies",
     description: "Drain 3 Health into Weakness and Vulnerability.",
-    image: "placeholder.png",
+    image: "",
     damage: 0,
     powers: {
       weak: 3,
@@ -283,7 +283,7 @@ export const defaultDeck = [
     target: "enemy",
     description:
       "Deal Damage equal to target's Vulnerable and Weak and remove the debuffs.",
-    image: "placeholder.png",
+    image: "",
     actions: [
       {
         type: "dealDamageEqualToWeak",
@@ -326,7 +326,7 @@ export const defaultDeck = [
     energy: 2,
     target: "player",
     description: "Remove your Weaknesses and Vulnerabilities.",
-    image: "placeholder.png",
+    image: "",
     damage: 0,
     actions: [
       {
@@ -346,7 +346,7 @@ export const defaultDeck = [
     energy: 0,
     target: "player",
     description: "Gain 1 energy point",
-    image: "placeholder.png",
+    image: "",
     damage: 0,
     actions: [
       {

@@ -6,7 +6,7 @@ export const poison = [
     target: "enemy",
     damage: 3,
     description: "Deal 3 Damage and apply 1 Poison.",
-    image: "strike.png",
+    image: "PoisonDart.png",
     powers: {
       poison: 1,
     },
@@ -26,7 +26,7 @@ export const poison = [
     damage: 6,
     description:
       "Deal 6 damage and 3 Poison to all enemies but you get 1 poison.",
-    image: "strike.png",
+    image: "PoisonMist.png",
     powers: {
       poison: 3,
     },
@@ -53,7 +53,7 @@ export const poison = [
     energy: 1,
     target: "player",
     description: "Remove your Poison stacks.",
-    image: "placeholder.png",
+    image: "Antidote.png",
     powers: {
       poison: 0,
     },
@@ -74,7 +74,7 @@ export const poison = [
     energy: 2,
     target: "enemy",
     description: "Deal 1 damage for every poison stack",
-    image: "strike.png",
+    image: "Afterburner.png",
     actions: [
       {
         type: "dealDamageEqualToPoison",
@@ -94,7 +94,7 @@ export const poison = [
     energy: 2,
     target: "enemy",
     description: "Double the poison stacks of an enemy",
-    image: "strike.png",
+    image: "",
     actions: [
       {
         type: "multiplyPoisonStack",
@@ -123,7 +123,7 @@ export const poison = [
     energy: 1,
     target: "enemy",
     description: "Apply 1 poison, 1 vulnerable and 1 weak",
-    image: "strike.png",
+    image: "ToxicGrenade.png",
     powers: {
       weak: 1,
       vulnerable: 1,
@@ -146,7 +146,7 @@ export const poison = [
     energy: 1,
     target: "player",
     description: "Your next attack deals 5 extra damage",
-    image: "strike.png",
+    image: "",
     powers: {
       boost: 5,
     },
@@ -165,7 +165,7 @@ export const poison = [
     energy: 3,
     target: "enemy",
     description: "Deal 10 damage and apply 2 poison",
-    image: "strike.png",
+    image: "",
     damage: 10,
     powers: {
       poison: 2,
@@ -186,7 +186,7 @@ export const poison = [
     energy: 2,
     target: "player",
     description: "Remove your Weaknesses and Vulnerabilities.",
-    image: "placeholder.png",
+    image: "",
     damage: 0,
     actions: [
       {
@@ -206,7 +206,7 @@ export const poison = [
     energy: 0,
     target: "player",
     description: "Gain 1 energy point",
-    image: "placeholder.png",
+    image: "",
     damage: 0,
     actions: [
       {
@@ -226,7 +226,7 @@ export const poison = [
     target: "player",
     description:
       "Gain 5 Regen. Can only be played if your health is below 50%.",
-    image: "placeholder.png",
+    image: "Flourish.png",
     powers: {
       regen: 5,
     },
@@ -252,7 +252,7 @@ export const poison = [
     energy: 1,
     block: 5,
     target: "player",
-    image: "defend.png",
+    image: "Defend.png",
     description: "Gain 5 Block.",
     upgrade() {
       this.block = 8;
