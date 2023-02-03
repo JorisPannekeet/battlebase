@@ -23,7 +23,7 @@ export default class Decks extends Component {
     return html`
       <article class="Splash Splash--fadein">
         <h1 style="margin-top:8vh">Decks</h1>
-        <article class="Splash">
+        <article>
           <p><a onclick=${props.back} class="Button">Back</a></p>
           <div class="decks">
             ${deckNames.map(
