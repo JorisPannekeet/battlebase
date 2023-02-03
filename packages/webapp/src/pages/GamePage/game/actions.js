@@ -7,6 +7,7 @@ import { dungeonWithMap } from "../content/dungeon-encounters.js";
 import { conditionsAreValid } from "./conditions.js";
 import { heroes } from "../content/heroes.js";
 import relics from "../content/relics";
+import { a } from "@react-spring/web";
 
 // Without this, immer.js will throw an error if our `state` is modified outside of an action.
 // While in theory a good idea, we're not there yet. It is a useful way to spot modifications
@@ -456,6 +457,13 @@ function applyCardPowers(state, { card, target }) {
     });
   });
 }
+function addPlayerCharge(state, { amount }) {
+  return produce(state, (draft) => {
+    draft.player.powers.charge = draft.player.powers.charge
+      ? draft.player.powers.charge + amount
+      : amount;
+  });
+}
 
 // applying poison state to player
 function applyPlayerPoison(state) {
@@ -499,7 +507,8 @@ function multiplyPoisonStack(state, { target, multiplier }) {
 // Helper to decrease all power stacks by one.
 function _decreasePowers(powers) {
   Object.entries(powers).forEach(([name, stacks]) => {
-    if (stacks > 0 && name !== "poison") powers[name] = stacks - 1;
+    if (stacks > 0 && name !== "poison" && name !== "charge")
+      powers[name] = stacks - 1;
   });
 }
 
@@ -720,7 +729,34 @@ function dealDamageEqualToPoison(state, { target }) {
     return draft;
   });
 }
+function dealDamageEqualToCharge(state, { target, multiplier, allTargets }) {
+  if (allTargets) {
+    target = "allEnemies";
+  }
+  return produce(state, (draft) => {
+    getTargets(draft, target).forEach((t) => {
+      if (state.player.powers.charge) {
+        const damage =
+          multiplier > 0
+            ? state.player.powers.charge * multiplier
+            : state.player.powers.charge;
+        const amount = t.currentHealth - damage;
+        t.currentHealth = amount;
+        draft.player.powers.charge = 0;
+      }
+    });
+    return draft;
+  });
+  // return produce(newState, (draft) => {
+  //   resetCharge(draft);
+  // });
+}
 
+function resetCharge(state) {
+  return produce(state, (draft) => {
+    draft.player.power.charge = 0;
+  });
+}
 /**
  * Sets a single power on a specific target
  * @param {State} state
@@ -814,6 +850,8 @@ const allActions = {
   dealDamageEqualToPoison,
   multiplyPoisonStack,
   addGold,
+  addPlayerCharge,
+  dealDamageEqualToCharge,
 };
 
 export default allActions;

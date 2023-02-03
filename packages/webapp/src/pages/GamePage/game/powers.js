@@ -59,4 +59,11 @@ export const poison = new Power({
   target: "monster",
   use: (dmg, stacks) => dmg + stacks,
 });
-export default { regen, vulnerable, weak, boost, poison };
+
+export const charge = new Power({
+  type: "buff",
+  name: "Charge",
+  description: "Can be discharged to boost certain cards",
+  use: (stacks) => stacks,
+});
+export default { regen, vulnerable, weak, boost, poison, charge };
