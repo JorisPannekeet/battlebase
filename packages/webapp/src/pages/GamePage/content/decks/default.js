@@ -95,7 +95,7 @@ export const defaultDeck = [
     block: 5,
     target: "enemy",
     description: "Deal 5 damage. Gain 5 Block.",
-    image: "",
+    image: "ironFocus.png",
     upgrade() {
       this.damage = 7;
       this.block = 7;
@@ -283,7 +283,7 @@ export const defaultDeck = [
     target: "enemy",
     description:
       "Deal Damage equal to target's Vulnerable and Weak and remove the debuffs.",
-    image: "",
+    image: "voodooEducation.png",
     actions: [
       {
         type: "dealDamageEqualToWeak",
@@ -326,7 +326,7 @@ export const defaultDeck = [
     energy: 2,
     target: "player",
     description: "Remove your Weaknesses and Vulnerabilities.",
-    image: "",
+    image: "ritualRain.png",
     damage: 0,
     actions: [
       {
@@ -346,7 +346,7 @@ export const defaultDeck = [
     energy: 0,
     target: "player",
     description: "Gain 1 energy point",
-    image: "",
+    image: "MaskOfTheFaceless.png",
     damage: 0,
     actions: [
       {

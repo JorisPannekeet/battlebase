@@ -146,7 +146,7 @@ export const poison = [
     energy: 1,
     target: "player",
     description: "Your next attack deals 5 extra damage",
-    image: "",
+    image: "SteroidSyringe.png",
     powers: {
       boost: 5,
     },
@@ -165,7 +165,7 @@ export const poison = [
     energy: 3,
     target: "enemy",
     description: "Deal 10 damage and apply 2 poison",
-    image: "",
+    image: "PoisonBlade.png",
     damage: 10,
     powers: {
       poison: 2,
@@ -186,7 +186,7 @@ export const poison = [
     energy: 2,
     target: "player",
     description: "Remove your Weaknesses and Vulnerabilities.",
-    image: "",
+    image: "ritualRain.png",
     damage: 0,
     actions: [
       {
@@ -206,7 +206,7 @@ export const poison = [
     energy: 0,
     target: "player",
     description: "Gain 1 energy point",
-    image: "",
+    image: "MaskOfTheFaceless.png",
     damage: 0,
     actions: [
       {
