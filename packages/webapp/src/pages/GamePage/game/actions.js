@@ -331,6 +331,7 @@ export function useCardActions(state, { target, card }) {
  * @returns {State} new state
  */
 function addHealth(state, { target, amount }) {
+  console.log({ target, amount });
   return produce(state, (draft) => {
     const targets = getTargets(draft, target);
     targets.forEach((t) => {
@@ -338,7 +339,15 @@ function addHealth(state, { target, amount }) {
     });
   });
 }
-
+function addPlayerHealth(state, { amount }) {
+  return produce(state, (draft) => {
+    draft.player.currentHealth = clamp(
+      draft.player.currentHealth + amount,
+      0,
+      draft.player.maxHealth
+    );
+  });
+}
 function addRegenEqualToAllDamage(state, { card }) {
   return produce(state, (draft) => {
     const room = getCurrRoom(state);
@@ -852,6 +861,7 @@ const allActions = {
   addGold,
   addPlayerCharge,
   dealDamageEqualToCharge,
+  addPlayerHealth,
 };
 
 export default allActions;

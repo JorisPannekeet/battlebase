@@ -58,8 +58,12 @@ export const Monster = (props) => {
 class Target extends Component {
   componentDidUpdate(prevProps) {
     // Keep track of how much hp we might have lost.
+
     const lostHealth =
-      prevProps.model.currentHealth - this.props.model.currentHealth;
+      this.props.model.currentHealth < prevProps.model.currentHealth
+        ? prevProps.model.currentHealth - this.props.model.currentHealth
+        : this.props.model.currentHealth - prevProps.model.currentHealth;
+
     if (lostHealth > 0) this.setState({ lostHealth });
     // Keep track of how much block we gained.
     // const gainedBlock = this.props.model.block - prevProps.model.block

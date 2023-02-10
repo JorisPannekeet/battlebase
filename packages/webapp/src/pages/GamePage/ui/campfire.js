@@ -9,6 +9,7 @@ export default class CampfireRoom extends Component {
     this.props.onChoose("rest");
   }
   choose(choice, reward) {
+    console.log("clicked");
     this.setState({
       choice,
       reward,
@@ -21,9 +22,11 @@ export default class CampfireRoom extends Component {
   onSelectCard(card) {
     this.choose(this.state.choice, card);
   }
+
   render(props, state) {
     const { gameState } = props;
     const { choice, isChoosingCard } = state;
+    console.log(state);
     let label = "";
     if (choice === "upgradeCard") label = "Choose a card to upgrade";
     if (choice === "removeCard") label = "Choose a card to remove";
@@ -50,7 +53,7 @@ export default class CampfireRoom extends Component {
                 </button>
               </li>
               <li>
-                <button disabled onclick=${() => this.choose("removeCard")}>
+                <button onclick=${() => this.choose("removeCard")}>
                   Remove card
                 </button>
               </li>

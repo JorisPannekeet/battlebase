@@ -28,6 +28,7 @@ export function getCurrRoom(state) {
  * @returns {Array<import('./dungeon-rooms').MONSTER>}
  */
 export function getTargets(state, targetQuery) {
+  console.log({ targetQuery });
   if (!targetQuery || typeof targetQuery !== "string") {
     throw new Error("Bad query string");
   }

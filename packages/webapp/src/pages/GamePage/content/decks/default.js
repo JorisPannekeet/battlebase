@@ -176,7 +176,7 @@ export const defaultDeck = [
     image: "SummerofSam.png",
     actions: [
       {
-        type: "addHealth",
+        type: "addPlayerHealth",
         parameter: {
           amount: 1,
         },
