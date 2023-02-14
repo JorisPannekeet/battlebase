@@ -31,13 +31,13 @@ easyMonsters["Easy does it x2"] = MonsterRoom(
     image: "monsters/slime.gif",
   })
 );
-monsters["RNG does it"] = MonsterRoom(
+monsters["RNG"] = MonsterRoom(
   Monster({
     hp: random(18, 20),
     intents: [{ damage: 7 }, { damage: 11 }, { damage: 7 }, { block: 9 }],
     random: 4,
-    name: "Minor demon",
-    image: "monsters/elite.gif",
+    name: "Minor devil",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 monsters["Easy one"] = MonsterRoom(
@@ -74,7 +74,7 @@ monsters["First double trouble"] = MonsterRoom(
     intents: [{ damage: 9 }, { damage: 8 }, { weak: 1 }, { damage: 6 }, {}],
     random: 2,
     name: "Double Trouble 2",
-    image: "monsters/elite.gif",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 monsters["Mid sized duo"] = MonsterRoom(
@@ -82,15 +82,15 @@ monsters["Mid sized duo"] = MonsterRoom(
     hp: random(28, 32),
     intents: [{ weak: 1 }, { damage: 9 }, { damage: 6 }, {}, { weak: 1 }],
     random: 2,
-    name: "Minor demon",
-    image: "monsters/elite.gif",
+    name: "Minor devil",
+    image: "monsters/devil_ghostd.gif",
   }),
   Monster({
     hp: random(50, 54),
     intents: [{ vulnerable: 1 }, { damage: 6 }, { damage: 9 }, { block: 10 }],
     random: 2,
-    name: "Minor demon",
-    image: "monsters/elite.gif",
+    name: "Minor devil",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 monsters["Tiny duo"] = MonsterRoom(
@@ -98,15 +98,15 @@ monsters["Tiny duo"] = MonsterRoom(
     hp: random(12, 15),
     random: 2,
     intents: [{ damage: 6 }],
-    name: "Minor demon",
-    image: "monsters/elite.gif",
+    name: "Minor devil",
+    image: "monsters/devil_ghostd.gif",
   }),
   Monster({
     hp: random(12, 15),
     random: 2,
     intents: [{ damage: 6 }],
-    name: "Minor demon",
-    image: "monsters/elite.gif",
+    name: "Minor devil",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 elites["monster7"] = MonsterRoom(
@@ -127,8 +127,8 @@ monsters["monster10"] = MonsterRoom(
   Monster({
     hp: 28,
     intents: [{ weak: 1 }, { block: 10, damage: 10 }, { damage: 21 }],
-    name: "Large demon",
-    image: "monsters/elite.gif",
+    name: "Large devil",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 
@@ -146,22 +146,22 @@ elites["Tougher"] = MonsterRoom(
     hp: 70,
     block: 12,
     intents: [{ block: 5 }, { damage: 16 }],
-    name: "Large demon",
-    image: "monsters/elite.gif",
+    name: "Large devil",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 elites["The Trio"] = MonsterRoom(
   Monster({
     hp: random(39, 46),
     intents: [{ weak: 1 }, { damage: 10 }],
-    name: "Large demon",
-    image: "monsters/elite.gif",
+    name: "Large devil",
+    image: "monsters/devil_ghostd.gif",
   }),
   Monster({
     hp: random(40, 60),
     intents: [{ damage: 12 }, { damage: 11, weak: 1 }, { damage: 4, block: 6 }],
-    name: "Large demon",
-    image: "monsters/elite.gif",
+    name: "Large devil",
+    image: "monsters/devil_ghostd.gif",
   })
 );
 
