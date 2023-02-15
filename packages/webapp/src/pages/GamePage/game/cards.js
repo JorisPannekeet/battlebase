@@ -87,8 +87,8 @@ export class Card {
  * @param {string} name
  * @returns {CARD}
  */
-// TODO: replace cards with decks[hero.deckname]
 function findCard(name) {
+  console.log({ name });
   return cards.find((card) => card.name === name);
 }
 
@@ -130,8 +130,10 @@ export function getRandomCards(list, amount) {
  */
 export function getCardRewards(amount = 3, hero) {
   // Select deck depending on hero
-  const deckCards = decks[hero.deckname];
-
+  const deckCards = [];
+  hero?.decks.map((deck) => {
+    deckCards.push(...decks[deck]);
+  });
   // filter out boring cards, TODO: change to not in hero.starterdeck
   const niceCards = deckCards
     .filter((card) => card.name !== "Strike")

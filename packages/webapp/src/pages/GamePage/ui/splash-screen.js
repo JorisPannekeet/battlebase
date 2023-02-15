@@ -71,8 +71,8 @@ export default class SplashScreen extends Component {
         </div>
       </article>
       ${!isMobile && html`<${Menu} />`}
-
-      <div class="leaderboard">
+      ${props.runs.length &&
+      html` <div class="leaderboard">
         <h2 center>Leaderboard</h2>
         <table class="rwd-table">
           <tr>
@@ -89,7 +89,7 @@ export default class SplashScreen extends Component {
               </tr>`
           )}
         </table>
-      </div>
+      </div>`}
     `;
   }
 }

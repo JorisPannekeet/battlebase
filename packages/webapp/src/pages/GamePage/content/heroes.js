@@ -1,6 +1,7 @@
 export const heroes = [
   {
     id: 1,
+    active: true,
     name: "Power to the Apes",
     description:
       "Use the Power to the Apes deck and destroy your opponents using bleed damage",
@@ -16,7 +17,7 @@ export const heroes = [
       "Strike",
       "Bash",
     ],
-    deckname: "defaultDeck",
+    decks: ["defaultDeck", "poison", "electric"],
     type: "Normal",
     image: "PTTA.gif",
     background: "p2a.png",
@@ -24,6 +25,7 @@ export const heroes = [
   },
   {
     id: 2,
+    active: false,
     name: "Specter",
     description:
       "Specter uses evasive manouvres and poisonous skills to win his battles.",
@@ -39,7 +41,7 @@ export const heroes = [
       "Defend",
       "Defend",
     ],
-    deckname: "poison",
+    decks: ["defaultDeck", "poison", "electric"],
     type: "Poison",
     image: "hero1.gif",
     background: "specter.jpeg",
@@ -47,6 +49,7 @@ export const heroes = [
   },
   {
     id: 3,
+    active: false,
     name: "Ice Cream",
     description:
       "General Ice Cream will obliterate enemies using his ice abilities!",
@@ -62,7 +65,7 @@ export const heroes = [
       "Thunder storm",
       "Thunder storm",
     ],
-    deckname: "electric",
+    decks: ["defaultDeck", "poison", "electric"],
     type: "Ice",
     image: "ice_v1.gif",
     background: "ice.jpeg",
@@ -70,6 +73,7 @@ export const heroes = [
   },
   {
     id: 4,
+    active: false,
     name: "Sakura",
     description: "Coming soon",
     starterdeck: [
@@ -84,7 +88,7 @@ export const heroes = [
       "Strike",
       "Bash",
     ],
-    deckname: "defaultDeck",
+    decks: ["defaultDeck", "poison", "electric"],
     type: "Wind",
     image: "hero1.gif",
     background: "sakura.jpeg",

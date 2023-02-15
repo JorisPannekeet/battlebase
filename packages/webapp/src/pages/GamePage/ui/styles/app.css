@@ -902,9 +902,12 @@ table {
   border: 3px solid gold;
   box-shadow: 0px 0px 17px 2px gold;
 }
-.hero-select:hover img,
+.hero-select:not(.disabled):hover img,
 .hero-select.active img {
   filter: none;
+}
+.hero-select.disabled {
+  pointer-events: none;
 }
 .selected-hero {
   width: 25%;

@@ -7,7 +7,6 @@ import { dungeonWithMap } from "../content/dungeon-encounters.js";
 import { conditionsAreValid } from "./conditions.js";
 import { heroes } from "../content/heroes.js";
 import relics from "../content/relics";
-import { a } from "@react-spring/web";
 
 // Without this, immer.js will throw an error if our `state` is modified outside of an action.
 // While in theory a good idea, we're not there yet. It is a useful way to spot modifications
@@ -331,7 +330,6 @@ export function useCardActions(state, { target, card }) {
  * @returns {State} new state
  */
 function addHealth(state, { target, amount }) {
-  console.log({ target, amount });
   return produce(state, (draft) => {
     const targets = getTargets(draft, target);
     targets.forEach((t) => {

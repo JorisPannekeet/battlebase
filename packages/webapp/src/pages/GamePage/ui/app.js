@@ -9,7 +9,7 @@ import { Flip } from "../web_modules/gsap/Flip.js";
 // Game logic
 import createNewGame from "../game/new-game.js";
 
-import { createCard, getCardRewards } from "../game/cards.js";
+import { getCardRewards } from "../game/cards.js";
 import {
   getCurrRoom,
   isCurrRoomCompleted,
@@ -98,7 +98,6 @@ stw.dealCards()`);
     window.stw = {
       game: this.game,
       update: this.update.bind(this),
-      createCard,
       dealCards: this.dealCards.bind(this),
       clearStage: this.handleNextStage.bind(this),
       iddqd() {

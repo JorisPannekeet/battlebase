@@ -78,7 +78,8 @@ export default class StartRoom extends Component {
             ${heroes.map((hero) => {
               return html`
                 <div
-                  class="hero-select ${this.state.selectedHero.id === hero.id
+                  class="hero-select ${!hero.active && "disabled"} ${this.state
+                    .selectedHero.id === hero.id
                     ? "active"
                     : ""}"
                 >
