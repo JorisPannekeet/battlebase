@@ -88,7 +88,6 @@ export class Card {
  * @returns {CARD}
  */
 function findCard(name) {
-  console.log({ name });
   return cards.find((card) => card.name === name);
 }
 

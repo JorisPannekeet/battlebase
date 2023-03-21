@@ -26,7 +26,6 @@ export default class CampfireRoom extends Component {
   render(props, state) {
     const { gameState } = props;
     const { choice, isChoosingCard } = state;
-    console.log(state);
     let label = "";
     if (choice === "upgradeCard") label = "Choose a card to upgrade";
     if (choice === "removeCard") label = "Choose a card to remove";

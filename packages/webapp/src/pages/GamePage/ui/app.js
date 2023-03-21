@@ -27,6 +27,7 @@ import { Player, Monster } from "./player.js";
 import CardChooser from "./card-chooser.js";
 import CampfireRoom from "./campfire.js";
 import QuestRoom from "./quest.js";
+import Shop from "./shop.js";
 import Menu from "./menu.js";
 import StartRoom from "./start-room.js";
 import DungeonStats from "./dungeon-stats.js";
@@ -49,7 +50,7 @@ export default class App extends Component {
     super();
     // Props
     this.base = undefined;
-    this.state = { showStageName: false };
+    this.state = { showStageName: false, displayShop: false };
     this.game = {};
     this.overlayIndex = 11;
     this.audio = new Audio();
@@ -69,6 +70,7 @@ export default class App extends Component {
     this.activateUltimate = this.activateUltimate.bind(this);
     this.isPlayerDead = this.isPlayerDead.bind(this);
     this.audioController = this.audioController.bind(this);
+    this.buyItem = this.buyItem.bind(this);
   }
   componentDidMount() {
     // Set up a new game
@@ -295,7 +297,7 @@ stw.dealCards()`);
     this.update();
   }
   handleNextStage() {
-    this.setState({ showStageName: true });
+    this.setState({ showStageName: true, displayShop: false });
     const stats = getEnemiesStats(this.game.state.dungeon);
     const stageScore =
       stats.encountered + stats.finalHealth + stats.killed + stats.maxHealth;
@@ -413,6 +415,9 @@ stw.dealCards()`);
     }
 
     return this.state.player.currentHealth < 1;
+  }
+  buyItem(item) {
+    console.log("trigger buy: ", item);
   }
   audioController(room, trigger) {
     this.audio.volume = 0.15;
@@ -540,15 +545,31 @@ stw.dealCards()`);
         }
         ${
           didWinStage &&
+          !this.state.displayShop &&
           html`<${Overlay}>
             <h2 center>Stage ${state.stage} Completed!</h2>
             <${DungeonStats} state=${state}><//>
             <p center>
-              <button onClick=${() => this.handleNextStage()}>
-                Start stage ${state.stage + 1}
+              <button onClick=${() => this.setState({ displayShop: true })}>
+                Continue
               </button>
             </p>
           <//> `
+        }
+
+        ${
+          this.state.displayShop &&
+          didWinStage &&
+          html`
+            <${Overlay} id="shop">
+              <${Shop}
+                gameState=${state}
+                buyItem=${this.buyItem}
+                onContinue=${this.handleNextStage}
+                nfts=${nfts}
+              />
+            <//>
+          `
         }
 
 				${

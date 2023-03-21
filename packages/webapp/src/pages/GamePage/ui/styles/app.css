@@ -958,3 +958,8 @@ table {
   margin-left: 20px;
   display: inline-block;
 }
+#shop .Splash {
+  background-image: url("../images/scenes/shop.jpeg");
+  background-size: cover;
+  background-position: center;
+}

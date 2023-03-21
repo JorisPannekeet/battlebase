@@ -407,7 +407,7 @@ const removeHealth = (state, { target, amount }) => {
         amount = powers.vulnerable.use(amount);
 
       let amountAfterBlock = t.block ? t.block - amount : 0 - amount;
-      console.log({ amount, amountAfterBlock });
+
       if (amountAfterBlock < 0) {
         t.block = 0;
         t.currentHealth = t.currentHealth + amountAfterBlock;
@@ -810,7 +810,7 @@ function iddqd(state) {
       floor.forEach((node) => {
         if (!node.room || !node.room.monsters) return;
         node.room.monsters.forEach((monster) => {
-          monster.currentHealth = 1;
+          monster.currentHealth = 0;
         });
       });
     });
