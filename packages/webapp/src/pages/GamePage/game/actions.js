@@ -764,6 +764,12 @@ function resetCharge(state) {
     draft.player.power.charge = 0;
   });
 }
+
+function setGold(state, { amount }) {
+  return produce(state, (draft) => {
+    draft.player.gold = amount;
+  });
+}
 /**
  * Sets a single power on a specific target
  * @param {State} state
@@ -860,6 +866,7 @@ const allActions = {
   addPlayerCharge,
   dealDamageEqualToCharge,
   addPlayerHealth,
+  setGold,
 };
 
 export default allActions;

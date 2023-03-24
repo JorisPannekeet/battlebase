@@ -90,24 +90,18 @@ export default class App extends Component {
     this.enableConsole();
   }
   enableConsole() {
-    // Enable a "console" in the browser.
-    console.log(`Welcome to the Console. Some examples:
-stw.game.state.player.maxHealth = 999; stw.update()
-stw.game.enqueue({type: 'drawCards', amount: 2})
-stw.update()
-stw.dealCards()`);
     // @ts-ignore
-    window.stw = {
+    window.df = {
       game: this.game,
       update: this.update.bind(this),
       dealCards: this.dealCards.bind(this),
-      clearStage: this.handleNextStage.bind(this),
+      money() {
+        this.game.enqueue({ type: "setGold", amount: 999 });
+        this.update();
+      },
       iddqd() {
-        // console.log(this.game.state)
         this.game.enqueue({ type: "iddqd" });
-        this.update(() => {
-          // console.log(this.game.state)
-        });
+        this.update();
       },
       getRuns() {
         return backend.getRuns();
@@ -285,12 +279,15 @@ stw.dealCards()`);
     };
     keymap[key] && keymap[key]();
   }
-  handlePlayerReward(choice, card) {
-    const gold = Math.floor(Math.random() * (10 - 1 + 1) + 1);
-    // add gold
-    this.game.enqueue({ type: "addGold", gold });
-    this.setState({ didGetGold: gold });
-    this.update();
+  handlePlayerReward(choice, card, noGold = false) {
+    if (!noGold) {
+      const gold = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+      // add gold
+      this.game.enqueue({ type: "addGold", gold });
+      this.setState({ didGetGold: gold });
+      this.update();
+    }
+
     // add card
     this.game.enqueue({ type: "addCardToDeck", card });
     this.setState({ didPickCard: card });
@@ -360,10 +357,12 @@ stw.dealCards()`);
     this.game.enqueue({ type: "selectHero", hero: name });
     this.update();
   }
-  selectRelic(nft) {
+  selectRelic(nft, skiproom = false) {
     this.game.enqueue({ type: "selectRelic", relic: nft });
     this.update();
-    this.goToNextRoom();
+    if (!skiproom) {
+      this.goToNextRoom();
+    }
     setTimeout(() => {
       this.checkRelicTrigger();
     }, 1000);
@@ -416,8 +415,18 @@ stw.dealCards()`);
 
     return this.state.player.currentHealth < 1;
   }
-  buyItem(item) {
-    console.log("trigger buy: ", item);
+  buyItem(item, type, cost) {
+    if (type === "card") {
+      this.handlePlayerReward("addCard", item, true);
+    }
+    if (type === "relic") {
+      this.selectRelic(item, true);
+    }
+    this.game.enqueue({
+      type: "setGold",
+      amount: this.game.state.player.gold - cost,
+    });
+    this.update();
   }
   audioController(room, trigger) {
     this.audio.volume = 0.15;
@@ -567,6 +576,7 @@ stw.dealCards()`);
                 buyItem=${this.buyItem}
                 onContinue=${this.handleNextStage}
                 nfts=${nfts}
+                state=${this.game.state}
               />
             <//>
           `
