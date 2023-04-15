@@ -9,6 +9,11 @@
   background-repeat: repeat-y;
   background-size: contain;
 }
+.MapContainer.stage2 {
+  background: url("../images/Stage-Two.webp");
+  background-repeat: repeat-y;
+  background-size: contain;
+}
 .MapFooter {
   align-self: flex-end;
   text-align: right;

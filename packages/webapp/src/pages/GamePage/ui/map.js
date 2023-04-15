@@ -7,10 +7,11 @@ import { isRoomCompleted } from "../game/utils-state.js";
 
 export default function map(props) {
   const { x, y, pathTaken } = props.dungeon;
+  const stageName = props.stage === 1 ? "Limbo" : "Lust";
 
   return html`
-    <div class="MapContainer">
-      <h2>Stage ${props.stage}</h2>
+    <div class="MapContainer stage${props.stage}">
+      <h2>${stageName}</h2>
 
       <${SlayMap}
         dungeon=${props.dungeon}
