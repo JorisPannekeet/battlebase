@@ -183,7 +183,7 @@ function selectRelic(state, { relic }) {
 /* Clear dungeon and go to next stage */
 function goToNextStage(state, { score }) {
   return produce(state, (draft) => {
-    if (state.stage <= 9) {
+    if (state.stage < 2) {
       draft.scores[state.stage] = score;
       draft.stage = state.stage + 1;
       draft.dungeon = dungeonWithMap(draft);
@@ -809,14 +809,13 @@ function makeCampfireChoice(state, { choice, reward }) {
  * @param {State} state
  * @returns {State}
  */
-function iddqd(state) {
-  console.log("iddqd");
+function iddqd(state, { hp }) {
   return produce(state, (draft) => {
     draft.dungeon.graph.forEach((floor) => {
       floor.forEach((node) => {
         if (!node.room || !node.room.monsters) return;
         node.room.monsters.forEach((monster) => {
-          monster.currentHealth = 0;
+          monster.currentHealth = hp;
         });
       });
     });

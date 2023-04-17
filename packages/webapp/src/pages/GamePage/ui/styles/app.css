@@ -201,9 +201,10 @@ h2 {
   background-position: center;
   background-image: url("../images/scenes/limbo.png");
 }
-/* .App-background[data-room-index="1"] {
-  background-image: url("../images/scenes/arietty.jpg");
+.App-background[data-stage="2"] {
+  background-image: url("../images/scenes/lust.jpeg");
 }
+/*
 .App-background[data-room-index="2"] {
   background-image: url("../images/scenes/bauhaus.jpg");
 }

@@ -7,7 +7,14 @@ import CardChooser from "./card-chooser.js";
 import { getCardRewards } from "../game/cards.js";
 
 export default class Shop extends Component {
+  constructor() {
+    super();
+    // Props
+    this.relics = [];
+    this.cards = [];
+  }
   componentDidMount() {
+    this.props.buyItem(null, "relic", 0);
     const allRelics = [];
     this.props.nfts.map((nft) => {
       const relic = relics.find(
@@ -37,8 +44,16 @@ export default class Shop extends Component {
     this.cards = html`<${CardChooser}
       cards=${getCardRewards(3, this.props.state.hero)}
       didSelectCard=${(card) => this.props.buyItem(card, "card", 80)}
+      isShop=${true}
     /> `;
     this.relics = randomRelics;
+  }
+
+  buyRelic(relic) {
+    this.props.buyItem(relic, "relic", 70);
+    const el = document.getElementById(relic.metadata.base.name);
+    el.style.pointerEvents = "none";
+    el.style.filter = "grayscale(1)";
   }
   render(props, state) {
     return html`
@@ -54,18 +69,18 @@ export default class Shop extends Component {
         </div>
       </div>
       <h1 center medium>Shop</h1>
-      <p center>Cards 80 Gold each.</p>
+      <h2 center>Cards 80 Gold each.</h2>
       ${props.state.player.gold >= 80 ? this.cards : html``}
-      <p center>Relics 70 Gold each.</p>
+      <h2 center>Relics 70 Gold each.</h2>
       ${props.state.player.gold >= 70
         ? html`
             <div class="Cards Cards--grid">
               ${this.relics.map((relic) => {
-                return html` <article class="Card relic-card">
-                  <div
-                    class="Card-inner"
-                    onClick=${() => this.props.buyItem(relic, "relic", 70)}
-                  >
+                return html` <article
+                  class="Card relic-card"
+                  id=${relic.metadata.base.name}
+                >
+                  <div class="Card-inner" onClick=${() => this.buyRelic(relic)}>
                     <h3 class="Card-name">${relic.metadata.base.name}</h3>
                     <figure class="Card-media relic">
                       <img

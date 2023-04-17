@@ -99,8 +99,12 @@ export default class App extends Component {
         this.game.enqueue({ type: "setGold", amount: 999 });
         this.update();
       },
-      iddqd() {
-        this.game.enqueue({ type: "iddqd" });
+      clearStage() {
+        this.game.enqueue({ type: "iddqd", hp: 0 });
+        this.update();
+      },
+      onePunch() {
+        this.game.enqueue({ type: "iddqd", hp: 1 });
         this.update();
       },
       getRuns() {
@@ -281,7 +285,7 @@ export default class App extends Component {
   }
   handlePlayerReward(choice, card, noGold = false) {
     if (!noGold) {
-      const gold = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+      const gold = Math.floor(Math.random() * (30 - 1 + 1) + 1);
       // add gold
       this.game.enqueue({ type: "addGold", gold });
       this.setState({ didGetGold: gold });
@@ -603,13 +607,9 @@ export default class App extends Component {
                 `
               : html`<p center>
                   Added <strong>${state.didPickCard.name} </strong> to your deck
-                  and ${state.didGetGold} Gold to your greedy ass.
+                  and <strong>${state.didGetGold} Gold</strong> to your greedy
+                  ass.
                 </p>`}
-            <p center>
-              <button onclick=${() => this.goToNextRoom()}>
-                Go to next room
-              </button>
-            </p>
           <//> `
         }
 
