@@ -606,10 +606,15 @@ export default class App extends Component {
                   />
                 `
               : html`<p center>
-                  Added <strong>${state.didPickCard.name} </strong> to your deck
-                  and <strong>${state.didGetGold} Gold</strong> to your greedy
-                  ass.
-                </p>`}
+                    Added <strong>${state.didPickCard.name} </strong> to your
+                    deck and <strong>${state.didGetGold} Gold</strong> to your
+                    greedy ass.
+                  </p>
+                  <p center>
+                    <button onclick=${() => this.goToNextRoom()}>
+                      Go to next room
+                    </button>
+                  </p>`}
           <//> `
         }
 

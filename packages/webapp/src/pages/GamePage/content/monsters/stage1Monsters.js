@@ -174,10 +174,11 @@ bosses["The Large One"] = MonsterRoom(
       { damage: 16 },
       { damage: 25 },
       { weak: 2 },
+      { poison: 1 },
     ],
     random: 5,
-    name: "Belial",
-    image: "monsters/boss.gif",
+    name: "Dankclops",
+    image: "monsters/dankclops.gif",
   })
 );
 // bosses["Scale much?"] = MonsterRoom(
