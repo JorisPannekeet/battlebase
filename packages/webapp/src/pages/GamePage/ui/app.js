@@ -440,7 +440,7 @@ export default class App extends Component {
     } else {
       switch (room) {
         case "start":
-          this.audio.src = require("./audio/menu.mp3").default;
+          this.audio.src = require("./audio/menu2.mp3").default;
           this.audio.play();
           break;
         case "monster":

@@ -95,7 +95,7 @@ const relics = [
     address: "free", // FREE
     matchingData: "Pocket money",
     type: "start",
-    relicDescription: "Start with 10 gold.",
+    relicDescription: "Gain 10 gold instantly.",
     action: "addGold",
     value: 10,
     id: null,

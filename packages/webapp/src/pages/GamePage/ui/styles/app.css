@@ -142,6 +142,7 @@ button:active {
   background-position: center bottom;
   background-size: contain;
   background-repeat: no-repeat; */
+  margin-top: 100px;
 }
 h1 {
   font-family: "Hades";
@@ -445,12 +446,12 @@ h2 {
 }
 
 .Splash {
-  background: url("../images/scenes/bg2.png");
+  background: url("../images/scenes/main_bg.jpeg");
   background-size: cover;
   background-position: center;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   margin: auto;
   flex-flow: column;
   text-align: center;
@@ -488,19 +489,19 @@ h2 {
   justify-content: center;
   list-style: none;
   padding: 0;
-  width: 300px;
+  width: 305px;
   max-width: 30em;
   margin-left: auto;
   margin-right: auto;
-  background: #160f0c4d;
+  /* background: #160f0c4d; */
   padding: 0.25rem;
   /* border-radius: 1em; */
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 .Options:not(.campfire, .mobile) {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   height: 100%;
   margin-top: 0px;
 }
@@ -770,7 +771,7 @@ table {
   box-shadow: none;
 }
 .landpage-hero {
-  background: url("../images/scenes/bg2.png");
+  background: url("../images/scenes/main_bg.jpeg");
   background-size: cover;
   background-position: center left;
   background-repeat: no-repeat;
@@ -801,7 +802,7 @@ table {
 .leaderboard {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   height: 100%;
   background: #160f0c4d;
   padding: 10px;
