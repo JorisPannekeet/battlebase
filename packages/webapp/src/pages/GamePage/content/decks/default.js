@@ -245,7 +245,7 @@ export const defaultDeck = [
     energy: 1,
     target: "allEnemies",
     description: "Drain 3 Health into Weakness and Vulnerability.",
-    image: "",
+    image: "SoulDrain.png",
     damage: 0,
     powers: {
       weak: 3,

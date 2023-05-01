@@ -472,6 +472,13 @@ function addPlayerCharge(state, { amount }) {
   });
 }
 
+function transferDischargeToHealth(state) {
+  return produce(state, (draft) => {
+    draft.player.currentHealth += draft.player.powers.charge;
+    draft.player.powers.charge = 0;
+  });
+}
+
 // applying poison state to player
 function applyPlayerPoison(state) {
   return produce(state, (draft) => {
@@ -866,6 +873,7 @@ const allActions = {
   dealDamageEqualToCharge,
   addPlayerHealth,
   setGold,
+  transferDischargeToHealth,
 };
 
 export default allActions;

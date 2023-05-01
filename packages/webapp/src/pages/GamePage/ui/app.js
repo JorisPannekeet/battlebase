@@ -605,11 +605,11 @@ export default class App extends Component {
                       this.handlePlayerReward("addCard", card)}
                   />
                 `
-              : html`<p center>
+              : html`<h2 center>
                     Added <strong>${state.didPickCard.name} </strong> to your
-                    deck and <strong>${state.didGetGold} Gold</strong> to your
-                    greedy ass.
-                  </p>
+                    deck and you gained
+                    <strong> ${state.didGetGold} Gold!</strong>
+                  </h2>
                   <p center>
                     <button onclick=${() => this.goToNextRoom()}>
                       Go to next room
