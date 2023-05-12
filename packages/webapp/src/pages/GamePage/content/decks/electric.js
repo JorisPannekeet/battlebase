@@ -6,7 +6,7 @@ export const electric = [
     target: "enemy",
     damage: 4,
     description: "Deal 4 Damage and add 1 Discharge.",
-    image: "ElectricShock.png",
+    image: "ElectricShock.webp",
     actions: [
       {
         type: "addPlayerCharge",
@@ -28,7 +28,7 @@ export const electric = [
     energy: 1,
     target: "enemy",
     description: "Deal damage equal to your Discharge.",
-    image: "PowerSurge.png",
+    image: "PowerSurge.webp",
     actions: [
       {
         type: "dealDamageEqualToCharge",
@@ -51,7 +51,7 @@ export const electric = [
     energy: 2,
     target: "allEnemies",
     description: "Deal 2 Damage x Discharge to all enemies.",
-    image: "thunder.png",
+    image: "thunder.webp",
     actions: [
       {
         type: "dealDamageEqualToCharge",
@@ -81,7 +81,7 @@ export const electric = [
     energy: 1,
     target: "player",
     description: "Add 4 Discharge.",
-    image: "",
+    image: "BatteryPills.webp",
     actions: [
       {
         type: "addPlayerCharge",
@@ -110,7 +110,7 @@ export const electric = [
     energy: 1,
     target: "player",
     description: "Transfer your discharge into health",
-    image: "PositiveCurrent.png",
+    image: "PositiveCurrent.webp",
     actions: [
       {
         type: "transferDischargeToHealth",
@@ -123,7 +123,7 @@ export const electric = [
     energy: 3,
     target: "enemy",
     description: "Deal 10 Damage x Discharge.",
-    image: "HeavenlySmite.png",
+    image: "HeavenlySmite.webp",
     actions: [
       {
         type: "dealDamageEqualToCharge",

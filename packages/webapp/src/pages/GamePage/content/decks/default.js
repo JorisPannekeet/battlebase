@@ -8,7 +8,7 @@ export const defaultDeck = [
     target: "enemy",
     damage: 6,
     description: "Deal 6 Damage.",
-    image: "Strike.png",
+    image: "Strike.webp",
     upgrade() {
       this.damage = 9;
       this.upgraded = true;
@@ -22,7 +22,7 @@ export const defaultDeck = [
     energy: 1,
     block: 5,
     target: "player",
-    image: "Defend.png",
+    image: "Defend.webp",
     description: "Gain 5 Block.",
     upgrade() {
       this.block = 8;
@@ -37,7 +37,7 @@ export const defaultDeck = [
     energy: 2,
     damage: 8,
     target: "enemy",
-    image: "Bash.png",
+    image: "Bash.webp",
     powers: {
       vulnerable: 2,
     },
@@ -64,7 +64,7 @@ export const defaultDeck = [
     ],
     description:
       "Can only be played if every card in your hand is an Attack. Deal 14 damage.",
-    image: "Clashstrike.png",
+    image: "Clashstrike.webp",
     upgrade() {
       this.name = "Clash+";
       this.damage = 17;
@@ -79,7 +79,7 @@ export const defaultDeck = [
     damage: 8,
     target: "allEnemies",
     description: "Deal 8 damage to all enemies.",
-    image: "Cleave.png",
+    image: "Cleave.webp",
     upgrade() {
       this.damage = 11;
       this.upgraded = true;
@@ -95,7 +95,7 @@ export const defaultDeck = [
     block: 5,
     target: "enemy",
     description: "Deal 5 damage. Gain 5 Block.",
-    image: "ironFocus.png",
+    image: "ironFocus.webp",
     upgrade() {
       this.damage = 7;
       this.block = 7;
@@ -114,7 +114,7 @@ export const defaultDeck = [
       weak: 1,
     },
     description: "Deal 7 Damage. Apply 1 Weak.",
-    image: "SuckerPunch.png",
+    image: "SuckerPunch.webp",
     upgrade() {
       this.damage = 8;
       this.upgraded = true;
@@ -133,7 +133,7 @@ export const defaultDeck = [
       vulnerable: 1,
     },
     description: "Deal 4 Damage. Apply 1 Vulnerable to all enemies.",
-    image: "thundershock.png",
+    image: "thundershock.webp",
     upgrade() {
       this.name = "Thunderclap+";
       this.damage = 6;
@@ -147,7 +147,7 @@ export const defaultDeck = [
     target: "player",
     description:
       "Gain 5 Regen. Can only be played if your health is below 50%.",
-    image: "Flourish.png",
+    image: "Flourish.webp",
     powers: {
       regen: 5,
     },
@@ -173,7 +173,7 @@ export const defaultDeck = [
     energy: 1,
     target: "player",
     description: "Gain 1 Health. Draw 2 Cards if your health is below 50%.",
-    image: "SummerofSam.png",
+    image: "SummerofSam.webp",
     actions: [
       {
         type: "addPlayerHealth",
@@ -209,7 +209,7 @@ export const defaultDeck = [
     type: "attack",
     target: "enemy",
     description: "Deal Damage equal to your Block.",
-    image: "CounterSlam.png",
+    image: "CounterSlam.webp",
     actions: [
       {
         type: "dealDamageEqualToBlock",
@@ -226,7 +226,7 @@ export const defaultDeck = [
     energy: 3,
     target: "allEnemies",
     description: "Deal 2 Damage to all enemies and suck it into life.",
-    image: "Succube.png",
+    image: "Succube.webp",
     damage: 2,
     actions: [
       {
@@ -245,7 +245,7 @@ export const defaultDeck = [
     energy: 1,
     target: "allEnemies",
     description: "Drain 3 Health into Weakness and Vulnerability.",
-    image: "SoulDrain.png",
+    image: "SoulDrain.webp",
     damage: 0,
     powers: {
       weak: 3,
@@ -283,7 +283,7 @@ export const defaultDeck = [
     target: "enemy",
     description:
       "Deal Damage equal to target's Vulnerable and Weak and remove the debuffs.",
-    image: "voodooEducation.png",
+    image: "voodooEducation.webp",
     actions: [
       {
         type: "dealDamageEqualToWeak",
@@ -326,7 +326,7 @@ export const defaultDeck = [
     energy: 2,
     target: "player",
     description: "Remove your Weaknesses and Vulnerabilities.",
-    image: "ritualRain.png",
+    image: "ritualRain.webp",
     damage: 0,
     actions: [
       {
@@ -346,7 +346,7 @@ export const defaultDeck = [
     energy: 0,
     target: "player",
     description: "Gain 1 energy point",
-    image: "MaskOfTheFaceless.png",
+    image: "MaskOfTheFaceless.webp",
     damage: 0,
     actions: [
       {

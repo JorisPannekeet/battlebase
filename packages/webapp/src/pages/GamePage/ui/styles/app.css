@@ -423,6 +423,7 @@ h2 {
   /* margin-bottom: -3rem; */
   cursor: grab;
   cursor: url(../images/cursors/grab-open.png) 10 0, auto;
+  transform: scale(1);
 }
 .Hand .Card-inner {
   /* because of negative margin */
@@ -431,10 +432,9 @@ h2 {
 .Hand .Card[disabled] {
   cursor: not-allowed;
 }
-.Hand .Card:hover {
-  /* transition-duration: 60ms; */
-  /* transform: translate3d(0, -1rem, 0) scale(1.25) rotate(0deg) !important; */
-  /* box-shadow: 0 0 0.75em gold; */
+.Hand .Card:hover:not(.dragging) {
+  transition-duration: 60ms;
+  transform: translate3d(0, -1rem, 0) scale(1.25) rotate(0deg) !important;
   z-index: 1;
 }
 

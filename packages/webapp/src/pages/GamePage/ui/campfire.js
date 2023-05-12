@@ -9,7 +9,6 @@ export default class CampfireRoom extends Component {
     this.props.onChoose("rest");
   }
   choose(choice, reward) {
-    console.log("clicked");
     this.setState({
       choice,
       reward,

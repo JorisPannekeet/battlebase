@@ -24,10 +24,10 @@ export function Card(card, gameState, index) {
   const isDisabled = !canPlay(card, gameState);
   const image = card.image
     ? require(`./images/cards/allCards/${card.image}`).default
-    : require("./images/cards/allCards/placeholder.png").default;
+    : require("./images/cards/allCards/placeholder.webp").default;
 
   return html` <article
-    class="Card"
+    class="Card ${card.upgraded ? "upgraded" : ""}"
     data-card-type=${card.type}
     data-card-target=${card.target}
     key=${card.id}

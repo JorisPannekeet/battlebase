@@ -28,6 +28,10 @@
   image-rendering: -moz-crisp-edges !important;
   image-rendering: pixelated !important;
 }
+
+.Card.upgraded {
+  filter: invert(1);
+}
 .Card.relic-card {
   border: 0.5em ridge #53b5a8;
   /* border-image-source: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAA7ElEQVRYhe2YMQ6DMAxFcwBGRtaeoFUv0K2qOAa36NYDVmLjMmHB0VfqEJbG3xKRvkTiAE+OnYBD2FrfDdFSAVvfDfH7vpsqQQnMMk9xmad0jWOacJ4o79fGVSgEEsPnda1qbx7a8mdifxcIJ7aKm6qHBOZxuTURQsm7i0Djc/y7fAHhYEsgTCYqD6lZRrVk1h6iAZIYoglqOg/RAflZMtwLKDZGOg+dQe0OiO60t8oyutP+/B5yF9R0QH6yTEiplgxJW+jQv30urHagJ0v22n2lSkjyEF196EjRqlRK0cowaNfmaLYfGOuyHjKsYnCffLyABLkAAAAASUVORK5CYII=) !important; */

@@ -6,7 +6,7 @@ export const poison = [
     target: "enemy",
     damage: 3,
     description: "Deal 3 Damage and apply 1 Poison.",
-    image: "PoisonDart.png",
+    image: "PoisonDart.webp",
     powers: {
       poison: 1,
     },
@@ -26,7 +26,7 @@ export const poison = [
     damage: 6,
     description:
       "Deal 6 damage and 3 Poison to all enemies but you get 1 poison.",
-    image: "PoisonMist.png",
+    image: "PoisonMist.webp",
     powers: {
       poison: 3,
     },
@@ -53,7 +53,7 @@ export const poison = [
     energy: 1,
     target: "player",
     description: "Remove your Poison stacks.",
-    image: "Antidote.png",
+    image: "Antidote.webp",
     powers: {
       poison: 0,
     },
@@ -74,7 +74,7 @@ export const poison = [
     energy: 2,
     target: "enemy",
     description: "Deal 1 damage for every poison stack",
-    image: "Afterburner.png",
+    image: "Afterburner.webp",
     actions: [
       {
         type: "dealDamageEqualToPoison",
@@ -94,7 +94,7 @@ export const poison = [
     energy: 2,
     target: "enemy",
     description: "Double the poison stacks of an enemy",
-    image: "",
+    image: "RadiationBlast.webp",
     actions: [
       {
         type: "multiplyPoisonStack",
@@ -123,7 +123,7 @@ export const poison = [
     energy: 1,
     target: "enemy",
     description: "Apply 1 poison, 1 vulnerable and 1 weak",
-    image: "ToxicGrenade.png",
+    image: "ToxicGrenade.webp",
     powers: {
       weak: 1,
       vulnerable: 1,
@@ -146,7 +146,7 @@ export const poison = [
     energy: 1,
     target: "player",
     description: "Your next attack deals 5 extra damage",
-    image: "SteroidSyringe.png",
+    image: "SteroidSyringe.webp",
     powers: {
       boost: 5,
     },
@@ -165,7 +165,7 @@ export const poison = [
     energy: 3,
     target: "enemy",
     description: "Deal 10 damage and apply 2 poison",
-    image: "PoisonBlade.png",
+    image: "PoisonBlade.webp",
     damage: 10,
     powers: {
       poison: 2,
@@ -178,87 +178,6 @@ export const poison = [
       this.powers = {
         poison: 3,
       };
-    },
-  },
-  {
-    name: "Ritual Rain",
-    type: "skill",
-    energy: 2,
-    target: "player",
-    description: "Remove your Weaknesses and Vulnerabilities.",
-    image: "ritualRain.png",
-    damage: 0,
-    actions: [
-      {
-        type: "removePlayerDebuffs",
-      },
-    ],
-    upgrade() {
-      this.name = "Eventual Rain";
-      this.description =
-        "Remove your weaknesses and vulnerabilities. Gain 10 Block.";
-      this.block = 10;
-    },
-  },
-  {
-    name: "Mask of the Faceless",
-    type: "skill",
-    energy: 0,
-    target: "player",
-    description: "Gain 1 energy point",
-    image: "MaskOfTheFaceless.png",
-    damage: 0,
-    actions: [
-      {
-        type: "addEnergyToPlayer",
-      },
-    ],
-    upgrade() {
-      this.description = "Gain 1 energy point and 5 block";
-      this.name = "Masks of the Faceless";
-      this.block = 5;
-    },
-  },
-  {
-    name: "Flourish",
-    type: "skill",
-    energy: 2,
-    target: "player",
-    description:
-      "Gain 5 Regen. Can only be played if your health is below 50%.",
-    image: "Flourish.png",
-    powers: {
-      regen: 5,
-    },
-    conditions: [
-      {
-        type: "healthPercentageBelow",
-        percentage: 50,
-      },
-    ],
-    upgrade() {
-      this.name = "Flourish+";
-      const a = this.conditions.find(
-        (action) => action.type === "healthPercentageBelow"
-      );
-      a.percentage = 75;
-      this.description =
-        "Gain 5 Regen. Can only be played if your health is below 75%.";
-    },
-  },
-  {
-    name: "Defend",
-    type: "skill",
-    energy: 1,
-    block: 5,
-    target: "player",
-    image: "Defend.png",
-    description: "Gain 5 Block.",
-    upgrade() {
-      this.block = 8;
-      this.upgraded = true;
-      this.name = "Defend+";
-      this.description = "Gain 8 Block.";
     },
   },
 ];
