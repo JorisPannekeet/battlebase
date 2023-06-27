@@ -37,7 +37,9 @@ p {
   margin: 0 auto;
   width: 100%;
 }
-
+.shrimp {
+  width: 200px;
+}
 /* Minimum font size */
 @media (max-width: 900px) {
   html {

@@ -36,7 +36,7 @@ monsters["RNG does it"] = MonsterRoom(
     hp: random(18, 20),
     intents: [{ damage: 7 }, { damage: 11 }, { damage: 7 }, { block: 9 }],
     random: 4,
-    name: "Minor demon",
+    name: "Herbshrimp",
     image: "monsters/herbshrimp2.gif",
   })
 );

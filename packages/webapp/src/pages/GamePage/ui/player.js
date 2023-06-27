@@ -91,7 +91,11 @@ class Target extends Component {
         <${Healthbar} max=${model.maxHealth} value=${hp} block=${model.block} />
         <${Powers} powers=${model.powers} />
         <img src="" id="skill" />
-        <img id="${type}-image" class=${type} src=${image} />
+        <img
+          id="${type}-image"
+          class="${type} ${name === "Herbshrimp" ? "shrimp" : ""}"
+          src=${image}
+        />
         <div class="Target-combatText Split">
           <${FCT}
             key=${model.block}
