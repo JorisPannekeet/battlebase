@@ -1,3 +1,0 @@
-requests==2.24.0
-eth_utils==1.10.0
-pillow==8.3.2
