@@ -25,7 +25,7 @@ export const heroes = [
   },
   {
     id: 2,
-    active: false,
+    active: true,
     name: "Specter",
     description:
       "Specter uses evasive manouvres and poisonous skills to win his battles.",
@@ -49,7 +49,7 @@ export const heroes = [
   },
   {
     id: 3,
-    active: false,
+    active: true,
     name: "Ice Cream",
     description:
       "General Ice Cream will obliterate enemies using his ice abilities!",
@@ -61,9 +61,9 @@ export const heroes = [
       "Battery Pills",
       "Battery Pills",
       "Battery Pills",
-      "Black Lightning",
-      "Thunder storm",
-      "Thunder storm",
+      "Power Surge",
+      "Thunder",
+      "Thunder",
     ],
     decks: ["defaultDeck", "poison", "electric"],
     type: "Ice",
@@ -73,9 +73,10 @@ export const heroes = [
   },
   {
     id: 4,
-    active: false,
+    active: true,
     name: "Sakura",
-    description: "Coming soon",
+    description:
+      "Sakura relies on a balanced deck of strikes and defends to outlast her enemies.",
     starterdeck: [
       "Defend",
       "Defend",

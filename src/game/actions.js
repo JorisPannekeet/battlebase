@@ -150,7 +150,10 @@ function removeCard(state, { card }) {
  */
 function upgradeCard(state, { card }) {
   return produce(state, (draft) => {
-    draft.deck.find((c) => c.id === card.id).upgrade();
+    const cardInDeck = draft.deck.find((c) => c.id === card.id);
+    if (cardInDeck && typeof cardInDeck.upgrade === "function") {
+      cardInDeck.upgrade();
+    }
   });
 }
 
@@ -188,7 +191,7 @@ function useRelic(state, { relic }) {
       });
     case "addAttack":
       return produce(state, (draft) => {
-        draft.player.powers.boost = 8;
+        draft.player.powers.boost = relic.value;
       });
     case "addVulnerable":
       return produce(state, (draft) => {
@@ -225,7 +228,8 @@ function useRelic(state, { relic }) {
     case "addGold":
       return addGold(state, { gold: relic.value });
     default:
-      return;
+      // Unknown or passive relic actions don't change the state.
+      return state;
   }
 }
 
@@ -259,7 +263,9 @@ function playCard(state, { card, target }) {
       draft.player.block = newState.player.block + card.block;
     }
   });
-  if (card.type === "attack" || card.damage) {
+  // Attack cards without a `damage` prop (e.g. "Counter Slam") deal their
+  // damage through `actions` instead, so only run this for real damage values.
+  if ((card.type === "attack" || card.damage) && card.damage > 0) {
     // This should be refactored, but when you play an attack card that targets all enemies,
     // we prioritize this over the actual enemy where you dropped the card.
     const newTarget =
@@ -298,16 +304,15 @@ export function useCardActions(state, { target, card }) {
   let newState = state;
   card.actions.forEach((action) => {
     // Don't run action if it has an invalid condition.
-    if (action.conditions && !conditionsAreValid(action.conditions, state)) {
-      return newState;
+    if (action.conditions && !conditionsAreValid(action.conditions, newState)) {
+      return;
     }
-    // Make sure the action is called with a target.
-    if (!action.parameter) action.parameter = {};
-    // Prefer the target you dropped the card on.
-    action.parameter.target = target;
-    action.parameter.card = card;
-    // Run the action
-    newState = allActions[action.type](newState, action.parameter);
+    // A target defined on the action itself (e.g. "Soul Drain" damaging the player)
+    // wins over the target the card was dropped on.
+    const parameter = { ...action.parameter, card };
+    if (!parameter.target) parameter.target = target;
+    // Run the action. Actions that bail out may return undefined; keep the state.
+    newState = allActions[action.type](newState, parameter) || newState;
   });
   return newState;
 }
@@ -463,7 +468,11 @@ function addPlayerCharge(state, { amount }) {
 
 function transferDischargeToHealth(state) {
   return produce(state, (draft) => {
-    draft.player.currentHealth += draft.player.powers.charge;
+    draft.player.currentHealth = clamp(
+      draft.player.currentHealth + (draft.player.powers.charge || 0),
+      0,
+      draft.player.maxHealth
+    );
     draft.player.powers.charge = 0;
   });
 }
@@ -477,12 +486,12 @@ function applyPlayerPoison(state) {
   });
 }
 
-// Apply poison damage to target
+// Apply poison damage to target. Poison ignores block.
 function applyPoison(state, { target, index }) {
   if (target === "player") {
-    return removeHealth(state, {
-      target: `player`,
-      amount: state.player.powers.poison,
+    return produce(state, (draft) => {
+      draft.player.currentHealth =
+        draft.player.currentHealth - (draft.player.powers.poison || 0);
     });
   } else {
     return produce(state, (draft) => {
@@ -559,7 +568,7 @@ function newTurn(state) {
   let newState = drawCards(state);
   return produce(newState, (draft) => {
     draft.turn++;
-    draft.player.currentEnergy = 3;
+    draft.player.currentEnergy = draft.player.maxEnergy;
     draft.player.block = 0;
   });
 }
@@ -621,10 +630,10 @@ function takeMonsterTurn(state, monsterIndex) {
       );
 
       dodgeRelics.map((relic) => {
-        console.log("Triggering dodge relic: ", relic);
         const calc = Math.random() * 100;
         if (calc < 10) {
-          amount = "Dodged";
+          console.log("Dodged attack thanks to relic: ", relic);
+          amount = 0;
         }
       });
       if (monster.powers.weak) amount = powers.weak.use(amount);
@@ -671,7 +680,7 @@ function move(state, { move }) {
   return produce(nextState, (draft) => {
     // Clear temporary powers, energy and block on player.
     draft.player.powers = {};
-    draft.player.currentEnergy = 3;
+    draft.player.currentEnergy = draft.player.maxEnergy;
     draft.player.block = 0;
     draft.dungeon.graph[move.y][move.x].didVisit = true;
     draft.dungeon.pathTaken.push({ x: move.x, y: move.y });
@@ -697,6 +706,7 @@ function dealDamageEqualToBlock(state, { target }) {
     const block = state.player.block;
     return removeHealth(state, { target, amount: block });
   }
+  return state;
 }
 
 function dealDamageEqualToVulnerable(state, { target }) {
@@ -757,7 +767,7 @@ function dealDamageEqualToCharge(state, { target, multiplier, allTargets }) {
 
 function resetCharge(state) {
   return produce(state, (draft) => {
-    draft.player.power.charge = 0;
+    draft.player.powers.charge = 0;
   });
 }
 

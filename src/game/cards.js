@@ -1,6 +1,6 @@
 import { uuid } from "./utils.js";
 import cards from "../content/cards.js";
-import { decks } from "../content/decks";
+import { decks } from "../content/decks/index.js";
 
 // This file contains the logic to create cards.
 // While cards are described in plain object form, they are always converted to a class equivalent.
@@ -68,10 +68,12 @@ export class Card {
     this.target = CardTargets[props.target];
     this.damage = props.damage;
     this.block = props.block;
-    this.powers = props.powers;
+    // Clone plain-data props so upgrading one card never mutates the shared
+    // content definitions (and with them every other copy of the card).
+    this.powers = props.powers && structuredClone(props.powers);
     this.description = props.description;
-    this.conditions = props.conditions;
-    this.actions = props.actions;
+    this.conditions = props.conditions && structuredClone(props.conditions);
+    this.actions = props.actions && structuredClone(props.actions);
     this.image = props.image;
     this.upgraded = false;
     if (props.upgrade) this.upgrade = props.upgrade;
@@ -102,6 +104,26 @@ export function createCard(name) {
   const baseCard = findCard(name);
   if (!baseCard) throw new Error(`Card not found: ${name}`);
   return new Card(baseCard);
+}
+
+/**
+ * Restores a card that was serialized to JSON (e.g. a saved game).
+ * JSON loses the class prototype and the per-card `upgrade` method,
+ * so we rebuild the card from its content definition and copy the
+ * saved values (id, upgraded stats, ...) back on top.
+ * @param {object} savedCard - plain object card from a save file
+ * @returns {CARD}
+ */
+export function rehydrateCard(savedCard) {
+  // Upgraded cards get a "+" suffix; fall back to the base name.
+  const base =
+    findCard(savedCard.name) || findCard(savedCard.name.replace(/\+$/, ""));
+  if (!base) {
+    // Renamed upgrades ("High Succube", ...) have no base card. Restoring the
+    // prototype at least gives them the default (no-op) upgrade method.
+    return Object.setPrototypeOf(savedCard, Card.prototype);
+  }
+  return Object.assign(new Card(base), savedCard);
 }
 
 /**

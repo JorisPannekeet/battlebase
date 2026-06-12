@@ -1,8 +1,17 @@
 import { html } from "../web_modules/htm/preact/standalone.module.js";
 import History from "./history.js";
 
+// JSON has no Set type, so serialize the dungeon node edges as arrays.
+// They are restored in app.js when the save is loaded.
 const save = (state) =>
-  localStorage.setItem("saveGame", encodeURIComponent(JSON.stringify(state)));
+  localStorage.setItem(
+    "saveGame",
+    encodeURIComponent(
+      JSON.stringify(state, (key, value) =>
+        value instanceof Set ? [...value] : value
+      )
+    )
+  );
 const abandonGame = () => window.location.reload();
 
 export default function Menu({ game, gameState, onUndo }) {
@@ -12,7 +21,7 @@ export default function Menu({ game, gameState, onUndo }) {
 
       <ul class="Options">
         <li>
-          <button onclick=${() => save(gameState)}>Save</button>
+          <button onclick=${() => save(game.state)}>Save</button>
         </li>
         <li>
           <button onclick=${() => abandonGame()}>Abandon Game</button>

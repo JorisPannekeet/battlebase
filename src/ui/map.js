@@ -161,7 +161,8 @@ export class SlayMap extends Component {
                   current=${isCurrent}
                   can-visit=${Boolean(canVisit)}
                   did-visit=${node.didVisit}
-                  onClick=${() => props.onSelect({ x: nodeIndex, y: rowIndex })}
+                  onClick=${() =>
+                    canVisit && props.onSelect({ x: nodeIndex, y: rowIndex })}
                 >
                   <span>${emojiFromNodeType(node.type)}</span>
                 </slay-map-node>`;

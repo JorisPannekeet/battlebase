@@ -82,7 +82,8 @@ export function isStageCompleted(state) {
       });
     })
     .filter(Boolean);
-  return clearedRooms.length === state.dungeon.graph.length && state.stage < 9;
+  // The final stage counts as winning the dungeon, not "just" the stage.
+  return clearedRooms.length === state.dungeon.graph.length && state.stage < 2;
 }
 
 // Checks if the whole dungeon (all stages) has been cleared.

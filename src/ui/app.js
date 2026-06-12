@@ -9,7 +9,7 @@ import { Flip } from "../web_modules/gsap/Flip.js";
 // Game logic
 import createNewGame from "../game/new-game.js";
 
-import { getCardRewards } from "../game/cards.js";
+import { getCardRewards, rehydrateCard } from "../game/cards.js";
 import {
   getCurrRoom,
   isCurrRoomCompleted,
@@ -40,18 +40,35 @@ Object.keys(realSfx).forEach((key) => {
   sfx[key] = () => null;
 });
 
-const load = () =>
-  JSON.parse(decodeURIComponent(localStorage.getItem("saveGame")));
+// Loads a saved game and restores what JSON.stringify can't represent:
+// the dungeon node edges (Sets) and the card class methods.
+const load = () => {
+  const state = JSON.parse(decodeURIComponent(localStorage.getItem("saveGame")));
+  state.dungeon.graph.forEach((floor) =>
+    floor.forEach((node) => {
+      node.edges = new Set(Array.isArray(node.edges) ? node.edges : []);
+    })
+  );
+  ["deck", "drawPile", "hand", "discardPile"].forEach((pile) => {
+    state[pile] = state[pile].map(rehydrateCard);
+  });
+  return state;
+};
 
 export default class App extends Component {
   constructor() {
     super();
     // Props
     this.base = undefined;
-    this.state = { showStageName: false, displayShop: false };
+    this.state = {
+      showStageName: false,
+      displayShop: false,
+      musicMuted: localStorage.getItem("musicMuted") === "true",
+    };
     this.game = {};
     this.overlayIndex = 11;
     this.audio = new Audio();
+    this.audio.muted = this.state.musicMuted;
 
     // Scope methods
     this.playCard = this.playCard.bind(this);
@@ -67,6 +84,7 @@ export default class App extends Component {
     this.activateUltimate = this.activateUltimate.bind(this);
     this.isPlayerDead = this.isPlayerDead.bind(this);
     this.audioController = this.audioController.bind(this);
+    this.toggleMusic = this.toggleMusic.bind(this);
     this.buyItem = this.buyItem.bind(this);
   }
   componentDidMount() {
@@ -78,7 +96,13 @@ export default class App extends Component {
     sfx.startGame();
 
     // If there is a saved game state, use it.
-    const savedGameState = localStorage.getItem("saveGame") && load();
+    let savedGameState;
+    try {
+      savedGameState = localStorage.getItem("saveGame") && load();
+    } catch (err) {
+      console.warn("Could not load the saved game, starting a new one.", err);
+      localStorage.removeItem("saveGame");
+    }
     if (savedGameState) {
       this.game.state = savedGameState;
       this.setState(savedGameState, this.dealCards);
@@ -90,6 +114,7 @@ export default class App extends Component {
     // @ts-ignore
     window.df = {
       game: this.game,
+      audio: this.audio,
       update: this.update.bind(this),
       dealCards: this.dealCards.bind(this),
       money() {
@@ -342,19 +367,16 @@ export default class App extends Component {
       this.goToNextRoom();
     }
     setTimeout(() => {
-      this.checkRelicTrigger();
+      this.checkRelicTrigger(nft);
     }, 1000);
   }
-  checkRelicTrigger() {
-    const startRelics = this.state.relics.filter(
-      (item) => item.type === "start"
-    );
-    startRelics.map((relic) => {
-      console.log("Triggering battleStart relic: ", relic);
-
-      this.game.enqueue({ type: "useRelic", relic: relic });
+  // "start" relics trigger once, when they are picked up.
+  checkRelicTrigger(relic) {
+    if (relic && relic.type === "start") {
+      console.log("Triggering start relic: ", relic);
+      this.game.enqueue({ type: "useRelic", relic });
       this.update();
-    });
+    }
   }
   handleMapMove(move) {
     this.toggleOverlay("#Map");
@@ -382,7 +404,11 @@ export default class App extends Component {
         (item) => item.type === "death"
       );
       deathRelics.map((relic) => {
-        if (!this.state.player.usedRelics.includes(relic)) {
+        // Compare by name: object references don't survive immer/save-load.
+        const wasUsed = this.state.player.usedRelics.some(
+          (used) => used.name === relic.name
+        );
+        if (!wasUsed) {
           console.log("Triggering death relic: ", relic);
 
           this.game.enqueue({ type: "useRelic", relic: relic });
@@ -405,6 +431,20 @@ export default class App extends Component {
       amount: this.game.state.player.gold - cost,
     });
     this.update();
+  }
+  // Mutes/unmutes the background music and remembers the choice.
+  // Also pauses/resumes playback: if the browser blocked autoplay earlier,
+  // muting alone would be inaudible and the button would appear broken.
+  toggleMusic() {
+    const musicMuted = !this.state.musicMuted;
+    this.audio.muted = musicMuted;
+    if (musicMuted) {
+      this.audio.pause();
+    } else if (this.audio.src) {
+      this.audio.play().catch(() => {});
+    }
+    localStorage.setItem("musicMuted", String(musicMuted));
+    this.setState({ musicMuted });
   }
   audioController(room, trigger) {
     this.audio.volume = 0.15;
@@ -644,6 +684,10 @@ export default class App extends Component {
         </div>
 
 				
+
+          <button class="MuteButton" onClick=${() => this.toggleMusic()}>
+            ${state.musicMuted ? "🔇 Music: Off" : "🔊 Music: On"}
+          </button>
 
              <${OverlayWithButton} id="Map" topright key=${1}>
               <button disabled=${

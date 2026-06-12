@@ -1,12 +1,11 @@
 import {
   html,
-  render,
-  Component,
+  useState,
 } from "../web_modules/htm/preact/standalone.module.js";
 import App from "./app.js";
 import SplashScreen from "./splash-screen.js";
 import WinScreen from "./win-screen.js";
-import Decks from "./decks";
+import Decks from "./decks.js";
 
 /** @enum {string} */
 const GameModes = {
@@ -20,46 +19,30 @@ const GameModes = {
  * Our root component for the game.
  * Controls what to render.
  */
-export class SlayTheWeb extends Component {
-  constructor() {
-    super();
-    this.state = {
-      // The game mode to start in.
-      gameMode: GameModes.splash,
-    };
-    this.handleWin = this.handleWin.bind(this);
-    this.handleNewGame = this.handleNewGame.bind(this);
-    this.handleLoose = this.handleLoose.bind(this);
-    this.handleDecks = this.handleDecks.bind(this);
-  }
+export function SlayTheWeb() {
+  const [gameMode, setGameMode] = useState(GameModes.splash);
 
-  handleNewGame() {
-    this.setState({ gameMode: GameModes.gameplay });
-    localStorage.setItem("saveGame", "");
-  }
-  handleWin() {
-    this.setState({ gameMode: GameModes.win });
-  }
-  handleLoose() {
-    this.setState({ gameMode: GameModes.splash });
-  }
-  handleDecks() {
-    this.setState({ gameMode: GameModes.decks });
-  }
-  render(props, { gameMode }) {
-    if (gameMode === GameModes.splash)
-      return html`<${SplashScreen}
-        onNewGame=${this.handleNewGame}
-        onContinue=${this.handleNewGame}
-        openDecks=${this.handleDecks}
-      />`;
-    if (gameMode === GameModes.decks)
-      return html`<${Decks} back=${this.handleLoose} />`;
-    if (gameMode === GameModes.gameplay)
-      return html`
-        <${App} onWin=${this.handleWin} onLoose=${this.handleLoose} />
-      `;
-    if (gameMode === GameModes.win)
-      return html` <${WinScreen} onNewGame=${this.handleNewGame} /> `;
-  }
+  // A new game starts from scratch, so any old save is removed first.
+  const handleNewGame = () => {
+    localStorage.removeItem("saveGame");
+    setGameMode(GameModes.gameplay);
+  };
+  // Continuing keeps the save so the App can pick it up.
+  const handleContinue = () => setGameMode(GameModes.gameplay);
+  const handleWin = () => setGameMode(GameModes.win);
+  const handleLoose = () => setGameMode(GameModes.splash);
+  const handleDecks = () => setGameMode(GameModes.decks);
+
+  if (gameMode === GameModes.splash)
+    return html`<${SplashScreen}
+      onNewGame=${handleNewGame}
+      onContinue=${handleContinue}
+      openDecks=${handleDecks}
+    />`;
+  if (gameMode === GameModes.decks)
+    return html`<${Decks} back=${handleLoose} />`;
+  if (gameMode === GameModes.gameplay)
+    return html` <${App} onWin=${handleWin} onLoose=${handleLoose} /> `;
+  if (gameMode === GameModes.win)
+    return html` <${WinScreen} onNewGame=${handleNewGame} /> `;
 }

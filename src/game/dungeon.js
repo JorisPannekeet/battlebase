@@ -34,7 +34,7 @@ const defaultOptions = {
  * @returns {DUNGEON}
  */
 export default function Dungeon(options = {}, state) {
-  options = Object.assign(defaultOptions, options);
+  options = Object.assign({}, defaultOptions, options);
 
   const graph = generateGraph(options);
   const paths = generatePaths(graph, options.customPaths);
@@ -135,7 +135,7 @@ function decideRoomType(nodeType, floor, state) {
  * @returns {array} - graph
  */
 export function generateGraph(options = {}) {
-  options = Object.assign(defaultOptions, options);
+  options = Object.assign({}, defaultOptions, options);
   const { height, width, minRooms, maxRooms } = options;
 
   function Node(type) {

@@ -39,6 +39,25 @@
 	bottom: 0;
 	right: 0;
 }
+/* The background music mute toggle. Styled like the overlay corner buttons,
+   sitting left of the Deck button. High z-index so it's reachable in the
+   start room too, where the music begins. */
+.MuteButton {
+	font-size: 1rem;
+	position: absolute;
+	top: 0;
+	right: 10rem;
+	padding: 0.8rem;
+	user-select: none;
+	/* Above the start room and any opened overlay, so the music is
+	   controllable from everywhere. */
+	z-index: 9999;
+	background: none;
+	border: 0;
+	color: var(--text);
+	box-shadow: none;
+	cursor: pointer;
+}
 .Overlay-content {
 	position: absolute;
 	top: 100%;
