@@ -1,7 +1,4 @@
-import {
-  html,
-  Component,
-} from "../web_modules/htm/preact/standalone.module.js";
+import { html } from "../web_modules/htm/preact/standalone.module.js";
 
 export const getEnemiesStats = (dungeon) => {
   const stats = {
@@ -31,18 +28,16 @@ export const getEnemiesStats = (dungeon) => {
   return stats;
 };
 
-export default class DungeonStats extends Component {
-  render({ state }) {
-    const { dungeon } = state;
-    const stats = getEnemiesStats(dungeon);
-    return html`
-      <h2>Dungeon stats</h2>
-      <ul>
-        <li>Enemies encountered: ${stats.encountered}</li>
-        <li>Enemies killed: ${stats.killed}</li>
-        <li>Total enemies health: ${stats.maxHealth}</li>
-        <li>Final health count: ${stats.finalHealth}</li>
-      </ul>
-    `;
-  }
+export default function DungeonStats({ state }) {
+  const { dungeon } = state;
+  const stats = getEnemiesStats(dungeon);
+  return html`
+    <h2>Dungeon stats</h2>
+    <ul>
+      <li>Enemies encountered: ${stats.encountered}</li>
+      <li>Enemies killed: ${stats.killed}</li>
+      <li>Total enemies health: ${stats.maxHealth}</li>
+      <li>Final health count: ${stats.finalHealth}</li>
+    </ul>
+  `;
 }
